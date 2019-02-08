@@ -1,2 +1,2 @@
-# k8s-event-router
+# Kubernetes Event Router
 A simple event router for Kubernetes native events
