@@ -1,28 +1,27 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+name: $(Date:yyyyMMdd)$(Rev:.r)
 
 trigger:
+- master
+
+pr: 
 - master
 
 pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
+  solution: 'src/**/*.csproj'
   buildConfiguration: 'Release'
 
 steps:
-- task: NuGetToolInstaller@0
-
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
+  displayName: 'Restore NuGet Packages'
   inputs:
-    restoreSolution: '$(solution)'
+    command: restore
+    projects: '$(solution)'
 
-- task: VSBuild@1
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
   inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    projects: '$(solution)'
+    arguments: '--configuration $(buildConfiguration)'
