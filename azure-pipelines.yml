@@ -10,7 +10,7 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  solution: '**/*.sln'
+  solution: '/src/**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
