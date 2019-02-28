@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="Aliencube.CloudEventsNet" Version="0.1.1" />
+    <PackageReference Include="CloudNative.CloudEvents" Version="0.1.23" />
     <PackageReference Include="KubernetesClient" Version="1.4.8-g9bbe42201f" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
