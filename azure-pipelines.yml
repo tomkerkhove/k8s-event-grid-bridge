@@ -48,5 +48,7 @@ jobs:
       command: 'Run an image'
       imageName: '$(Image.TaggedName)'
       ports: '$(Image.Port):80'
-  - bash: 'curl -X GET "http://localhost:$(Image.Port)/api/v1/health" -H "accept: application/json" --include --fail'
-    displayName: 'Ping Health endpoint of Kubernetes Event Bridge'
+  - bash: |
+      sleep 5
+      curl -X GET "http://localhost:$(Image.Port)/api/v1/health" -H "accept: application/json" --include
+    displayName: 'Ping Health endpoint'
