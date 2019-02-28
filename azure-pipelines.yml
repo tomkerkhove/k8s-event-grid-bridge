@@ -12,16 +12,38 @@ pool:
 variables:
   solution: 'src/Kubernetes.EventBridge.sln'
   buildConfiguration: 'Release'
+  Image.TaggedName: '$(Image.Name):$(Image.Version)'
+  Image.Name: tomkerkhove/k8s-event-bridge
+  Image.Port: 8888
 
-steps:
-- task: DotNetCoreCLI@2
-  displayName: 'Restore NuGet Packages'
-  inputs:
-    command: restore
-    projects: '$(solution)'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Build'
-  inputs:
-    projects: '$(solution)'
-    arguments: '--configuration $(buildConfiguration)'
+jobs:
+- job: Build
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: 'Restore NuGet Packages'
+    inputs:
+      command: restore
+      projects: '$(solution)'
+  - task: DotNetCoreCLI@2
+    displayName: 'Build'
+    inputs:
+      projects: '$(solution)'
+      arguments: '--configuration $(buildConfiguration)'
+- job: Docker
+  steps:
+  - task: Docker@1
+    displayName: 'Build Run Kubernetes Event Bridge Docker image'
+    inputs:
+      dockerFile: ./src/Kubernetes.EventBridge.Host/Dockerfile
+      arguments: '-t $(Image.TaggedName)'
+      useDefaultContext: false
+      buildContext: ./src/
+      imageName: '$(Image.TaggedName)'
+  - task: Docker@1
+    displayName: 'Run Kubernetes Event Bridge Docker image'
+    inputs:
+      command: 'Run an image'
+      imageName: '$(Image.TaggedName)'
+      ports: '$(Image.Port):80'
+  - bash: 'curl -X GET "http://localhost:$(Image.Port)/api/v1/health" -H "accept: application/json" --include'
+    displayName: 'Ping Health endpoint of Kubernetes Event Bridge'
