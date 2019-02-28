@@ -1,23 +1,23 @@
 name: $(Date:yyyyMMdd)$(Rev:.r)
 
+variables:
+  solution: 'src/Kubernetes.EventBridge.sln'
+  buildConfiguration: 'Release'
+  Image.TaggedName: '$(Image.Name):$(Build.BuildNumber)'
+  Image.Name: tomkerkhove/k8s-event-bridge
+  Image.Port: 8888
+
 trigger:
 - master
 
 pr: 
 - master
 
-pool:
-  vmImage: 'Ubuntu-16.04'
-
-variables:
-  solution: 'src/Kubernetes.EventBridge.sln'
-  buildConfiguration: 'Release'
-  Image.TaggedName: '$(Image.Name):$(Image.Version)'
-  Image.Name: tomkerkhove/k8s-event-bridge
-  Image.Port: 8888
-
 jobs:
 - job: Build
+  displayName: Verify Codebase & Tests
+  pool:
+    vmImage: 'Ubuntu-16.04'
   steps:
   - task: DotNetCoreCLI@2
     displayName: 'Restore NuGet Packages'
@@ -30,6 +30,9 @@ jobs:
       projects: '$(solution)'
       arguments: '--configuration $(buildConfiguration)'
 - job: Docker
+  displayName: Verify Docker Image
+  pool:
+    vmImage: 'Ubuntu-16.04'
   steps:
   - task: Docker@1
     displayName: 'Build Run Kubernetes Event Bridge Docker image'
