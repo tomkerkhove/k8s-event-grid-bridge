@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Kubernetes.EventBridge.Host</name>
+    </assembly>
+    <members>
+        <member name="M:Kubernetes.EventBridge.Host.Controllers.HealthController.Get">
+            <summary>
+                Get Health
+            </summary>
+            <remarks>Provides an indication about the health of the host</remarks>
+        </member>
+        <member name="M:Kubernetes.EventBridge.Host.Extensions.IApplicationBuilderExtensions.UseOpenApiUi(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+                Add support for Open API with API explorer
+            </summary>
+            <param name="app">Application Builder</param>
+        </member>
+        <member name="M:Kubernetes.EventBridge.Host.Extensions.IServiceCollectionExtensions.UseOpenApiSpecifications(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Int32)">
+            <summary>
+                Use OpenAPI specification
+            </summary>
+            <param name="services">Collections of services in application</param>
+            <param name="apiVersion">Version of the API</param>
+        </member>
+    </members>
+</doc>

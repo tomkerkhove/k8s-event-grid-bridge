@@ -328,6 +328,3 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
-
-# Custom
-src/Kubernetes.EventBridge.Host/Docs/Open-Api.xml
