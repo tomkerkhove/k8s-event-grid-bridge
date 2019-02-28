@@ -10,7 +10,7 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  solution: 'src/**/*.csproj'
+  solution: 'src/Kubernetes.EventBridge.sln'
   buildConfiguration: 'Release'
 
 steps:

@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-
 using k8s;
 using k8s.Models;
-using Newtonsoft.Json;
 
-namespace eventrouter
+namespace Kubernetes.EventBridge.Sample
 {
     internal class EventRouter
     {
@@ -14,7 +12,7 @@ namespace eventrouter
         {
             var _namespace = "default";
             var config = KubernetesClientConfiguration.BuildConfigFromConfigFile();
-            IKubernetes client = new Kubernetes(config);
+            IKubernetes client = new k8s.Kubernetes(config);
             Console.WriteLine("Starting Watcher!");
 
             var handlers = new List<IEventHandler>();
@@ -28,7 +26,8 @@ namespace eventrouter
                     var eventlistResp = client.ListNamespacedEventWithHttpMessagesAsync(_namespace, watch: true).Result;
                     using (eventlistResp.Watch<V1Event>((type, item) =>
                     {
-                        foreach(var handler in handlers) {
+                        foreach (var handler in handlers)
+                        {
                             handler.HandleEvent(item);
                         }
                     }))
@@ -39,7 +38,9 @@ namespace eventrouter
                         Console.CancelKeyPress += (sender, eventArgs) => ctrlc.Set();
                         ctrlc.Wait();
                     }
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     Console.WriteLine(ex);
                 }
             }

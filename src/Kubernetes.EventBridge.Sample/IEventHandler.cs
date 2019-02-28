@@ -1,7 +1,7 @@
-namespace eventrouter {
-    using System;
-    using k8s.Models;
+using k8s.Models;
 
+namespace Kubernetes.EventBridge.Sample
+{
     interface IEventHandler
     {
         void HandleEvent(V1Event obj);
