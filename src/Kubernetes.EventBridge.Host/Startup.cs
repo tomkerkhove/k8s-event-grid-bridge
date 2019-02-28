@@ -1,7 +1,8 @@
-﻿using Kubernetes.EventBridge.Host.Extensions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Kubernetes.EventBridge.Host.BackgroundServices;
+using Kubernetes.EventBridge.Host.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,6 +22,8 @@ namespace Kubernetes.EventBridge.Host
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.UseOpenApiSpecifications(apiVersion: 1);
+
+            services.AddHostedService<KubernetesEventBridgeHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
