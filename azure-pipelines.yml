@@ -35,7 +35,7 @@ jobs:
     vmImage: 'Ubuntu-16.04'
   steps:
   - task: Docker@1
-    displayName: 'Build Run Kubernetes Event Bridge Docker image'
+    displayName: 'Build Docker image'
     inputs:
       dockerFile: ./src/Kubernetes.EventBridge.Host/Dockerfile
       arguments: '-t $(Image.TaggedName)'
@@ -43,7 +43,7 @@ jobs:
       buildContext: ./src/
       imageName: '$(Image.TaggedName)'
   - task: Docker@1
-    displayName: 'Run Kubernetes Event Bridge Docker image'
+    displayName: 'Run Docker image'
     inputs:
       command: 'Run an image'
       imageName: '$(Image.TaggedName)'
