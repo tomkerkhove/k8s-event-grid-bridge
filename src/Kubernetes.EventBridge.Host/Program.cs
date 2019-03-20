@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Kubernetes.EventBridge.Host
@@ -15,6 +16,7 @@ namespace Kubernetes.EventBridge.Host
             WebHost.CreateDefaultBuilder(args)
                 .UseKestrel()
                 .ConfigureLogging(loggingBuilder => loggingBuilder.AddConsole())
+                .ConfigureAppConfiguration(configurationBuilder=>configurationBuilder.AddEnvironmentVariables("K8S_BRIDGE_"))
                 .UseStartup<Startup>();
 
     }

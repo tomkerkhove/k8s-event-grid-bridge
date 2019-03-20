@@ -1,6 +1,7 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using Kubernetes.EventBridge.Host.Kubernetes;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -8,20 +9,32 @@ namespace Kubernetes.EventBridge.Host.BackgroundServices
 {
     public class KubernetesEventBridgeHostedService : IHostedService
     {
+        private readonly KubernetesEventWatcher _kubernetesEventWatcher;
         private readonly ILogger _logger;
-        public KubernetesEventBridgeHostedService(ILogger<KubernetesEventBridgeHostedService> logger)
+
+        public KubernetesEventBridgeHostedService(ILogger<KubernetesEventBridgeHostedService> logger, IConfiguration configuration)
         {
             _logger = logger;
+
+            _kubernetesEventWatcher = new KubernetesEventWatcher(logger, configuration);
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Starting Kubernetes Event Bridge");
+
+            await _kubernetesEventWatcher.Start(cancellationToken);
+
+            _logger.LogInformation("Kubernetes Event Bridge Started");
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Stopping Kubernetes Event Bridge");
+
+            await _kubernetesEventWatcher.Stop();
+
+            _logger.LogInformation("Kubernetes Event Bridge Stopped");
         }
     }
 }

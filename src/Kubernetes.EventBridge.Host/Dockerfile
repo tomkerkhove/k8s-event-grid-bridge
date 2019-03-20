@@ -1,9 +1,9 @@
-FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2.3 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM microsoft/dotnet:2.2-sdk AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2.105 AS build
 WORKDIR /src
 COPY ["Kubernetes.EventBridge.Host/Kubernetes.EventBridge.Host.csproj", "Kubernetes.EventBridge.Host/"]
 RUN dotnet restore "Kubernetes.EventBridge.Host/Kubernetes.EventBridge.Host.csproj"

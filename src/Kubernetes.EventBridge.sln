@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kubernetes.EventBridge.Samp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kubernetes.EventBridge.Host", "Kubernetes.EventBridge.Host\Kubernetes.EventBridge.Host.csproj", "{6BB1A79A-9399-4018-AA6A-82620E3CDE19}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D3C4EA61-D045-4C96-8C53-2B5DE90315BC}"
+	ProjectSection(SolutionItems) = preProject
+		Kubernetes.EventBridge.sln.DotSettings = Kubernetes.EventBridge.sln.DotSettings
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
