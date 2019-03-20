@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using k8s;
 using k8s.Models;
+using Kubernetes.EventBridge.Host.CloudEvents;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
@@ -43,8 +44,10 @@ namespace Kubernetes.EventBridge.Host.Kubernetes
 
         private void HandleKubernetesEvent(WatchEventType type, V1Event kubernetesEvent)
         {
-            var rawEvent = JsonConvert.SerializeObject(kubernetesEvent);
-            _logger.LogInformation($"{DateTimeOffset.UtcNow:s} - {rawEvent}");
+            var cloudEvent = CloudEventsSchematizer.GenerateFromKubernetesEvent(kubernetesEvent);
+
+            var rawCloudEvent = JsonConvert.SerializeObject(cloudEvent);
+            _logger.LogInformation($"{DateTimeOffset.UtcNow:s} - {rawCloudEvent}");
         }
     }
 }

@@ -4,6 +4,12 @@
         <name>Kubernetes.EventBridge.Host</name>
     </assembly>
     <members>
+        <member name="M:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsSchematizer.GenerateFromKubernetesEvent(k8s.Models.V1Event)">
+            <summary>
+                Generates a Cloud Event for a Kubernetes Event (v1 schema)
+            </summary>
+            <param name="kubernetesEvent">Event that occured in Kubernetes cluster</param>
+        </member>
         <member name="M:Kubernetes.EventBridge.Host.Controllers.HealthController.Get">
             <summary>
                 Get Health
