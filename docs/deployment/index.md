@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Deploying Promitor
+title: Deploying Kubernetes Event Bridge
 ---
 
 # Image Tagging Strategy
