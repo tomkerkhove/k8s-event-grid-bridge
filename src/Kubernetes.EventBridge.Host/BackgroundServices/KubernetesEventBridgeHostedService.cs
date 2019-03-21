@@ -16,7 +16,9 @@ namespace Kubernetes.EventBridge.Host.BackgroundServices
         {
             _logger = logger;
 
-            _kubernetesEventWatcher = new KubernetesEventWatcher(logger, configuration);
+            var topicEndpointUri = configuration.GetValue<string>(key: "TOPIC_URI");
+            var eventSource = configuration.GetValue<string>(key: "EVENT_SOURCE");
+            _kubernetesEventWatcher = new KubernetesEventWatcher(topicEndpointUri, eventSource, logger, configuration);
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
