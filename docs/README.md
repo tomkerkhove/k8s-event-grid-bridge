@@ -1,3 +1,3 @@
 # Documenation for Kubernetes Event Bridge
 
-Contains all the documentation for [Kubernetes Event Bridge](https://github.com/tomkerkhove/k8s-event-bridge)
+Contains all the documentation for [Kubernetes Event Bridge](https://k8s-event-bridge.tomkerkhove.be/)
