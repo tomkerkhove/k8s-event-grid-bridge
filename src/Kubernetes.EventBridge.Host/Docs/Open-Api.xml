@@ -4,6 +4,23 @@
         <name>Kubernetes.EventBridge.Host</name>
     </assembly>
     <members>
+        <member name="M:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsPublisher.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="topicEndpointUri">Uri of the topic to publish events to</param>
+        </member>
+        <member name="P:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsPublisher.TopicEndpointUri">
+            <summary>
+            Uri of the topic to publish events to
+            </summary>
+        </member>
+        <member name="M:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsPublisher.Publish(CloudNative.CloudEvents.CloudEvent)">
+            <summary>
+            Publish Cloud Event to a given topic
+            </summary>
+            <param name="cloudEvent">Event to publish</param>
+        </member>
         <member name="M:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsSchematizer.GenerateFromKubernetesEvent(k8s.Models.V1Event)">
             <summary>
                 Generates a Cloud Event for a Kubernetes Event (v1 schema)
