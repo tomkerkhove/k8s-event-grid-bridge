@@ -13,9 +13,9 @@ namespace Kubernetes.EventBridge.Host.Kubernetes
 {
     public class KubernetesEventWatcher
     {
-        private readonly KubernetesClientConfiguration _kubernetesConfiguration;
         private readonly CloudEventsPublisher _cloudEventsPublisher;
         private readonly IConfiguration _configuration;
+        private readonly KubernetesClientConfiguration _kubernetesConfiguration;
         private readonly ILogger _logger;
         private Watcher<V1Event> _watch;
 
@@ -26,14 +26,14 @@ namespace Kubernetes.EventBridge.Host.Kubernetes
             _logger = logger;
             _configuration = configuration;
 
-            var topicEndpointUri = _configuration.GetValue<string>("TOPIC_URI");
-            _cloudEventsPublisher = new CloudEventsPublisher(topicEndpointUri);
+            var topicEndpointUri = _configuration.GetValue<string>(key: "TOPIC_URI");
+            _cloudEventsPublisher = new CloudEventsPublisher(topicEndpointUri, logger);
         }
 
         public async Task Start(CancellationToken cancellationToken)
         {
             var kubernetesClient = new k8s.Kubernetes(_kubernetesConfiguration);
-            var kubernetesNamespace = _configuration.GetValue<string>("NAMESPACE");
+            var kubernetesNamespace = _configuration.GetValue<string>(key: "NAMESPACE");
             HttpOperationResponse<V1EventList> eventsPerNamespace = await kubernetesClient.ListNamespacedEventWithHttpMessagesAsync(kubernetesNamespace, watch: true, cancellationToken: cancellationToken);
 
             _watch = eventsPerNamespace.Watch<V1Event>(async (type, kubernetesEvent) => await HandleKubernetesEvent(type, kubernetesEvent));
