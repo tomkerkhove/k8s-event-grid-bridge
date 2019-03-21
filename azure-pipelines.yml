@@ -42,13 +42,15 @@ jobs:
       useDefaultContext: false
       buildContext: ./src/
       imageName: '$(Image.TaggedName)'
-  - task: Docker@1
-    displayName: 'Run Docker image'
-    inputs:
-      command: 'Run an image'
-      imageName: '$(Image.TaggedName)'
-      ports: '$(Image.Port):80'
-  - bash: |
-      sleep 5
-      curl -X GET "http://localhost:$(Image.Port)/api/v1/health" -H "accept: application/json" --include
-    displayName: 'Ping Health endpoint'
+  # This is deliberately turned off until we've improved the Kubernetes authentication
+  # A follow-up PR will be doen for this
+  #- task: Docker@1
+  #  displayName: 'Run Docker image'
+  #  inputs:
+  #    command: 'Run an image'
+  #    imageName: '$(Image.TaggedName)'
+  #    ports: '$(Image.Port):80'
+  #- bash: |
+  #    sleep 5
+  #    curl -X GET "http://localhost:$(Image.Port)/api/v1/health" -H "accept: application/json" --include
+  #  displayName: 'Ping Health endpoint'
