@@ -9,19 +9,34 @@ namespace Kubernetes.EventBridge.Host.CloudEvents
     public class CloudEventsSchematizer
     {
         private const string DefaultEventType = "Kubernetes.Event";
+
+        /// <summary>
+        /// </summary>
+        /// <param name="eventSourceUri">The source of all events where the cluster is running</param>
+        public CloudEventsSchematizer(string eventSourceUri)
+        {
+            Guard.NotNullOrEmpty(eventSourceUri, nameof(eventSourceUri));
+
+            EventSource = new Uri(eventSourceUri, UriKind.Relative);
+        }
+
+        /// <summary>
+        ///     Source of all events where the cluster is running
+        /// </summary>
+        public Uri EventSource { get; }
+
         /// <summary>
         ///     Generates a Cloud Event for a Kubernetes Event (v1 schema)
         /// </summary>
         /// <param name="kubernetesEvent">Event that occured in Kubernetes cluster</param>
-        public static CloudEvent GenerateFromKubernetesEvent(V1Event kubernetesEvent)
+        public CloudEvent GenerateFromKubernetesEvent(V1Event kubernetesEvent)
         {
             Guard.NotNull(kubernetesEvent, nameof(kubernetesEvent));
 
-            var eventSource = new Uri(uriString: "/subscriptions/0f9d7fea-99e8-4768-8672-06a28514f77e/resourceGroups/k8s-event-bridge/providers/Microsoft.EventGrid/topics/k8s-event-bridge#k8s-event-bridge", uriKind: UriKind.Relative);
             var eventId = kubernetesEvent.Metadata.Uid ?? Guid.NewGuid().ToString();
             var eventTime = kubernetesEvent.LastTimestamp ?? DateTime.UtcNow;
 
-            var cloudEvent = new CloudEvent(CloudEventsSpecVersion.V0_1, DefaultEventType, eventSource, eventId, eventTime)
+            var cloudEvent = new CloudEvent(CloudEventsSpecVersion.V0_1, DefaultEventType, EventSource, eventId, eventTime)
             {
                 ContentType = new ContentType(contentType: "application/json"),
                 Data = kubernetesEvent

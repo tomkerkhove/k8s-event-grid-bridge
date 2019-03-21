@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using GuardNet;
 using k8s;
 using k8s.Models;
 using Kubernetes.EventBridge.Host.CloudEvents;
@@ -14,20 +15,24 @@ namespace Kubernetes.EventBridge.Host.Kubernetes
     public class KubernetesEventWatcher
     {
         private readonly CloudEventsPublisher _cloudEventsPublisher;
+        private readonly CloudEventsSchematizer _cloudEventsSchematizer;
         private readonly IConfiguration _configuration;
         private readonly KubernetesClientConfiguration _kubernetesConfiguration;
         private readonly ILogger _logger;
         private Watcher<V1Event> _watch;
 
-        public KubernetesEventWatcher(ILogger logger, IConfiguration configuration)
+        public KubernetesEventWatcher(string topicEndpointUri, string eventSource, ILogger logger, IConfiguration configuration)
         {
+            Guard.NotNullOrEmpty(topicEndpointUri, nameof(topicEndpointUri));
+            Guard.NotNullOrEmpty(eventSource, nameof(eventSource));
+
             _kubernetesConfiguration = KubernetesClientConfiguration.BuildConfigFromConfigFile();
 
             _logger = logger;
             _configuration = configuration;
 
-            var topicEndpointUri = _configuration.GetValue<string>(key: "TOPIC_URI");
             _cloudEventsPublisher = new CloudEventsPublisher(topicEndpointUri, logger);
+            _cloudEventsSchematizer = new CloudEventsSchematizer(eventSource);
         }
 
         public async Task Start(CancellationToken cancellationToken)
@@ -48,7 +53,7 @@ namespace Kubernetes.EventBridge.Host.Kubernetes
 
         private async Task HandleKubernetesEvent(WatchEventType type, V1Event kubernetesEvent)
         {
-            var cloudEvent = CloudEventsSchematizer.GenerateFromKubernetesEvent(kubernetesEvent);
+            var cloudEvent = _cloudEventsSchematizer.GenerateFromKubernetesEvent(kubernetesEvent);
 
             await _cloudEventsPublisher.Publish(cloudEvent);
             var rawCloudEvent = JsonConvert.SerializeObject(cloudEvent);
