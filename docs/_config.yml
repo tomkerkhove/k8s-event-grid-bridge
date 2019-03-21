@@ -1,0 +1,6 @@
+repository: tomkerkhove/k8s-event-bridge
+theme: jekyll-theme-cayman
+title: Kubernetes Event Bridge
+description: A simple event router for Kubernetes native events
+plugins:
+  - jemoji
