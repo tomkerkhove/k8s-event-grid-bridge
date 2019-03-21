@@ -13,8 +13,9 @@ namespace Kubernetes.EventBridge.Host.Kubernetes
 {
     public class KubernetesEventWatcher
     {
-        private readonly IConfiguration _configuration;
         private readonly KubernetesClientConfiguration _kubernetesConfiguration;
+        private readonly CloudEventsPublisher _cloudEventsPublisher;
+        private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
         private Watcher<V1Event> _watch;
 
@@ -24,6 +25,9 @@ namespace Kubernetes.EventBridge.Host.Kubernetes
 
             _logger = logger;
             _configuration = configuration;
+
+            var topicEndpointUri = _configuration.GetValue<string>("TOPIC_URI");
+            _cloudEventsPublisher = new CloudEventsPublisher(topicEndpointUri);
         }
 
         public async Task Start(CancellationToken cancellationToken)
@@ -32,7 +36,7 @@ namespace Kubernetes.EventBridge.Host.Kubernetes
             var kubernetesNamespace = _configuration.GetValue<string>("NAMESPACE");
             HttpOperationResponse<V1EventList> eventsPerNamespace = await kubernetesClient.ListNamespacedEventWithHttpMessagesAsync(kubernetesNamespace, watch: true, cancellationToken: cancellationToken);
 
-            _watch = eventsPerNamespace.Watch<V1Event>(HandleKubernetesEvent);
+            _watch = eventsPerNamespace.Watch<V1Event>(async (type, kubernetesEvent) => await HandleKubernetesEvent(type, kubernetesEvent));
         }
 
         public Task Stop()
@@ -42,10 +46,11 @@ namespace Kubernetes.EventBridge.Host.Kubernetes
             return Task.CompletedTask;
         }
 
-        private void HandleKubernetesEvent(WatchEventType type, V1Event kubernetesEvent)
+        private async Task HandleKubernetesEvent(WatchEventType type, V1Event kubernetesEvent)
         {
             var cloudEvent = CloudEventsSchematizer.GenerateFromKubernetesEvent(kubernetesEvent);
 
+            await _cloudEventsPublisher.Publish(cloudEvent);
             var rawCloudEvent = JsonConvert.SerializeObject(cloudEvent);
             _logger.LogInformation($"{DateTimeOffset.UtcNow:s} - {rawCloudEvent}");
         }
