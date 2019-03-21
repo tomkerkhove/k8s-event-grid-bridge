@@ -54,10 +54,7 @@ namespace Kubernetes.EventBridge.Host.Kubernetes
         private async Task HandleKubernetesEvent(WatchEventType type, V1Event kubernetesEvent)
         {
             var cloudEvent = _cloudEventsSchematizer.GenerateFromKubernetesEvent(kubernetesEvent);
-
             await _cloudEventsPublisher.Publish(cloudEvent);
-            var rawCloudEvent = JsonConvert.SerializeObject(cloudEvent);
-            _logger.LogInformation($"{DateTimeOffset.UtcNow:s} - {rawCloudEvent}");
         }
     }
 }
