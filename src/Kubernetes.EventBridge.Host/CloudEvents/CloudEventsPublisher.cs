@@ -45,7 +45,7 @@ namespace Kubernetes.EventBridge.Host.CloudEvents
             };
 
             var response = await _httpClient.SendAsync(httpRequest);
-            if (response.StatusCode == HttpStatusCode.OK)
+            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted)
             {
                 _logger.LogInformation($"Event '{cloudEvent.Id}' was forwarded to event topic uri");
             }
