@@ -1,14 +1,12 @@
 name: $(Date:yyyyMMdd)$(Rev:.r)
-
-pr: 
-  batch: true
+trigger: none
+pr:
   branches:
     include:
     - master
   paths:
     include:
     - deploy/automation/*
-
 jobs:
 - job: Tooling
   displayName: Verify Tooling
