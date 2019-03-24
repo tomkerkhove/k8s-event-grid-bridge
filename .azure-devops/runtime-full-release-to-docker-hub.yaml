@@ -47,6 +47,7 @@ steps:
     tag: '$(Release.TagName)'
     title: '$(Release.Title)'
     releaseNotesSource: input
+    isDraft: true
     releaseNotes: |
      ### Getting started
      Running Kubernetes Event Bridge is super easy:
@@ -63,7 +64,6 @@ steps:
      Docker image is available on [Docker Hub](https://hub.docker.com/r/tomkerkhove/k8s-event-bridge/).
      
      For more information about our tagging strategy, feel free to read our [documentation](https://k8s-event-bridge.tomkerkhove.be/deployment/#image-tagging-strategy).
-     isDraft: true
 
 - task: Docker@1
   displayName: 'Push ''{major}.{minor}.{patch}'' to Docker Hub'
