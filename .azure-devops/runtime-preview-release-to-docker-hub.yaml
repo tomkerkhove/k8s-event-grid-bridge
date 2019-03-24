@@ -1,0 +1,62 @@
+name: $(Image.Version)
+resources:
+- repo: self
+trigger: none
+pr: none
+pool:
+  name: Hosted Ubuntu 1604
+variables:
+  DotNet.SDK.Version: '2.2.103'
+  Image.Name: 'tomkerkhove/k8s-event-bridge'
+  Image.TaggedName: '$(Image.Name):$(Image.Version)'
+  Release.TagName: '$(Build.BuildNumber)'
+steps:
+- task: DotNetCoreInstaller@0
+  displayName: 'Install .NET SDK'
+  inputs:
+    version: '$(DotNet.SDK.Version)'
+
+- task: Docker@1
+  displayName: 'Build Docker image'
+  inputs:
+    dockerFile: ./src/Kubernetes.EventBridge.Host/Dockerfile
+    arguments: '-t $(Image.Name):$(Image.Version)'
+    imageName: '$(Image.TaggedName)'
+    includeLatestTag: true
+    useDefaultContext: false
+    buildContext: ./src/
+
+- task: GitHubRelease@0
+  displayName: 'Create GitHub Release'
+  inputs:
+    gitHubConnection: 'Tom Kerkhove (GitHub - OAuth)'
+    repositoryName: tomkerkhove/k8s-event-bridge
+    action: Create
+    tagSource: manual
+    tag: '$(Release.TagName)'
+    title: '$(Release.Title)'
+    releaseNotesSource: input
+    isPreRelease: true
+    isDraft: true
+    releaseNotes: |
+     ### Getting started
+     Running Kubernetes Event Bridge is super easy:
+     ```
+     docker run -d -p 8999:80 --name k8s-event-bridge tomkerkhove/k8s-event-bridge:$(Image.Version)
+     ```
+     
+     ### Docker Image information
+     New Docker image tag is available: `$(Image.Version)`
+     
+     Docker image is available on [Docker Hub](https://hub.docker.com/r/tomkerkhove/k8s-event-bridge/).
+     
+     For more information about our tagging strategy, feel free to read our [documentation](https://k8s-event-bridge.tomkerkhove.be/deployment/#image-tagging-strategy).
+
+- task: Docker@1
+  displayName: 'Push preview version to Docker Hub'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryEndpoint: 'Docker Hub'
+    command: 'Push an image'
+    imageName: '$(Image.TaggedName)'
+
