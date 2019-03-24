@@ -31,21 +31,6 @@ jobs:
       projects: '$(solution)'
       arguments: '--configuration $(buildConfiguration)'
       
-- job: Tooling
-  displayName: Verify Tooling
-  pool:
-    vmImage: 'Ubuntu-16.04'
-  steps:
-  - task: AzureResourceGroupDeployment@2
-    displayName: 'Validate Docker Hub Bot ARM Template'
-    inputs:
-      azureSubscription: 'Visual Studio Enterprise (0f9d7fea-99e8-4768-8672-06a28514f77e)'
-      resourceGroupName: 'k8s-event-bridge'
-      location: 'West Europe'
-      csmFile: 'deploy/automation/docker-hub/ci/azuredeploy.json'
-      csmParametersFile: 'deploy/automation/docker-hub/ci/azuredeploy.parameters.json'
-      deploymentMode: Validation
-      
 - job: Docker
   displayName: Verify Docker Image
   pool:
