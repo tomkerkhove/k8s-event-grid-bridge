@@ -1,5 +1,4 @@
 name: $(Date:yyyyMMdd)$(Rev:.r)
-
 variables:
   DotNet.SDK.Version: '2.2.103'
   solution: 'src/Kubernetes.EventBridge.sln'
@@ -7,13 +6,10 @@ variables:
   Image.TaggedName: '$(Image.Name):$(Build.BuildNumber)'
   Image.Name: tomkerkhove/k8s-event-bridge-ci
   Image.Port: 8888
-
 trigger:
 - master
-
 pr: 
 - master
-
 jobs:
 - job: Build
   displayName: Verify Codebase & Tests
