@@ -44,10 +44,8 @@ steps:
      ```
      docker run -d -p 8999:80 --name k8s-event-bridge tomkerkhove/k8s-event-bridge:$(Image.Version)
      ```
-     
      ### Docker Image information
-     New Docker image tag is available: `$(Image.Version)` on [Docker Hub](https://hub.docker.com/r/tomkerkhove/k8s-event-bridge/).
-     
+     New Docker image tag is available: `$(Image.Version)` on [Docker Hub](https://hub.docker.com/r/tomkerkhove/k8s-event-bridge/).<br/>
      For more information about our tagging strategy, feel free to read our [documentation](https://k8s-event-bridge.tomkerkhove.be/deployment/#image-tagging-strategy).
 
 - task: Docker@1

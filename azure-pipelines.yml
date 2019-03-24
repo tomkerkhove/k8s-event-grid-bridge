@@ -8,7 +8,7 @@ variables:
   Image.Port: 8888
 trigger:
 - master
-pr: 
+pr:
 - master
 jobs:
 - job: Build
@@ -32,7 +32,7 @@ jobs:
     inputs:
       projects: '$(solution)'
       arguments: '--configuration $(buildConfiguration)'
-      
+   
 - job: Docker
   displayName: Verify Docker Image
   pool:
