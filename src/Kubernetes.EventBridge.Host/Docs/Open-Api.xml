@@ -4,6 +4,40 @@
         <name>Kubernetes.EventBridge.Host</name>
     </assembly>
     <members>
+        <member name="M:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsPublisher.#ctor(System.String,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+                Constructor
+            </summary>
+            <param name="topicEndpointUri">Uri of the topic to publish events to</param>
+            <param name="logger">Logger to provide insights on publishing events</param>
+        </member>
+        <member name="P:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsPublisher.TopicEndpointUri">
+            <summary>
+                Uri of the topic to publish events to
+            </summary>
+        </member>
+        <member name="M:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsPublisher.Publish(CloudNative.CloudEvents.CloudEvent)">
+            <summary>
+                Publish Cloud Event to a given topic
+            </summary>
+            <param name="cloudEvent">Event to publish</param>
+        </member>
+        <member name="M:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsSchematizer.#ctor(System.String)">
+            <summary>
+            </summary>
+            <param name="eventSourceUri">The source of all events where the cluster is running</param>
+        </member>
+        <member name="P:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsSchematizer.EventSource">
+            <summary>
+                Source of all events where the cluster is running
+            </summary>
+        </member>
+        <member name="M:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsSchematizer.GenerateFromKubernetesEvent(k8s.Models.V1Event)">
+            <summary>
+                Generates a Cloud Event for a Kubernetes Event (v1 schema)
+            </summary>
+            <param name="kubernetesEvent">Event that occured in Kubernetes cluster</param>
+        </member>
         <member name="M:Kubernetes.EventBridge.Host.Controllers.HealthController.Get">
             <summary>
                 Get Health
