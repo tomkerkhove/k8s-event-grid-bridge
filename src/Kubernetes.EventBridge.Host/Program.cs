@@ -18,6 +18,5 @@ namespace Kubernetes.EventBridge.Host
                 .ConfigureLogging(loggingBuilder => loggingBuilder.AddConsole())
                 .ConfigureAppConfiguration(configurationBuilder=>configurationBuilder.AddEnvironmentVariables("K8S_BRIDGE_"))
                 .UseStartup<Startup>();
-
     }
 }
