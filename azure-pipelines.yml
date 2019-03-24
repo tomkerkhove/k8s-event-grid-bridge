@@ -1,18 +1,14 @@
 name: $(Date:yyyyMMdd)$(Rev:.r)
-
 variables:
   solution: 'src/Kubernetes.EventBridge.sln'
   buildConfiguration: 'Release'
   Image.TaggedName: '$(Image.Name):$(Build.BuildNumber)'
   Image.Name: tomkerkhove/k8s-event-bridge-ci
   Image.Port: 8888
-
 trigger:
 - master
-
 pr: 
 - master
-
 jobs:
 - job: Build
   displayName: Verify Codebase & Tests
