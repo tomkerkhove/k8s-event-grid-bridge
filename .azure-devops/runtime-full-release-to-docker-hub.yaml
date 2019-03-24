@@ -6,13 +6,7 @@ pr: none
 
 pool:
   name: Hosted Ubuntu 1604
-#Your build pipeline references an undefined variable named ‘DotNet.SDK.Version’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-#Your build pipeline references an undefined variable named ‘Image.Name’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
 #Your build pipeline references an undefined variable named ‘Image.MajorMinorVersion’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-#Your build pipeline references an undefined variable named ‘Image.MajorMinorVersion’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-#Your build pipeline references an undefined variable named ‘Image.Name’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-#Your build pipeline references an undefined variable named ‘Image.MajorMinorVersion’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-#Your build pipeline references an undefined variable named ‘Image.Name’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
 variables:
   Image.TaggedName: '$(Image.Name):$(Image.Version)'
   Release.TagName: '$(Build.BuildNumber)'
@@ -34,16 +28,10 @@ steps:
    Write-Output ("##vso[task.setvariable variable=Image.MajorMinorVersion;]$majorMinorVersion")
   displayName: 'Determine ''{major}.{minor}'' version'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Run Unit Tests'
-  inputs:
-    command: test
-    projects: src/Promitor.Scraper.Tests.Unit/Promitor.Scraper.Tests.Unit.csproj
-
 - task: Docker@1
   displayName: 'Build Docker image'
   inputs:
-    dockerFile: ./src/Promitor.Scraper.Host/Dockerfile
+    dockerFile: ./src/Kubernetes.EventBridge.Host/Dockerfile
     arguments: '-t $(Image.Name):$(Image.MajorMinorVersion)'
     imageName: '$(Image.TaggedName)'
     includeLatestTag: true
