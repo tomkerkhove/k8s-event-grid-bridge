@@ -32,7 +32,7 @@ jobs:
     inputs:
       projects: '$(solution)'
       arguments: '--configuration $(buildConfiguration)'
-   
+
 - job: Docker
   displayName: Verify Docker Image
   pool:
