@@ -332,3 +332,4 @@ ASALocalRun/
 # Local Jekyll output
 _site/*
 docs/_site/*
+!.azure-devops/*/release/
