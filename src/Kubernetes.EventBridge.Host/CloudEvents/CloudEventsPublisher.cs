@@ -1,9 +1,12 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CloudNative.CloudEvents;
 using GuardNet;
 using Microsoft.Extensions.Logging;
+using Polly;
+using Polly.Retry;
 
 namespace Kubernetes.EventBridge.Host.CloudEvents
 {
@@ -11,6 +14,11 @@ namespace Kubernetes.EventBridge.Host.CloudEvents
     {
         private readonly HttpClient _httpClient = new HttpClient();
         private readonly ILogger _logger;
+
+        private readonly AsyncRetryPolicy<HttpResponseMessage> _retryPolicy =
+            Policy<HttpResponseMessage>.HandleResult(response => response.StatusCode == HttpStatusCode.TooManyRequests)
+                .WaitAndRetryAsync(retryCount: 5,
+                    sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(x: 2, y: retryAttempt)));
 
         /// <summary>
         ///     Constructor
@@ -39,13 +47,14 @@ namespace Kubernetes.EventBridge.Host.CloudEvents
         {
             var content = new CloudEventContent(cloudEvent, ContentMode.Structured, new JsonEventFormatter());
 
-            var httpRequest = new HttpRequestMessage(HttpMethod.Post, TopicEndpointUri)
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, new Uri(uriString: "http://mockbin.org/bin/a793f881-840c-4708-8977-ccc6d81a2464"))
             {
                 Content = content
             };
+            
+            var pushResponse = await _retryPolicy.ExecuteAsync(async () => await _httpClient.SendAsync(httpRequest));
 
-            var response = await _httpClient.SendAsync(httpRequest);
-            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted)
+            if (pushResponse.StatusCode == HttpStatusCode.OK || pushResponse.StatusCode == HttpStatusCode.Accepted)
             {
                 _logger.LogInformation($"Event '{cloudEvent.Id}' was forwarded to event topic uri '{TopicEndpointUri}'");
             }

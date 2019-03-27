@@ -27,8 +27,10 @@
     <PackageReference Include="KubernetesClient" Version="1.5.16" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Polly" Version="7.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="4.0.1" />
+    <PackageReference Include="YamlDotNet" Version="6.0.0" />
   </ItemGroup>
 
 </Project>
