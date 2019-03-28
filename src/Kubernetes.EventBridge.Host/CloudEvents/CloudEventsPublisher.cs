@@ -47,11 +47,11 @@ namespace Kubernetes.EventBridge.Host.CloudEvents
         {
             var content = new CloudEventContent(cloudEvent, ContentMode.Structured, new JsonEventFormatter());
 
-            var httpRequest = new HttpRequestMessage(HttpMethod.Post, new Uri(uriString: "http://mockbin.org/bin/a793f881-840c-4708-8977-ccc6d81a2464"))
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, new Uri(TopicEndpointUri))
             {
                 Content = content
             };
-            
+
             var pushResponse = await _retryPolicy.ExecuteAsync(async () => await _httpClient.SendAsync(httpRequest));
 
             if (pushResponse.StatusCode == HttpStatusCode.OK || pushResponse.StatusCode == HttpStatusCode.Accepted)
