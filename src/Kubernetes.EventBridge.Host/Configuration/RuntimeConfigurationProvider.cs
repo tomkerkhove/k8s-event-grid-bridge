@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using Kubernetes.EventBridge.Host.Configuration.Model;
 using Kubernetes.EventBridge.Host.Serialization;
 
@@ -21,6 +22,7 @@ namespace Kubernetes.EventBridge.Host.Configuration
             stringBuilder.AppendLine("  uri: \"https://k8s-event-bridge.westeurope-1.eventgrid.azure.net/api/events\"");
             stringBuilder.AppendLine("  customHeaders:");
             stringBuilder.AppendLine("    aeg-sas-key: 80Sxc%2FMslQ1gdVbqKtkKRwz0yDoE%2F%2FXGlBg%2Fo5ISgbo%3D");
+            stringBuilder.AppendLine($"    request-id: {Guid.NewGuid()}");
             stringBuilder.AppendLine("  resiliency:");
             stringBuilder.AppendLine("    retry:");
             stringBuilder.AppendLine("      count: 10");
