@@ -4,16 +4,16 @@
         <name>Kubernetes.EventBridge.Host</name>
     </assembly>
     <members>
-        <member name="M:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsPublisher.#ctor(System.String,Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsPublisher.#ctor(Kubernetes.EventBridge.Host.Configuration.Model.EventTopicConfiguration,Microsoft.Extensions.Logging.ILogger)">
             <summary>
                 Constructor
             </summary>
-            <param name="topicEndpointUri">Uri of the topic to publish events to</param>
+            <param name="eventTopic">Information about the event topic to publish events to</param>
             <param name="logger">Logger to provide insights on publishing events</param>
         </member>
-        <member name="P:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsPublisher.TopicEndpointUri">
+        <member name="P:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsPublisher.EventTopic">
             <summary>
-                Uri of the topic to publish events to
+                Information about the event topic to publish events to
             </summary>
         </member>
         <member name="M:Kubernetes.EventBridge.Host.CloudEvents.CloudEventsPublisher.Publish(CloudNative.CloudEvents.CloudEvent)">

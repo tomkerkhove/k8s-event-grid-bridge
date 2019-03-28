@@ -1,4 +1,5 @@
 ﻿using Kubernetes.EventBridge.Host.BackgroundServices;
+using Kubernetes.EventBridge.Host.Configuration;
 using Kubernetes.EventBridge.Host.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,15 +18,6 @@ namespace Kubernetes.EventBridge.Host
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.UseOpenApiSpecifications(apiVersion: 1);
-
-            services.AddHostedService<KubernetesEventBridgeHostedService>();
-        }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -42,6 +34,17 @@ namespace Kubernetes.EventBridge.Host
             app.UseHttpsRedirection();
             app.UseMvc();
             app.UseOpenApiUi();
+        }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.UseOpenApiSpecifications(apiVersion: 1);
+
+            services.AddTransient<RuntimeConfigurationProvider>();
+            services.AddTransient(serviceProvider => serviceProvider.GetService<RuntimeConfigurationProvider>().Get());
+            services.AddHostedService<KubernetesEventBridgeHostedService>();
         }
     }
 }

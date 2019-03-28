@@ -1,14 +1,14 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using GuardNet;
 using k8s;
 using k8s.Models;
+using Kubernetes.EventBridge.Host.BackgroundServices;
 using Kubernetes.EventBridge.Host.CloudEvents;
-using Microsoft.Extensions.Configuration;
+using Kubernetes.EventBridge.Host.Configuration;
+using Kubernetes.EventBridge.Host.Configuration.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
-using Newtonsoft.Json;
 
 namespace Kubernetes.EventBridge.Host.Kubernetes
 {
@@ -16,30 +16,32 @@ namespace Kubernetes.EventBridge.Host.Kubernetes
     {
         private readonly CloudEventsPublisher _cloudEventsPublisher;
         private readonly CloudEventsSchematizer _cloudEventsSchematizer;
-        private readonly IConfiguration _configuration;
         private readonly KubernetesClientConfiguration _kubernetesConfiguration;
         private readonly ILogger _logger;
         private Watcher<V1Event> _watch;
 
-        public KubernetesEventWatcher(string topicEndpointUri, string eventSource, ILogger logger, IConfiguration configuration)
+        public KubernetesEventWatcher(string kubernetesNamespace, EventTopicConfiguration eventTopic, string eventSource, ILogger logger)
         {
-            Guard.NotNullOrEmpty(topicEndpointUri, nameof(topicEndpointUri));
+            Guard.NotNullOrEmpty(kubernetesNamespace, nameof(kubernetesNamespace));
+            Guard.NotNull(eventTopic, nameof(eventTopic));
             Guard.NotNullOrEmpty(eventSource, nameof(eventSource));
+
+            KubernetesNamespace = kubernetesNamespace;
 
             _kubernetesConfiguration = KubernetesClientConfiguration.BuildConfigFromConfigFile();
 
             _logger = logger;
-            _configuration = configuration;
 
-            _cloudEventsPublisher = new CloudEventsPublisher(topicEndpointUri, logger);
+            _cloudEventsPublisher = new CloudEventsPublisher(eventTopic, logger);
             _cloudEventsSchematizer = new CloudEventsSchematizer(eventSource);
         }
+
+        public string KubernetesNamespace { get; }
 
         public async Task Start(CancellationToken cancellationToken)
         {
             var kubernetesClient = new k8s.Kubernetes(_kubernetesConfiguration);
-            var kubernetesNamespace = _configuration.GetValue<string>(key: "NAMESPACE");
-            HttpOperationResponse<V1EventList> eventsPerNamespace = await kubernetesClient.ListNamespacedEventWithHttpMessagesAsync(kubernetesNamespace, watch: true, cancellationToken: cancellationToken);
+            HttpOperationResponse<V1EventList> eventsPerNamespace = await kubernetesClient.ListNamespacedEventWithHttpMessagesAsync(KubernetesNamespace, watch: true, cancellationToken: cancellationToken);
 
             _watch = eventsPerNamespace.Watch<V1Event>(async (type, kubernetesEvent) => await HandleKubernetesEvent(type, kubernetesEvent));
         }
