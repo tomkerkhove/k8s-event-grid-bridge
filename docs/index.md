@@ -9,6 +9,8 @@ title: Kubernetes Event Bridge - A simple event router for Kubernetes native eve
 **Kubernetes Event Bridge** is a simple event router that will subscribe and forward Kubernetes native events to an endpoint of choice such as Azure Event Grid.
 
 # Documentation
+- **Configuration**
+    - [Runtime](config)
 - **Deployment**
     - [Image Tagging Strategy](deployment#image-tagging-strategy)
 - **Operations**
