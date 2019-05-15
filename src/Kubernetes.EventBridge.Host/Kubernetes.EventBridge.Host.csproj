@@ -24,7 +24,7 @@
   <ItemGroup>
     <PackageReference Include="CloudNative.CloudEvents" Version="0.1.23" />
     <PackageReference Include="Guard.Net" Version="1.2.0" />
-    <PackageReference Include="KubernetesClient" Version="1.5.16" />
+    <PackageReference Include="KubernetesClient" Version="1.5.19" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Polly" Version="7.1.0" />
