@@ -1,20 +1,14 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2.5 AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS installer-env
 
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2.300 AS build
-WORKDIR /src
-COPY ["Kubernetes.EventBridge.Host/Kubernetes.EventBridge.Host.csproj", "Kubernetes.EventBridge.Host/"]
-RUN dotnet restore "Kubernetes.EventBridge.Host/Kubernetes.EventBridge.Host.csproj"
-COPY . .
-WORKDIR "/src/Kubernetes.EventBridge.Host"
-RUN dotnet build "Kubernetes.EventBridge.Host.csproj" -c Release -o /app
+COPY . /src/dotnet-function-app
+RUN cd /src/dotnet-function-app && \
+    mkdir -p /home/site/wwwroot && \
+    dotnet publish *.csproj --output /home/site/wwwroot
 
-FROM build AS publish
-RUN dotnet publish "Kubernetes.EventBridge.Host.csproj" -c Release -o /app
+# To enable ssh & remote debugging on app service change the base image to the one below
+# FROM mcr.microsoft.com/azure-functions/dotnet:3.0-appservice
+FROM mcr.microsoft.com/azure-functions/dotnet:3.0
+ENV AzureWebJobsScriptRoot=/home/site/wwwroot \
+    AzureFunctionsJobHost__Logging__Console__IsEnabled=true
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "Kubernetes.EventBridge.Host.dll"]
+COPY --from=installer-env ["/home/site/wwwroot", "/home/site/wwwroot"]

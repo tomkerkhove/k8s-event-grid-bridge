@@ -1,0 +1,67 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: k8s-event-bridge-bindings-kubernetes
+  labels:
+    app: k8s-event-bridge
+spec:
+  type: bindings.kubernetes
+  metadata:
+  - name: namespace
+    value: k8s-event-bridge-sandbox
+---
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: k8s-event-bridge-bindings-eventgrid
+  labels:
+    app: k8s-event-bridge
+spec:
+  type: bindings.azure.eventgrid
+  metadata:
+  - name: accessKey
+    value: "rybRFyshodqMvB5AOgayfro19S7gBpAGVDoDarpSB/8="
+  - name: topicEndpoint
+    value: "https://k8s-event-bridge.westeurope-1.eventgrid.azure.net/api/events"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: k8s-event-bridge-workload-secrets
+data:
+  AzureWebJobsStorage: VXNlRGV2ZWxvcG1lbnRTdG9yYWdlPXRydWU=
+  FUNCTIONS_WORKER_RUNTIME: ZG90bmV0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-event-bridge-workload
+  labels:
+    app: k8s-event-bridge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-event-bridge
+  template:
+    metadata:
+      labels:
+        app: k8s-event-bridge
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/id: "k8s-event-bridge"
+        # Only define port of Dapr triggers are included
+        dapr.io/port: "3001"
+    spec:
+      containers:
+      - name: k8s-event-bridge
+        image: tomkerkhove/k8s-event-bridge:dev
+        ports:
+        # Port for HTTP triggered functions
+        - containerPort: 80
+        env:
+        - name: AzureFunctionsJobHost__functions__0
+          value: kubernetes-event-bridge
+        envFrom:
+        - secretRef:
+            name: k8s-event-bridge-workload-secrets
