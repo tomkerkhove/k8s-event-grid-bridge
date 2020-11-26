@@ -29,7 +29,7 @@ namespace Kubernetes.EventBridge.Core.Parsing
         ///     Generates a Cloud Event for a Kubernetes Event (v1 schema)
         /// </summary>
         /// <param name="kubernetesEvent">Event that occured in Kubernetes cluster</param>
-        public CloudEvent GenerateFromKubernetesEvent(V1Event kubernetesEvent)
+        public CloudEvent GenerateFromKubernetesEvent(Corev1Event kubernetesEvent)
         {
             // TODO: Remove Kubernetes Client dependency
             Guard.NotNull(kubernetesEvent, nameof(kubernetesEvent));
