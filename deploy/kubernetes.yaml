@@ -1,3 +1,25 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: kubernetes-events
+rules:
+- apiGroups: [""]
+  resources: ["events"]
+  verbs: ["get", "watch", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kubernetes-events-role-binding
+subjects:
+- kind: ServiceAccount
+  name: k8s-event-bridge-service-account
+  namespace: k8s-event-bridge-app
+roleRef:
+  kind: Role
+  name: kubernetes-events
+  apiGroup: ""
+---
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
@@ -6,6 +28,7 @@ metadata:
     app: k8s-event-bridge
 spec:
   type: bindings.kubernetes
+  version: v1
   metadata:
   - name: namespace
     value: k8s-event-bridge-sandbox
@@ -18,9 +41,10 @@ metadata:
     app: k8s-event-bridge
 spec:
   type: bindings.azure.eventgrid
+  version: v1
   metadata:
   - name: accessKey
-    value: "rybRFyshodqMvB5AOgayfro19S7gBpAGVDoDarpSB/8="
+    value: "<access-key>"
   - name: topicEndpoint
     value: "https://k8s-event-bridge.westeurope-1.eventgrid.azure.net/api/events"
 ---
@@ -29,8 +53,13 @@ kind: Secret
 metadata:
   name: k8s-event-bridge-workload-secrets
 data:
-  AzureWebJobsStorage: VXNlRGV2ZWxvcG1lbnRTdG9yYWdlPXRydWU=
+  AzureWebJobsStorage: <secret>
   FUNCTIONS_WORKER_RUNTIME: ZG90bmV0
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: k8s-event-bridge-service-account
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -53,6 +82,7 @@ spec:
         # Only define port of Dapr triggers are included
         dapr.io/port: "3001"
     spec:
+      serviceAccountName: k8s-event-bridge-service-account
       containers:
       - name: k8s-event-bridge
         image: tomkerkhove/k8s-event-bridge:dev
