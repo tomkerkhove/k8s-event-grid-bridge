@@ -78,9 +78,9 @@ spec:
         app: k8s-event-bridge
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/id: "k8s-event-bridge"
+        dapr.io/app-id: "k8s-event-bridge"
         # Only define port of Dapr triggers are included
-        dapr.io/port: "3001"
+        dapr.io/app-port: "3001"
     spec:
       serviceAccountName: k8s-event-bridge-service-account
       containers:

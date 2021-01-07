@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kubernetes.EventBridge.Host", "Kubernetes.EventBridge.Host\Kubernetes.EventBridge.Host.csproj", "{A9EDC108-4D16-4360-B563-6CBA88C36A5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kubernetes.EventBridge.Core", "Kubernetes.EventBridge.Core\Kubernetes.EventBridge.Core.csproj", "{DE4F1AC4-0A7F-4524-A42C-A9A14E38226B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,10 +20,6 @@ Global
 		{A9EDC108-4D16-4360-B563-6CBA88C36A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9EDC108-4D16-4360-B563-6CBA88C36A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9EDC108-4D16-4360-B563-6CBA88C36A5B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DE4F1AC4-0A7F-4524-A42C-A9A14E38226B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE4F1AC4-0A7F-4524-A42C-A9A14E38226B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DE4F1AC4-0A7F-4524-A42C-A9A14E38226B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DE4F1AC4-0A7F-4524-A42C-A9A14E38226B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
