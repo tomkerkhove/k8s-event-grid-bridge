@@ -31,6 +31,12 @@ namespace Kubernetes.EventBridge.Host
         public async Task Run([HttpTrigger(AuthorizationLevel.Anonymous, Route = "kubernetes/events/forward")] HttpRequest request)
         {
             var payload = await request.ReadAsStringAsync();
+
+            foreach (var header in request.Headers)
+            {
+                _logger.LogInformation($"Request header {header.Key}: {header.Value}");
+            }
+            
             _logger.LogInformation($"Kubernetes event received: {payload}");
 
             var cloudEvent = ConvertToCloudEvent(payload);
