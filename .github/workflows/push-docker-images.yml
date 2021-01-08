@@ -7,6 +7,7 @@ env:
   IMAGE_TAG: experimental
 jobs:
   push_docker_to_ghcr:
+    name: Push Docker image to GitHub Container Registry
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
