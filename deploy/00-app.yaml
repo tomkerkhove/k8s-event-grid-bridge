@@ -37,6 +37,7 @@ spec:
       containers:
       - name: k8s-event-bridge
         image: ghcr.io/tomkerkhove/k8s-event-bridge:experimental
+        imagePullPolicy: Always
         ports:
         # Port for HTTP triggered functions
         - containerPort: 80
