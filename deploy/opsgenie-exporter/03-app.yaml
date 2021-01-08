@@ -1,25 +1,10 @@
-apiVersion: dapr.io/v1alpha1
-kind: Component
-metadata:
-  name: k8s-event-bridge-bindings-eventgrid
-  labels:
-    app: k8s-event-bridge
-spec:
-  type: bindings.azure.eventgrid
-  version: v1
-  metadata:
-  - name: accessKey
-    value: "<access-key>"
-  - name: topicEndpoint
-    value: "https://k8s-event-bridge.westeurope-1.eventgrid.azure.net/api/events"
----
 apiVersion: v1
 kind: Secret
 metadata:
-  name: k8s-event-bridge-workload-secrets
+  name: k8s-event-bridge-secrets
 data:
-  AzureWebJobsStorage: VXNlRGV2ZWxvcG1lbnRTdG9yYWdlPXRydWU=
-  FUNCTIONS_WORKER_RUNTIME: ZG90bmV0
+  AzureWebJobsStorage: <storage>
+  EventGridAuthenticationKey: <access-key>
 ---
 apiVersion: v1
 kind: Service
@@ -51,13 +36,25 @@ spec:
     spec:
       containers:
       - name: k8s-event-bridge
-        image: tomkerkhove/k8s-event-bridge:opsginie
+        image: ghcr.io/tomkerkhove/k8s-event-bridge:experimental
         ports:
         # Port for HTTP triggered functions
         - containerPort: 80
-        # env:
-        # - name: AzureFunctionsJobHost__functions__0
-        #   value: opsgenie-kubernetes-event-exporter
+        env:
+        - name: FUNCTIONS_WORKER_RUNTIME
+          value: dotnet
+        - name: AzureWebJobsStorage
+          valueFrom:
+            secretKeyRef:
+              name: k8s-event-bridge-secrets
+              key: AzureWebJobsStorage
+        - name: EventBridge_EventGrid_Topic_Uri
+          value: opsgenie-kubernetes-event-exporter
+        - name: EventBridge_EventGrid_Topic_Key
+          valueFrom:
+            secretKeyRef:
+              name: k8s-event-bridge-secrets
+              key: EventGridAuthenticationKey
         envFrom:
         - secretRef:
             name: k8s-event-bridge-workload-secrets
