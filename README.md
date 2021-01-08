@@ -1,10 +1,11 @@
 # Kubernetes Event Bridge
-[![Netlify Status](https://api.netlify.com/api/v1/badges/c85c7f9a-6bb1-47bc-b04e-8bd9140edd30/deploy-status)](https://app.netlify.com/sites/k8s-event-bridge-staging/deploys)
-[![CodeFactor](https://www.codefactor.io/repository/github/tomkerkhove/k8s-event-bridge/badge)](https://www.codefactor.io/repository/github/tomkerkhove/k8s-event-bridge)
 
-A simple event bridge for Kubernetes native events
+A simple event bridge between [Opsgenie's kubernetes-event-exporter](https://github.com/opsgenie/kubernetes-event-exporter) & Azure Event Grid to flow Kubernetes cluster events into Microsoft Azure.
 
 # Concept
-Kubernetes Event Bridge will subscribe for events inside the Kubernetes cluster and forward CNCF Cloud Events to a sidecar of choice, in this case an Azure Event Grid proxy.
 
-![Kubernetes Event Router Concept](./media/concept-event-router.png)
+Coming later on.
+
+## License
+
+This is licensed under The MIT License (MIT). Which means that you can use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the web application. But you always need to state that Tom Kerkhove is the original author of this web application.
