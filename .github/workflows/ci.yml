@@ -1,0 +1,23 @@
+name: CI
+on:
+  - pull_request
+
+env:
+  IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-bridge
+  IMAGE_TAG: experimental
+  
+jobs:
+  solution:
+    name: Solution
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: dotnet build ./src/Kubernetes.EventBridge.sln
+  runtime:
+    name: Runtime (Docker)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build ./src/Kubernetes.EventBridge.Host/ --file ./src/Kubernetes.EventBridge.Host/Dockerfile --tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
