@@ -1,47 +1,77 @@
-﻿using Kubernetes.EventBridge.Host.BackgroundServices;
-using Kubernetes.EventBridge.Host.Extensions;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Arcus.EventGrid.Publishing;
+using Arcus.EventGrid.Publishing.Interfaces;
+using Serilog;
+using Serilog.Configuration;
+using Serilog.Events;
 
+[assembly: FunctionsStartup(typeof(Kubernetes.EventBridge.Host.Startup))]
 namespace Kubernetes.EventBridge.Host
 {
-    public class Startup
+    public class Startup : FunctionsStartup
     {
-        public Startup(IConfiguration configuration)
+        public override void ConfigureAppConfiguration(IFunctionsConfigurationBuilder builder)
         {
-            Configuration = configuration;
+            base.ConfigureAppConfiguration(builder);
+
+            builder.ConfigurationBuilder.AddEnvironmentVariables("EventBridge_");
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public override void Configure(IFunctionsHostBuilder builder)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.UseOpenApiSpecifications(apiVersion: 1);
+            var configuration = GetConfiguration(builder);
 
-            services.AddHostedService<KubernetesEventBridgeHostedService>();
+            AddEventGridPublisher(builder, configuration);
+            ConfigureLogging(builder, configuration);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        private static void AddEventGridPublisher(IFunctionsHostBuilder builder, IConfiguration configuration)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+            var topicEndpoint = configuration["EventGrid_Topic_Uri"];
+            var topicKey = configuration["EventGrid_Topic_Key"];
 
-            app.UseHttpsRedirection();
-            app.UseMvc();
-            app.UseOpenApiUi();
+            var eventGridPublisher = EventGridPublisherBuilder
+                .ForTopic(topicEndpoint)
+                .UsingAuthenticationKey(topicKey)
+                .Build();
+
+            builder.Services.AddTransient<IEventGridPublisher>(provider => eventGridPublisher);
+        }
+
+        private static void ConfigureLogging(IFunctionsHostBuilder builder, IConfiguration configuration)
+        {
+            var instrumentationKey = configuration.GetValue<string>("APPINSIGHTS_INSTRUMENTATIONKEY");
+
+            var loggerConfiguration = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .Enrich.FromLogContext()
+                .Enrich.WithComponentName("Kubernetes Event Bridge")
+                .Enrich.WithVersion()
+                .WriteTo.Console();
+
+            if (string.IsNullOrWhiteSpace(instrumentationKey) == false)
+            {
+                loggerConfiguration = loggerConfiguration.WriteTo.AzureApplicationInsights(instrumentationKey);
+            }
+                
+            var logger = loggerConfiguration.CreateLogger();
+
+            builder.Services.AddLogging(loggingBuilder =>
+            {
+                loggingBuilder.ClearProvidersExceptFunctionProviders();
+                loggingBuilder.AddSerilog(logger);
+            });
+        }
+
+        private static IConfiguration GetConfiguration(IFunctionsHostBuilder builder)
+        {
+            var serviceProvider = builder.Services.BuildServiceProvider();
+            var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+            return configuration;
         }
     }
 }

@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: k8s-event-bridge-secrets
+data:
+  AzureWebJobsStorage: <storage>
+  EventGridAuthenticationKey: <access-key>
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-event-bridge
+spec:
+  selector:
+    app: k8s-event-bridge
+  ports:
+    - protocol: TCP
+      port: 8888
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-event-bridge-workload
+  labels:
+    app: k8s-event-bridge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-event-bridge
+  template:
+    metadata:
+      labels:
+        app: k8s-event-bridge
+    spec:
+      containers:
+      - name: k8s-event-bridge
+        image: ghcr.io/tomkerkhove/k8s-event-bridge:experimental
+        ports:
+        # Port for HTTP triggered functions
+        - containerPort: 80
+        env:
+        - name: FUNCTIONS_WORKER_RUNTIME
+          value: dotnet
+        - name: AzureWebJobsStorage
+          valueFrom:
+            secretKeyRef:
+              name: k8s-event-bridge-secrets
+              key: AzureWebJobsStorage
+        - name: EventBridge_EventGrid_Topic_Uri
+          value: https://k8s-event-bridge.westeurope-1.eventgrid.azure.net/api/events
+        - name: EventBridge_EventGrid_Topic_Key
+          valueFrom:
+            secretKeyRef:
+              name: k8s-event-bridge-secrets
+              key: EventGridAuthenticationKey
+        envFrom:
+        - secretRef:
+            name: k8s-event-bridge-workload-secrets

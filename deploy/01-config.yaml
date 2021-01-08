@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: event-exporter-cfg
+  namespace: monitoring
+data:
+  config.yaml: |
+    logLevel: error
+    logFormat: json
+    route:
+      routes:
+        - match:
+            - receiver: "dump"
+            - receiver: "webhook"
+            - receiver: "webhook-local"
+    receivers:
+      - name: "dump"
+        file:
+          path: "/dev/stdout"
+      - name: "webhook"
+        webhook:
+          endpoint: "https://995b4b71b6a88833ac626b68879d357e.m.pipedream.net"
+          headers:
+            User-Agent: kube-event-exporter 1.0
+      - name: "webhook-local"
+        webhook:
+          endpoint: "http://localhost:7071/api/kubernetes/events/forward"
+          headers:
+            User-Agent: kube-event-exporter 1.0
