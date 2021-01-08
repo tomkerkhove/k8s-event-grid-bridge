@@ -14,14 +14,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: dotnet build ./src/Kubernetes.EventBridge.sln
-  orders:
-    name: Orders (Docker)
+  runtime:
+    name: Runtime (Docker)
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build ./src/Kubernetes.EventBridge.Host/ --file ./src/Kubernetes.EventBridge.Host/Dockerfile --tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-    - name: Scan Docker image
-      uses: azure/container-scan@v0
-      with:
-        image-name: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
