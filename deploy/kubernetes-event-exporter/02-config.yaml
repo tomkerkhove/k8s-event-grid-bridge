@@ -11,19 +11,13 @@ data:
       routes:
         - match:
             - receiver: "dump"
-            - receiver: "webhook"
-            - receiver: "webhook-local"
+            - receiver: "k8s-event-bridge"
     receivers:
       - name: "dump"
         file:
           path: "/dev/stdout"
-      - name: "webhook"
+      - name: "k8s-event-bridge"
         webhook:
-          endpoint: "https://995b4b71b6a88833ac626b68879d357e.m.pipedream.net"
-          headers:
-            User-Agent: kube-event-exporter 1.0
-      - name: "webhook-local"
-        webhook:
-          endpoint: "http://localhost:7071/api/kubernetes/events/forward"
+          endpoint: "http://k8s-event-bridge:8888/api/kubernetes/events/forward"
           headers:
             User-Agent: kube-event-exporter 1.0
