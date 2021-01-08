@@ -21,3 +21,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build ./src/Kubernetes.EventBridge.Host/ --file ./src/Kubernetes.EventBridge.Host/Dockerfile --tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+    - name: Scan Docker image
+      uses: azure/container-scan@v0
+      with:
+        image-name: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+        run-quality-checks: true
