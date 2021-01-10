@@ -24,7 +24,7 @@ jobs:
       run: helm lint ./charts/${{ env.CHART_NAME }} --values examples/helm-chart.config.yaml
 
   deploy-helm-3-x:
-    name: Deploy chart to Kind cluster
+    name: Deploy Chart to Kind Cluster
     needs: [lint-helm-3-x]
     runs-on: ubuntu-latest
     env:
