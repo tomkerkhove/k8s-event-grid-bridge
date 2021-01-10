@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using ContentType = System.Net.Mime.ContentType;
 
-namespace Kubernetes.EventBridge.Host
+namespace Kubernetes.EventGrid.Bridge.Host
 {
     public class KubernetesEventExporterFunction
     {
