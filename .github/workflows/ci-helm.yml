@@ -1,0 +1,66 @@
+name: Helm Chart CI - Scraper Agent
+
+on:
+  pull_request:
+    paths:
+    - '.github/workflows/ci-helm.yml'
+    - 'charts/**'
+
+env:
+  CHART_NAME: k8s-event-grid-bridge
+  
+jobs:
+  lint-helm-3-x:
+    name: Lint Helm Chart
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Helm install
+      uses: Azure/setup-helm@v1
+
+    - name: Lint Helm chart
+      run: helm lint ${{ env.CHART_NAME }} --values examples/helm-chart.config.yaml
+
+  deploy-helm-3-x:
+    name: Deploy chart to Kind cluster
+    needs: [lint-helm-3-x]
+    runs-on: ubuntu-latest
+    env:
+      KUBERNETES_NAMESPACE: k8s-event-grid-bridge
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Helm install
+      uses: Azure/setup-helm@v1
+
+    - name: Create k8s Kind Cluster
+      uses: helm/kind-action@v1.0.0
+
+    - name: Show Kubernetes version
+      run: |
+        kubectl version
+    - name: Show Helm version
+      run: |
+        helm version
+    - name: Create namespace
+      run: kubectl create ns ${{ env.KUBERNETES_NAMESPACE }}
+
+    - name: Change Kubernetes context to use namespace
+      run: kubectl config set-context --current --namespace=${{ env.KUBERNETES_NAMESPACE }}
+
+    - name: Template Helm chart
+      run: helm template ${{ env.CHART_NAME }} ./charts/${{ env.CHART_NAME }}/ --values examples/helm-chart.config.yaml
+
+    - name: Install Helm chart
+      run: helm install ${{ env.CHART_NAME }} ./charts/${{ env.CHART_NAME }}/ --values examples/helm-chart.config.yaml --wait
+
+    - name: Show installed Helm charts
+      run: helm ls
+      if: always()
+
+    - name: Show Kubernetes resources
+      run: kubectl get all
+      if: always()

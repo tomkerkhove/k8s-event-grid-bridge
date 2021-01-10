@@ -1,0 +1,8 @@
+image:
+  tag: experimental
+azure:
+  storage:
+    connectionString: <storage-connection-string>
+  eventGrid:
+    topicUri: <event-grid-uri>
+    key: <event-grid-auth-key>

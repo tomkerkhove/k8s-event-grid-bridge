@@ -56,6 +56,3 @@ spec:
             secretKeyRef:
               name: k8s-event-grid-bridge-secrets
               key: EventGridAuthenticationKey
-        envFrom:
-        - secretRef:
-            name: k8s-event-grid-bridge-workload-secrets

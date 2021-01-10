@@ -8,6 +8,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+examples/helm-chart.config.local.yaml
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
