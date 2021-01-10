@@ -1,7 +1,10 @@
 name: Push Docker Images
 on:
   push:
-    branches: [ main ]
+    paths:
+    - 'src/**'
+    branches:
+    - main
 env:
   IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-grid-bridge
   IMAGE_TAG: experimental
