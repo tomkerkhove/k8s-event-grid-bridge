@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Arcus.EventGrid.Publishing.Interfaces;
 using CloudNative.CloudEvents;
 using GuardNet;
-using k8s.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
@@ -31,12 +30,6 @@ namespace Kubernetes.EventGrid.Bridge.Host
         public async Task Run([HttpTrigger(AuthorizationLevel.Anonymous, Route = "kubernetes/events/forward")] HttpRequest request)
         {
             var payload = await request.ReadAsStringAsync();
-
-            foreach (var header in request.Headers)
-            {
-                _logger.LogInformation($"Request header {header.Key}: {header.Value}");
-            }
-            
             _logger.LogInformation($"Kubernetes event received: {payload}");
 
             var cloudEvent = ConvertToCloudEvent(payload);
@@ -47,14 +40,12 @@ namespace Kubernetes.EventGrid.Bridge.Host
 
         private static CloudEvent ConvertToCloudEvent(string payload)
         {
-            var @event = JsonConvert.DeserializeObject<Eventsv1Event>(payload);
-            var @event2 = JsonConvert.DeserializeObject<Corev1Event>(payload);
-            var @event3 = JsonConvert.DeserializeObject<V1beta1Event>(payload);
+            var @event = JsonConvert.DeserializeObject<object>(payload);
 
-            var cloudEvent = new CloudEvent(CloudEventsSpecVersion.V1_0, "Kubernetes.Events.Generic", new Uri("http://temporary"))
+            var cloudEvent = new CloudEvent(CloudEventsSpecVersion.V1_0, "Kubernetes.Events.Generic", new Uri("http://kubernetes"))
             {
                 DataContentType = new ContentType("application/json"), 
-                Data = @event2
+                Data = @event
             };
 
             return cloudEvent;
