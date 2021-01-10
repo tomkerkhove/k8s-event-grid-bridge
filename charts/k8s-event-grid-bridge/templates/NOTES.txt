@@ -1,0 +1,3 @@
+Kubernetes Event Grid Bridge is up & running!
+
+Internal workloads can forward requests to http://127.0.0.1:{{ .Values.service.port }}.

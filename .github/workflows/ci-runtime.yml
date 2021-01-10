@@ -1,4 +1,4 @@
-name: CI
+name: CI (Runtime)
 on:
   pull_request:
     paths:
