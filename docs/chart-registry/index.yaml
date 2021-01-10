@@ -3,13 +3,13 @@ entries:
   k8s-event-grid-bridge:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-01-10T13:53:45.6263218+01:00"
+    created: "2021-01-10T15:44:13.3082563+01:00"
     description: A simple event bridge for Kubernetes native events to Azure Event
       Grid.
     digest: 6935608e8f456abc434548ce95e498d8154bf27f33c5f0b93f0b2a3e725bc1c1
     name: k8s-event-grid-bridge
     type: application
     urls:
-    - https://tomkerkhove.github.io/k8s-event-grid-bridge/k8s-event-grid-bridge-0.1.0.tgz
+    - https://tomkerkhove.github.io/chart-registry/k8s-event-grid-bridge/k8s-event-grid-bridge-0.1.0.tgz
     version: 0.1.0
-generated: "2021-01-10T13:53:45.624392+01:00"
+generated: "2021-01-10T15:44:13.3082563+01:00"
