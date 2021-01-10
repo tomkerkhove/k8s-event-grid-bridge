@@ -1,4 +1,4 @@
-name: Helm Chart CI - Scraper Agent
+name: Helm Chart CI
 
 on:
   pull_request:
@@ -21,7 +21,7 @@ jobs:
       uses: Azure/setup-helm@v1
 
     - name: Lint Helm chart
-      run: helm lint ${{ env.CHART_NAME }} --values examples/helm-chart.config.yaml
+      run: helm lint ./charts/${{ env.CHART_NAME }} --values examples/helm-chart.config.yaml
 
   deploy-helm-3-x:
     name: Deploy chart to Kind cluster
