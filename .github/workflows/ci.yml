@@ -1,6 +1,8 @@
 name: CI
 on:
-  - pull_request
+  pull_request:
+    paths:
+    - 'src/**'
 
 env:
   IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-grid-bridge
