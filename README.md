@@ -58,7 +58,7 @@ Coming later on.
 
 # Deployment
 
-We provide a Kubernetes deployment YAML (`deploy\deploy-k8s-event-bridge.yaml`) that provides everything you need as a starting point.
+We provide a Kubernetes deployment YAML (`deploy\deploy-k8s-event-grid-bridge.yaml`) that provides everything you need as a starting point.
 
 Easily deploy our Kubernetes Event Bridge is very easy:
 
@@ -66,7 +66,7 @@ Easily deploy our Kubernetes Event Bridge is very easy:
 2. Deploy the YAML template:
 
 ```cli
-kubectl apply -f .\deploy\deploy-k8s-event-bridge.yaml
+kubectl apply -f .\deploy\deploy-k8s-event-grid-bridge.yaml
 ```
 
 ## Deploying Opsgenie's Kubernetes Event Exporter
@@ -89,14 +89,14 @@ data:
       routes:
         - match:
             - receiver: "dump"
-            - receiver: "k8s-event-bridge"
+            - receiver: "k8s-event-grid-bridge"
     receivers:
       - name: "dump"
         file:
           path: "/dev/stdout"
-      - name: "k8s-event-bridge"
+      - name: "k8s-event-grid-bridge"
         webhook:
-          endpoint: "http://k8s-event-bridge:8888/api/kubernetes/events/forward"
+          endpoint: "http://k8s-event-grid-bridge:8888/api/kubernetes/events/forward"
           headers:
             User-Agent: kube-event-exporter 1.0
 ```
