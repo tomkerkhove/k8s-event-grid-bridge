@@ -3,7 +3,7 @@ on:
   - pull_request
 
 env:
-  IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-bridge
+  IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-grid-bridge
   IMAGE_TAG: experimental
   
 jobs:
@@ -13,11 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: dotnet build ./src/Kubernetes.EventBridge.sln
+      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln
   runtime:
     name: Runtime (Docker)
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build ./src/Kubernetes.EventBridge.Host/ --file ./src/Kubernetes.EventBridge.Host/Dockerfile --tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+      run: docker build ./src/Kubernetes.EventGrid.Bridge.Host/ --file ./src/Kubernetes.EventGrid.Bridge.Host/Dockerfile --tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}

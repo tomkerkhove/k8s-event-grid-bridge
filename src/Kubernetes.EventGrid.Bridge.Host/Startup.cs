@@ -8,8 +8,8 @@ using Serilog;
 using Serilog.Configuration;
 using Serilog.Events;
 
-[assembly: FunctionsStartup(typeof(Kubernetes.EventBridge.Host.Startup))]
-namespace Kubernetes.EventBridge.Host
+[assembly: FunctionsStartup(typeof(Kubernetes.EventGrid.Bridge.Host.Startup))]
+namespace Kubernetes.EventGrid.Bridge.Host
 {
     public class Startup : FunctionsStartup
     {

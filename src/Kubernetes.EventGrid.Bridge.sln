@@ -5,10 +5,10 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D3C4EA61-D045-4C96-8C53-2B5DE90315BC}"
 	ProjectSection(SolutionItems) = preProject
-		Kubernetes.EventBridge.sln.DotSettings = Kubernetes.EventBridge.sln.DotSettings
+		Kubernetes.EventGrid.Bridge.sln.DotSettings = Kubernetes.EventGrid.Bridge.sln.DotSettings
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kubernetes.EventBridge.Host", "Kubernetes.EventBridge.Host\Kubernetes.EventBridge.Host.csproj", "{A9EDC108-4D16-4360-B563-6CBA88C36A5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kubernetes.EventGrid.Bridge.Host", "Kubernetes.EventGrid.Bridge.Host\Kubernetes.EventGrid.Bridge.Host.csproj", "{A9EDC108-4D16-4360-B563-6CBA88C36A5B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Events", "Events", "{487C0A64-1543-40B1-A6C7-6025B0CFD6B8}"
 	ProjectSection(SolutionItems) = preProject
