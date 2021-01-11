@@ -3,7 +3,8 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
-title: Home
+title: Welcome
+nav_order: 1
 ---
 
 # Kubernetes Event Grid Bridge
