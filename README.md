@@ -1,4 +1,4 @@
-# Kubernetes Event Grid Bridge
+![Logo](./docs/media/logo-with-name.png)
 
 A simple event bridge for Kubernetes native events forwarding [CloudEvents v1.0](https://cloudevents.io/) compliant events to Azure Event Grid into Microsoft Azure.
 
