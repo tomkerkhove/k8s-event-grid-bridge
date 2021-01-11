@@ -19,20 +19,29 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Kubernetes Event Grid Bridge
-email: your-email@example.com
+email: kerkhove.tom@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  A simple event bridge for Kubernetes native events forwarding CloudEvents v1.0 compliant events to Azure Event Grid into Microsoft Azure.
+  
+  The bridge is not in charge of acquiring the events from Kubernetes, but you can use tools such as Opsgenie's Kubernetes Event Exporter and forward them to the bridge.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
+url: "https://k8s-event-grid-bridge.tomkerkhove.be" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: tomkerkhove
 github_username:  tomkerkhove
 
 # Build settings
 theme: just-the-docs
 plugins:
   - jekyll-feed
+
+# Theme settings
+# All settings can be found on https://pmarsceill.github.io/just-the-docs/docs/configuration/
+# color_scheme: dark
+aux_links:
+  "GitHub":
+    - "https://github.com/tomkerkhove/k8s-event-grid-bridge"
+  "License":
+    - "https://github.com/tomkerkhove/k8s-event-grid-bridge/blob/main/LICENSE"
 
 # Exclude from processing.
 # The following items will not be processed, by default.
