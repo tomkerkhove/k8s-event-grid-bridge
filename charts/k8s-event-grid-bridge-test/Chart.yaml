@@ -22,10 +22,10 @@ version: 0.1.0
 # follow Semantic Versioning. They should reflect the version the application is using.
 appVersion: 0.1.0
 
-home: http://k8s-event-grid-bridge-test.tomkerkhove.be/
+home: http://k8s-event-grid-bridge.tomkerkhove.be/
 sources:
-  - https://github.com/tomkerkhove/k8s-event-grid-bridge-test
+  - https://github.com/tomkerkhove/k8s-event-grid-bridge
 maintainers:
   - name: Tom Kerkhove
     url: https://github.com/tomkerkhove
-icon: https://raw.githubusercontent.com/tomkerkhove/k8s-event-grid-bridge-test/main/docs/media/logo.png
+icon: https://raw.githubusercontent.com/tomkerkhove/k8s-event-grid-bridge/main/docs/media/logo.png
