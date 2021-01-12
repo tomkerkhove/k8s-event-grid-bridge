@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Opsgenie's Kubernetes Event Exporter
+title: Using Kubernetes Event Grid Bridge with Opsgenie's Kubernetes Event Exporter
 parent: Walkthroughs
 ---
 
