@@ -1,4 +1,4 @@
-name: Push Docker Images
+name: Push Experimental Docker Image
 on:
   push:
     paths:
