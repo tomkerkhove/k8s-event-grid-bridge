@@ -42,7 +42,7 @@ namespace Kubernetes.EventGrid.Bridge.Host
         {
             var @event = JsonConvert.DeserializeObject<object>(payload);
 
-            var cloudEvent = new CloudEvent(CloudEventsSpecVersion.V1_0, "Kubernetes.Events.Generic", new Uri("http://kubernetes"))
+            var cloudEvent = new CloudEvent(CloudEventsSpecVersion.V1_0, "Kubernetes.Events.Raw", new Uri("http://kubernetes"))
             {
                 DataContentType = new ContentType("application/json"), 
                 Data = @event
