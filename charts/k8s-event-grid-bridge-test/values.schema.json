@@ -1,0 +1,95 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "title": "Kubernetes Event Grid Bridge Chart JSON Schema",
+    "type": "object",
+    "properties": {
+        "azure": {
+            "title": "Azure configuration",
+            "type": "object",
+            "properties": {
+                "storage": {
+                    "title": "Azure Storage configuration",
+                    "type": "object",
+                    "properties": {
+                        "connectionString": {
+                            "title": "Connection string for Azure Storage account",
+                            "default": "hub",
+                            "type": "string"
+                        }
+                    },
+                    "required": ["connectionString"]
+                },
+                "eventGrid": {
+                    "title": "Azure Event Grid configuration",
+                    "type": "object",
+                    "properties": {
+                        "topicUri": {
+                            "title": "Uri of Azure Event Grid topic to publish events to",
+                            "default": "",
+                            "type": "string"
+                        },
+                        "key": {
+                            "title": "Authentication key for Azure Event Grid",
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "required": ["topicUri", "key"]
+                }
+            },
+            "required": ["storage", "eventGrid"]
+        },
+        "service": {
+            "title": "Service configuration",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "title": "Type of service",
+                    "default": "ClusterIP",
+                    "type": "string"
+                },
+                "port": {
+                    "title": "Port of the service",
+                    "type": "integer",
+                    "default": 8888
+                }
+            },
+            "required": ["type", "port"]
+        },
+        "nameOverride": {
+            "type": "string",
+            "default": ""
+        },
+        "fullnameOverride": {
+            "type": "string",
+            "default": ""
+        },
+        "imagePullSecrets": {
+            "type": "array",
+            "default": []
+        },
+        "image": {
+            "title": "Image configuration",
+            "type": "object",
+            "properties": {
+                "repository": {
+                    "title": "Container image uri",
+                    "default": "ghcr.io/tomkerkhove/k8s-event-grid-bridge-test",
+                    "type": "string"
+                },
+                "pullPolicy": {
+                    "title": "Policy to pull container image",
+                    "type": "string",
+                    "default": "IfNotPresent"
+                },
+                "tag": {
+                    "title": "Tag of container image to pull, in case app version cannot be used",
+                    "type": "string",
+                    "default": ""
+                }
+            },
+            "required": ["repository", "pullPolicy"]
+        }
+    },
+    "required": ["azure"]
+}
