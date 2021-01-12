@@ -3,8 +3,8 @@ layout: page
 title: Deploy
 permalink: /deploy/
 has_children: true
-has_toc: false
-nav_order: 3
+has_toc: true
+nav_order: 4
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Here's an overview of the deployment options for running the Kubernetes Event Grid Bridge.
