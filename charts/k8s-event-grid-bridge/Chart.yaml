@@ -21,11 +21,26 @@ version: 0.1.0
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 appVersion: 0.1.0
-
 home: http://k8s-event-grid-bridge.tomkerkhove.be/
+icon: https://raw.githubusercontent.com/tomkerkhove/k8s-event-grid-bridge/main/docs/media/logo.png
+keywords:
+  - kubernetes
+  - kubernetes events
+  - azure
+  - azure event grid
+  - event
+  - events
+  - event exporting
+  - event driven
 sources:
   - https://github.com/tomkerkhove/k8s-event-grid-bridge
 maintainers:
   - name: Tom Kerkhove
     url: https://github.com/tomkerkhove
-icon: https://raw.githubusercontent.com/tomkerkhove/k8s-event-grid-bridge/main/docs/media/logo.png
+annotations:
+  artifacthub.io/changes: |
+    - Initial version
+  artifacthub.io/containsSecurityUpdates: "false"
+  artifacthub.io/images: |
+    - name: k8s-event-grid-bridge
+      image: ghcr.io/tomkerkhove/k8s-event-grid-bridge:experimental
