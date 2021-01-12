@@ -1,21 +1,23 @@
 ---
 layout: default
-title: Generic
+title: Raw
 parent: Supported Events
 ---
 
-# Generic
+# Raw
+
+This event represents a raw Kubernetes event without translation.
 
 ## Event Type
 
-`Kubernetes.Events.Generic`
+`Kubernetes.Events.Raw`
 
 ## Example
 
 ```json
 {
 	"specversion": "1.0",
-	"type": "Kubernetes.Events.Generic",
+	"type": "Kubernetes.Events.Raw",
 	"source": "http://kubernetes",
 	"id": "727b39dd-7ac1-4783-94f1-4a1d5de3d1da",
 	"time": "2021-01-10T09:22:09.6277244Z",
