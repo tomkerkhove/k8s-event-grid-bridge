@@ -1,5 +1,5 @@
 ---
-name: Event type request
+name: Event type request ⚡
 about: Suggest a new event type that would be an added value
 labels: event-type,feature-request
 ---
