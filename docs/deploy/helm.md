@@ -10,7 +10,7 @@ parent: Deploy
 
 We allow you to easily deploy to Kubernetes through Helm.
 
-## Adding the Helm chart registry
+## Adding our Helm chart registry
 
 - Install the `k8s-event-grid-bridge` Chart repository:
 
@@ -43,18 +43,9 @@ You can easily install our Kubernetes Event Grid Bridge as following:
 ```
 ❯ helm install k8s-event-grid-bridge \
                k8s-event-grid-bridge/k8s-event-grid-bridge \
-               --values /path/to/helm-configuration.yaml
-```
-
-Here is an example of minimal required configuration that you can pass:
-
-```yaml
-azure:
-  storage:
-    connectionString: <storage-connection-string>
-  eventGrid:
-    topicUri: <event-grid-uri>
-    key: <event-grid-auth-key>
+               --set azure.storage.connectionString='<storage-connection-string>' \
+               --set azure.eventGrid.topicUri='<event-grid-uri>' \
+               --set azure.eventGrid.key='<event-grid-auth-key>'
 ```
 
 Our Helm chart provides a variety of configuration options which you can explore in our full [values file](https://github.com/tomkerkhove/k8s-event-grid-bridge/blob/main/charts/k8s-event-grid-bridge/values.yaml) to see all configurable values.
