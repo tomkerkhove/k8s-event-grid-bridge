@@ -10,10 +10,10 @@ entries:
           image: ghcr.io/tomkerkhove/k8s-event-grid-bridge:experimental
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-01-12T15:36:36.2131293+01:00"
+    created: "2021-01-18T06:58:53.0311438+01:00"
     description: A simple event bridge for Kubernetes native events to Azure Event
       Grid.
-    digest: 198c13248ba85445beed44a36cd4a4cd40cb2733a172140d122cadb3f71e14b5
+    digest: 877275eed46b6fa576bc4137b001864abe48cd5834b78667c41fed8f34586bdc
     home: http://k8s-event-grid-bridge.tomkerkhove.be/
     icon: https://raw.githubusercontent.com/tomkerkhove/k8s-event-grid-bridge/main/docs/media/logo.png
     keywords:
@@ -35,4 +35,4 @@ entries:
     urls:
     - https://k8s-event-grid-bridge.tomkerkhove.be/chart-registry/k8s-event-grid-bridge-0.1.0.tgz
     version: 0.1.0
-generated: "2021-01-12T15:36:36.2111369+01:00"
+generated: "2021-01-18T06:58:53.0280895+01:00"
