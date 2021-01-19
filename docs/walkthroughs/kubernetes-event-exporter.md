@@ -15,16 +15,17 @@ We'll use Opsgenie's Kubernetes Event Exporter to export and route events to Kub
 Here's an overview of the steps that we'll go through:
 
 1. Creating an Azure Event Grid topic ([link](#creating-an-azure-event-grid-topic))
-2. Creating an Azure Logic Apps as event handler ([link](#creating-an-azure-logic-apps-as-event-handler))
+2. Creating an Azure Logic Apps as an event handler ([link](#creating-an-azure-logic-apps-as-an-event-handler))
 3. Subscribing to events in Azure Event Grid topic for our event handler ([link](#subscribing-to-events-in-azure-event-grid-topic-for-our-event-handler))
 4. Deploying Kubernetes Event Grid Bridge ([link](#deploying-kubernetes-event-grid-bridge))
 5. Deploying Opsgenie's Kubernetes Event Exporter ([link](#deploying-opsgenies-kubernetes-event-exporter))
+6. See it in action! ([link](#see-it-in-action))
 
 ## Creating an Azure Event Grid topic
 
 We'll start by creating a new resource group that will contain Azure Event Grid topic to which we will forward events.
 
-> 📝*While this walkthrough uses the Azure Cloud Shell, you can use any CLI tool, ARM or Azure portal if you prefer.*
+> 📝*While this walkthrough uses the Azure Cloud Shell, you can use any CLI tool, ARM, or Azure portal if you prefer.*
 
 - Create a new resource group:
 
@@ -34,7 +35,7 @@ resourceGroupName=k8s-event-grid-bridge
 location=westeurope
 
 # Create new resource group
-az group create --name $resourceGroupName --location $location
+$ az group create --name $resourceGroupName --location $location
 {
   "id": "/subscriptions/0f9d7fea-99e8-4768-8672-06a28514f77e/resourceGroups/k8s-event-grid-bridge",
   "location": "westeurope",
@@ -55,7 +56,7 @@ az group create --name $resourceGroupName --location $location
 topicName=k8s-event-grid-bridge
 
 # Create Azure Event Grid topic
-az eventgrid topic create --name $topicName --input-schema cloudeventschemav1_0 --resource-group $resourceGroupName --location $location
+$ az eventgrid topic create --name $topicName --input-schema cloudeventschemav1_0 --resource-group $resourceGroupName --location $location
 {
   "endpoint": "https://k8s-event-grid-bridge.westeurope-1.eventgrid.azure.net/api/events",
   "id": "/subscriptions/0f9d7fea-99e8-4768-8672-06a28514f77e/resourceGroups/k8s-event-grid-bridge/providers/Microsoft.EventGrid/topics/k8s-event-grid-bridge",
@@ -83,11 +84,11 @@ az eventgrid topic create --name $topicName --input-schema cloudeventschemav1_0 
 }
 ```
 
-## Creating an Azure Logic Apps as event handler
+## Creating an Azure Logic Apps as an event handler
 
 Next, we'll create an Azure Logic App that will act as an event handler.
 
-- Create a file called `event-handler-workflow.json` which represents an empty workflow with request trigger
+- Create a file called `event-handler-workflow.json` which represents an empty workflow with request trigger:
 
 ```json
 {
@@ -111,21 +112,21 @@ Next, we'll create an Azure Logic App that will act as an event handler.
 }
 ```
 
-- Install the experimental Azure Logic App extension for the Azure CLI
+- Install the experimental Azure Logic App extension for the Azure CLI:
 
 ```bash
 # Install the Azure Logic App extension (experimental)
 az extension add --name logic
 ```
 
-- Create a new Azure Logic App based on the workflow definition that we have created
+- Create a new Azure Logic App based on the workflow definition that we have created:
 
 ```bash
 # Define variables
 logicAppName=k8s-event-handler
 
 # Create Azure Logic App
-az logic workflow create --name $logicAppName --definition "event-handler-workflow.json" --resource-group $resourceGroupName --location $location
+$ az logic workflow create --name $logicAppName --definition "event-handler-workflow.json" --resource-group $resourceGroupName --location $location
 Command group 'logic' is experimental and not covered by customer support. Please use with discretion.
 {
   "accessControl": null,
@@ -152,10 +153,10 @@ Command group 'logic' is experimental and not covered by customer support. Pleas
 
 ## Subscribing to events in Azure Event Grid topic for our event handler
 
-Now that we have both our Azure Event Grid topic, we can create an event subscription to forward all events to our new event handler.
+Now that we have both our Azure Event Grid topic and Azure Logic App, we can create an event subscription to forward all events to our new event handler.
 
 - Go to our even handler Azure Logic App and copy the trigger URL in the editor
-- Store the trigger URL and topic id as variables
+- Store the trigger URL and topic id as variables:
 
 ```bash
 # Define variables
@@ -163,10 +164,10 @@ triggerUrl="<url>"
 topicId=$(az eventgrid topic show --name $topicName -g $resourceGroupName --query id --output tsv)
 ```
 
-- Create a new event subscription on our Azure Event Grid topic
+- Create a new event subscription on our Azure Event Grid topic:
 
 ```bash
-az eventgrid event-subscription create \
+$ az eventgrid event-subscription create \
   --source-resource-id $topicId \
   --name example-subscription \
   --endpoint $triggerUrl \
@@ -217,7 +218,7 @@ You can easily install our Kubernetes Event Grid Bridge through Helm. Before we 
 
 Let's get started!
 
-- Create a new Azure Storage Account
+- Create a new Azure Storage Account:
 
 ```bash
 # Define variables
@@ -231,7 +232,7 @@ az storage account create \
     --sku Standard_LRS
 ```
 
-- Retrieve all required information as variables
+- Retrieve all required information as variables:
 
 ```bash
 # Retrieve required information for Kubernetes Event Grid Bridge to authenticate to Azure Event Grid topic & Storage
@@ -245,7 +246,7 @@ storageConnectionString=$(az storage account show-connection-string  --name $sto
 - Install our Kubernetes Event Grid Bridge Helm chart:
 
 ```bash
-❯ helm install k8s-event-grid-bridge \
+$ helm install k8s-event-grid-bridge \
                k8s-event-grid-bridge/k8s-event-grid-bridge \
                --set azure.storage.connectionString=$storageConnectionString \
                --set azure.eventGrid.topicUri=$eventGridEndpoint \
@@ -267,13 +268,30 @@ That's it, the Kubernetes Event Grid Bridge is up & running and ready to forward
 
 Lastly, we will deploy [Opsgenie's Kubernetes Event Exporter](https://github.com/opsgenie/kubernetes-event-exporter) to export Kubernetes events from the API Server and send them to our Kubernetes Event Grid Bridge instance!
 
-You can deploy the Kubernetes Event Exporter through raw Kubernetes YAML files ([docs](https://github.com/opsgenie/kubernetes-event-exporter#deployment)) or use a community-based Helm chart by Bitnami.
+You can deploy the Kubernetes Event Exporter through raw Kubernetes YAML files ([docs](https://github.com/opsgenie/kubernetes-event-exporter#deployment)) or use a [community-based Helm chart](https://artifacthub.io/packages/helm/bitnami/kubernetes-event-exporter) by Bitnami.
+
+> 💡 *An official Helm chart is being contributed ([GitHub](https://github.com/opsgenie/kubernetes-event-exporter/pull/104))*
 
 To make it easy, we'll use Helm:
 
-- 
+- Add our [Helm registry](/deploy/helm#adding-our-helm-chart-registry):
 
-https://artifacthub.io/packages/helm/bitnami/kubernetes-event-exporter --> Community, not official. Official is coming through https://github.com/opsgenie/kubernetes-event-exporter/pull/104
+```shell
+$ helm repo add bitnami https://charts.bitnami.com/bitnami
+"bitnami" has been added to your repositories
+```
+
+- Refresh your local chart repositories:
+
+```shell
+$ helm repo update
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "k8s-event-grid-bridge" chart repository
+...Successfully got an update from the "bitnami" chart repository
+Update Complete. ⎈ Happy Helming!⎈
+```
+
+- Create a new Helm configuration file `kubernetes-event-exporter-config.yml` which routes events to our Kubernetes Event Grid Bridge through webhooks:
 
 ```yaml
 image:
@@ -293,33 +311,41 @@ config:
           User-Agent: kube-event-exporter 1.0
 ```
 
-helm install kubernetes-event-exporter bitnami/kubernetes-event-exporter --values config.ymlNAME: kubernetes-event-exporter
+> 💡 *We are specifying the image because by default the Helm chart uses a Bitnami image, while we want to use the official one instead*
+
+- Install the Helm chart:
+
+```shell
+$ helm install kubernetes-event-exporter bitnami/kubernetes-event-exporter --values kubernetes-event-exporter-config.yml
+NAME: kubernetes-event-exporter
 LAST DEPLOYED: Mon Jan 18 08:40:51 2021
 NAMESPACE: default
 STATUS: deployed
 REVISION: 1
 TEST SUITE: None
-
-Here is an example configuration that you can use:
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: event-exporter-cfg
-  namespace: monitoring
-data:
-  config.yaml: |
-    logLevel: error
-    logFormat: json
-    route:
-      routes:
-        - match:
-            - receiver: "k8s-event-grid-bridge"
-    receivers:
-      - name: "k8s-event-grid-bridge"
-        webhook:
-          endpoint: "http://k8s-event-grid-bridge:8888/api/kubernetes/events/forward"
-          headers:
-            User-Agent: kube-event-exporter 1.0
 ```
+
+And that's it, you will now be able to process all Kubernetes events through Azure Event Grid!
+
+# See it in action!
+
+Now that everything is set up, we can see how easy it is to process those events in Azure!
+
+- Let's create a new `nginx` deployment that generates a few Kubernetes events behind the scenes:
+
+```shell
+$ kubectl create deployment nginx --image nginx
+deployment.apps/nginx created
+```
+
+- When going to our Azure Event Grid topic, it shows how many events were received and how many were delivered to our Azure Logic App:
+
+![High Level Overview](/media/walkthroughs/delivered-events.png)
+
+- Our Azure Logic Apps successfully received & processed the events:
+
+![High Level Overview](/media/walkthroughs/received-events.png)
+
+- Once you open the run details, you will see a CloudEvent-compliant version of the Kubernetes events:
+
+![High Level Overview](/media/walkthroughs/received-event-details.png)
