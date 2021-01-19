@@ -1,0 +1,15 @@
+image:
+  registry: docker.io
+  repository: opsgenie/kubernetes-event-exporter
+  tag: latest
+config:
+  route:
+    routes:
+      - match:
+          - receiver: "k8s-event-grid-bridge"
+  receivers:
+    - name: "k8s-event-grid-bridge"
+      webhook:
+        endpoint: "http://k8s-event-grid-bridge:8888/api/kubernetes/events/forward"
+        headers:
+          User-Agent: kube-event-exporter 1.0
