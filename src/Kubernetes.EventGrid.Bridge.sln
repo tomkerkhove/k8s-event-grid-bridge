@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Events", "Events", "{487C0A
 		..\events\ScalingReplicaSet.json = ..\events\ScalingReplicaSet.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kubernetes.EventGrid.Core", "Kubernetes.EventGrid.Core\Kubernetes.EventGrid.Core.csproj", "{10DD3A89-C475-495B-913B-04A1DF4DC297}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kubernetes.EventGrid.Core", "Kubernetes.EventGrid.Core\Kubernetes.EventGrid.Core.csproj", "{10DD3A89-C475-495B-913B-04A1DF4DC297}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kubernetes.EventGrid.Tests.Unit", "Kubernetes.EventGrid.Tests.Unit\Kubernetes.EventGrid.Tests.Unit.csproj", "{BD4B9825-A792-46B8-A2DD-AF6BA949B527}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{10DD3A89-C475-495B-913B-04A1DF4DC297}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10DD3A89-C475-495B-913B-04A1DF4DC297}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10DD3A89-C475-495B-913B-04A1DF4DC297}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD4B9825-A792-46B8-A2DD-AF6BA949B527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD4B9825-A792-46B8-A2DD-AF6BA949B527}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD4B9825-A792-46B8-A2DD-AF6BA949B527}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD4B9825-A792-46B8-A2DD-AF6BA949B527}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
