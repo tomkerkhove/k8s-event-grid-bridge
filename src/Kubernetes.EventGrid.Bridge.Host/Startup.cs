@@ -4,6 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Arcus.EventGrid.Publishing;
 using Arcus.EventGrid.Publishing.Interfaces;
+using Kubernetes.EventGrid.Core.CloudEvents;
+using Kubernetes.EventGrid.Core.CloudEvents.Interfaces;
+using Kubernetes.EventGrid.Core.Kubernetes;
+using Kubernetes.EventGrid.Core.Kubernetes.Interfaces;
 using Serilog;
 using Serilog.Configuration;
 using Serilog.Events;
@@ -24,8 +28,16 @@ namespace Kubernetes.EventGrid.Bridge.Host
         {
             var configuration = GetConfiguration(builder);
 
-            AddEventGridPublisher(builder, configuration);
+            AddDependencies(builder, configuration);
+
             ConfigureLogging(builder, configuration);
+        }
+
+        private void AddDependencies(IFunctionsHostBuilder builder, IConfiguration configuration)
+        {
+            builder.Services.AddTransient<IKubernetesEventParser, KubernetesEventParser>();
+            builder.Services.AddTransient<ICloudEventFactory, CloudEventFactory>();
+            AddEventGridPublisher(builder, configuration);
         }
 
         private static void AddEventGridPublisher(IFunctionsHostBuilder builder, IConfiguration configuration)
