@@ -1,14 +1,18 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS installer-env
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+WORKDIR /src
+COPY ["Kubernetes.EventGrid.Bridge.Host/Kubernetes.EventGrid.Bridge.Host.csproj", "Kubernetes.EventGrid.Bridge.Host/"]
+COPY ["Kubernetes.EventGrid.Core/Kubernetes.EventGrid.Core.csproj", "Kubernetes.EventGrid.Core/"]
+RUN dotnet restore "Kubernetes.EventGrid.Bridge.Host/Kubernetes.EventGrid.Bridge.Host.csproj"
+COPY . .
+WORKDIR "/src/Kubernetes.EventGrid.Bridge.Host"
+RUN dotnet build "Kubernetes.EventGrid.Bridge.Host.csproj" -c Release -o /app/build
 
-COPY . /src/dotnet-function-app
-RUN cd /src/dotnet-function-app && \
-    mkdir -p /home/site/wwwroot && \
-    dotnet publish *.csproj --output /home/site/wwwroot
+FROM build AS publish
+RUN dotnet publish "Kubernetes.EventGrid.Bridge.Host.csproj" -c Release -o /app/publish
 
-# To enable ssh & remote debugging on app service change the base image to the one below
-# FROM mcr.microsoft.com/azure-functions/dotnet:3.0-appservice
-FROM mcr.microsoft.com/azure-functions/dotnet:3.0
+FROM mcr.microsoft.com/azure-functions/dotnet:3.0 AS runtime
+WORKDIR /home/site/wwwroot
+EXPOSE 80
+COPY --from=publish /app/publish .
 ENV AzureWebJobsScriptRoot=/home/site/wwwroot \
     AzureFunctionsJobHost__Logging__Console__IsEnabled=true
-
-COPY --from=installer-env ["/home/site/wwwroot", "/home/site/wwwroot"]
