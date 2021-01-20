@@ -16,6 +16,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln
+    - name: Run Unit Tests
+      run: dotnet test ./src/Kubernetes.EventGrid.Tests.Unit/Kubernetes.EventGrid.Tests.Unit.csproj --filter Category=Unit
   runtime:
     name: Runtime (Docker)
     runs-on: ubuntu-latest
