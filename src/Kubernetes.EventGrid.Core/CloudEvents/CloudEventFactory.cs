@@ -2,6 +2,7 @@
 using System.Net.Mime;
 using CloudNative.CloudEvents;
 using Kubernetes.EventGrid.Core.CloudEvents.Interfaces;
+using Kubernetes.EventGrid.Core.Extensions;
 using Kubernetes.EventGrid.Core.Kubernetes.Interfaces;
 
 namespace Kubernetes.EventGrid.Core.CloudEvents

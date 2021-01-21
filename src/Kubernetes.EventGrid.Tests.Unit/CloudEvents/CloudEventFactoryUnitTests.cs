@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Kubernetes.EventGrid.Tests.Unit
+namespace Kubernetes.EventGrid.Tests.Unit.CloudEvents
 {
     [Trait("Category", "Unit")]
     public class CloudEventFactoryUnitTests
