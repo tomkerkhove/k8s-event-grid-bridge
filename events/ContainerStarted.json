@@ -1,0 +1,42 @@
+{
+	"metadata": {
+		"name": "nginx-6799fc88d8-rxw8h.165c5a002bd7cdd7",
+		"namespace": "default",
+		"selfLink": "/api/v1/namespaces/default/events/nginx-6799fc88d8-rxw8h.165c5a002bd7cdd7",
+		"uid": "51ff5002-2f5a-4da4-a12d-b4b9c814b6f2",
+		"resourceVersion": "4320801",
+		"creationTimestamp": "2021-01-21T20:42:03Z",
+		"managedFields": [{
+			"manager": "kubelet",
+			"operation": "Update",
+			"apiVersion": "v1",
+			"time": "2021-01-21T20:42:03Z"
+		}]
+	},
+	"reason": "Started",
+	"message": "Started container nginx",
+	"source": {
+		"component": "kubelet",
+		"host": "aks-agentpool-11593772-vmss000000"
+	},
+	"firstTimestamp": "2021-01-21T20:42:03Z",
+	"lastTimestamp": "2021-01-21T20:42:03Z",
+	"count": 1,
+	"type": "Normal",
+	"eventTime": null,
+	"reportingComponent": "",
+	"reportingInstance": "",
+	"involvedObject": {
+		"kind": "Pod",
+		"namespace": "default",
+		"name": "nginx-6799fc88d8-rxw8h",
+		"uid": "207dfebb-c80b-48d9-9bdf-710458a025c9",
+		"apiVersion": "v1",
+		"resourceVersion": "4320760",
+		"fieldPath": "spec.containers{nginx}",
+		"labels": {
+			"app": "nginx",
+			"pod-template-hash": "6799fc88d8"
+		}
+	}
+}
