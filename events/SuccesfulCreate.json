@@ -1,0 +1,40 @@
+{
+	"metadata": {
+		"name": "nginx-6799fc88d8.165c59ff7ad784cc",
+		"namespace": "default",
+		"selfLink": "/api/v1/namespaces/default/events/nginx-6799fc88d8.165c59ff7ad784cc",
+		"uid": "be7a918d-7b65-4035-8dc2-2df6fa2d569f",
+		"resourceVersion": "4320764",
+		"creationTimestamp": "2021-01-21T20:42:00Z",
+		"managedFields": [{
+			"manager": "kube-controller-manager",
+			"operation": "Update",
+			"apiVersion": "v1",
+			"time": "2021-01-21T20:42:00Z"
+		}]
+	},
+	"reason": "SuccessfulCreate",
+	"message": "Created pod: nginx-6799fc88d8-w9sn4",
+	"source": {
+		"component": "replicaset-controller"
+	},
+	"firstTimestamp": "2021-01-21T20:42:00Z",
+	"lastTimestamp": "2021-01-21T20:42:00Z",
+	"count": 1,
+	"type": "Normal",
+	"eventTime": null,
+	"reportingComponent": "",
+	"reportingInstance": "",
+	"involvedObject": {
+		"kind": "ReplicaSet",
+		"namespace": "default",
+		"name": "nginx-6799fc88d8",
+		"uid": "7c8ff468-cd97-437c-9a39-0c323347b2bd",
+		"apiVersion": "apps/v1",
+		"resourceVersion": "4320754",
+		"labels": {
+			"app": "nginx",
+			"pod-template-hash": "6799fc88d8"
+		}
+	}
+}

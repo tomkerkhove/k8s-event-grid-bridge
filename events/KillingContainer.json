@@ -1,0 +1,42 @@
+{
+	"metadata": {
+		"name": "nginx-6799fc88d8-sthns.165c59c2a112274c",
+		"namespace": "default",
+		"selfLink": "/api/v1/namespaces/default/events/nginx-6799fc88d8-sthns.165c59c2a112274c",
+		"uid": "9248235e-0971-45b9-a505-ebaa1c6eec5c",
+		"resourceVersion": "4320047",
+		"creationTimestamp": "2021-01-21T20:37:39Z",
+		"managedFields": [{
+			"manager": "kubelet",
+			"operation": "Update",
+			"apiVersion": "v1",
+			"time": "2021-01-21T20:37:39Z"
+		}]
+	},
+	"reason": "Killing",
+	"message": "Stopping container nginx",
+	"source": {
+		"component": "kubelet",
+		"host": "aks-agentpool-11593772-vmss000000"
+	},
+	"firstTimestamp": "2021-01-21T20:37:39Z",
+	"lastTimestamp": "2021-01-21T20:37:39Z",
+	"count": 1,
+	"type": "Normal",
+	"eventTime": null,
+	"reportingComponent": "",
+	"reportingInstance": "",
+	"involvedObject": {
+		"kind": "Pod",
+		"namespace": "default",
+		"name": "nginx-6799fc88d8-sthns",
+		"uid": "c8c3901f-630b-4c0b-82be-b4e64bb564a8",
+		"apiVersion": "v1",
+		"resourceVersion": "3719461",
+		"fieldPath": "spec.containers{nginx}",
+		"labels": {
+			"app": "nginx",
+			"pod-template-hash": "6799fc88d8"
+		}
+	}
+}
