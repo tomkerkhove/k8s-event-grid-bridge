@@ -14,12 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
+    - name: Build Solution
       run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln
+    - name: Run Unit Tests
+      run: dotnet test ./src/Kubernetes.EventGrid.Tests.Unit/Kubernetes.EventGrid.Tests.Unit.csproj --filter Category=Unit
   runtime:
     name: Runtime (Docker)
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build ./src/Kubernetes.EventGrid.Bridge.Host/ --file ./src/Kubernetes.EventGrid.Bridge.Host/Dockerfile --tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+      run: docker build ./src/ --file ./src/Kubernetes.EventGrid.Bridge.Host/Dockerfile --tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
