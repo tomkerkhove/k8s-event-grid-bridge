@@ -24,7 +24,7 @@ namespace Kubernetes.EventGrid.Core.CloudEvents
         ///     Creates a CloudEvent for a raw Kubernetes event
         /// </summary>
         /// <param name="payload">Raw Kubernetes event</param>
-        public CloudEvent CreateFromRawKubernetesEvent(string payload)
+        public virtual CloudEvent CreateFromRawKubernetesEvent(string payload)
         {
             var kubernetesEvent = _kubernetesEventParser.ParseFromRawNativeEvent(payload);
             var eventType = kubernetesEvent.Type.GetDescription();

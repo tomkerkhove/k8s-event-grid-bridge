@@ -12,7 +12,7 @@ namespace Kubernetes.EventGrid.Core.Kubernetes
         /// </summary>
         /// <param name="rawPayload">Raw payload containing the native Kubernetes event</param>
         /// <returns>User-friendly Kubernetes event</returns>
-        public IKubernetesEvent ParseFromRawNativeEvent(string rawPayload)
+        public virtual IKubernetesEvent ParseFromRawNativeEvent(string rawPayload)
         {
             var parsedPayload = JToken.Parse(rawPayload);
 
@@ -24,7 +24,7 @@ namespace Kubernetes.EventGrid.Core.Kubernetes
             }
         }
 
-        private static IKubernetesEvent ComposeRawKubernetesEvent(JToken parsedPayload)
+        private IKubernetesEvent ComposeRawKubernetesEvent(JToken parsedPayload)
         {
             return new RawKubernetesEvent
             {

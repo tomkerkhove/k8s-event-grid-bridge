@@ -14,6 +14,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="..\..\events\ContainerStarted.json" Link="Events\Samples\ContainerStarted.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\ImagePulled.json" Link="Events\Samples\ImagePulled.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\KillingContainer.json" Link="Events\Samples\KillingContainer.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\KillingPod.json" Link="Events\Samples\KillingPod.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\PodScheduled.json" Link="Events\Samples\PodScheduled.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\PullingImage.json" Link="Events\Samples\PullingImage.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\ScalingReplicaSet.json" Link="Events\Samples\ScalingReplicaSet.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\SuccesfulCreate.json" Link="Events\Samples\SuccesfulCreate.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\SuccessfulDelete.json" Link="Events\Samples\SuccessfulDelete.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Bogus" Version="32.0.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
@@ -24,5 +54,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Kubernetes.EventGrid.Core\Kubernetes.EventGrid.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Events\Samples\" />
   </ItemGroup>
 </Project>
