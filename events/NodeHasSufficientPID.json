@@ -1,0 +1,30 @@
+{
+	"metadata": {
+		"name": "aks-agentpool-11593772-vmss000001.165c8875140a648d",
+		"namespace": "default",
+		"selfLink": "/api/v1/namespaces/default/events/aks-agentpool-11593772-vmss000001.165c8875140a648d",
+		"uid": "5b4b73aa-a235-4c3f-9216-cad4d6140d6c",
+		"resourceVersion": "4457523",
+		"creationTimestamp": "2021-01-22T10:53:23Z",
+		"managedFields": [{
+			"manager": "kubelet",
+			"operation": "Update",
+			"apiVersion": "v1",
+			"time": "2021-01-22T10:53:23Z"
+		}]
+	},
+	"reason": "NodeHasSufficientPID",
+	"message": "Node aks-agentpool-11593772-vmss000001 status is now: NodeHasSufficientPID",
+	"source": {
+		"component": "kubelet",
+		"host": "aks-agentpool-11593772-vmss000001"
+	},
+	"firstTimestamp": "2021-01-22T10:53:23Z",
+	"lastTimestamp": "2021-01-22T10:53:23Z",
+	"count": 2,
+	"type": "Normal",
+	"eventTime": null,
+	"reportingComponent": "",
+	"reportingInstance": "",
+	"involvedObject": {}
+}

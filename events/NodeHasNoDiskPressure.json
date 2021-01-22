@@ -1,0 +1,30 @@
+{
+	"metadata": {
+		"name": "aks-agentpool-11593772-vmss000001.165c8875140a4615",
+		"namespace": "default",
+		"selfLink": "/api/v1/namespaces/default/events/aks-agentpool-11593772-vmss000001.165c8875140a4615",
+		"uid": "9b871d7f-8e31-4d2b-a013-2edd2b14026e",
+		"resourceVersion": "4457521",
+		"creationTimestamp": "2021-01-22T10:53:23Z",
+		"managedFields": [{
+			"manager": "kubelet",
+			"operation": "Update",
+			"apiVersion": "v1",
+			"time": "2021-01-22T10:53:23Z"
+		}]
+	},
+	"reason": "NodeHasNoDiskPressure",
+	"message": "Node aks-agentpool-11593772-vmss000001 status is now: NodeHasNoDiskPressure",
+	"source": {
+		"component": "kubelet",
+		"host": "aks-agentpool-11593772-vmss000001"
+	},
+	"firstTimestamp": "2021-01-22T10:53:23Z",
+	"lastTimestamp": "2021-01-22T10:53:23Z",
+	"count": 2,
+	"type": "Normal",
+	"eventTime": null,
+	"reportingComponent": "",
+	"reportingInstance": "",
+	"involvedObject": {}
+}

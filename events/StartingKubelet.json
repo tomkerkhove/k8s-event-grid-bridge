@@ -1,0 +1,30 @@
+{
+	"metadata": {
+		"name": "aks-agentpool-11593772-vmss000001.165c8875075aabc1",
+		"namespace": "default",
+		"selfLink": "/api/v1/namespaces/default/events/aks-agentpool-11593772-vmss000001.165c8875075aabc1",
+		"uid": "65e0f05b-3442-4116-bb94-d8dc094d7391",
+		"resourceVersion": "4457507",
+		"creationTimestamp": "2021-01-22T10:53:22Z",
+		"managedFields": [{
+			"manager": "kubelet",
+			"operation": "Update",
+			"apiVersion": "v1",
+			"time": "2021-01-22T10:53:22Z"
+		}]
+	},
+	"reason": "Starting",
+	"message": "Starting kubelet.",
+	"source": {
+		"component": "kubelet",
+		"host": "aks-agentpool-11593772-vmss000001"
+	},
+	"firstTimestamp": "2021-01-22T10:53:22Z",
+	"lastTimestamp": "2021-01-22T10:53:22Z",
+	"count": 1,
+	"type": "Normal",
+	"eventTime": null,
+	"reportingComponent": "",
+	"reportingInstance": "",
+	"involvedObject": {}
+}

@@ -1,0 +1,29 @@
+{
+	"metadata": {
+		"name": "aks-agentpool-11593772-vmss000001.165c8cff2a11aa2b",
+		"namespace": "default",
+		"selfLink": "/api/v1/namespaces/default/events/aks-agentpool-11593772-vmss000001.165c8cff2a11aa2b",
+		"uid": "e2ba6a46-ebd8-4633-a44f-49158dfcf5ed",
+		"resourceVersion": "4471400",
+		"creationTimestamp": "2021-01-22T12:16:34Z",
+		"managedFields": [{
+			"manager": "kube-controller-manager",
+			"operation": "Update",
+			"apiVersion": "v1",
+			"time": "2021-01-22T12:16:34Z"
+		}]
+	},
+	"reason": "RemovingNode",
+	"message": "Node aks-agentpool-11593772-vmss000001 event: Removing Node aks-agentpool-11593772-vmss000001 from Controller",
+	"source": {
+		"component": "node-controller"
+	},
+	"firstTimestamp": "2021-01-22T12:16:34Z",
+	"lastTimestamp": "2021-01-22T12:16:34Z",
+	"count": 1,
+	"type": "Normal",
+	"eventTime": null,
+	"reportingComponent": "",
+	"reportingInstance": "",
+	"involvedObject": {}
+}

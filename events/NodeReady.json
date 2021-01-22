@@ -1,0 +1,30 @@
+{
+	"metadata": {
+		"name": "aks-agentpool-11593772-vmss000001.165c88776df8b259",
+		"namespace": "default",
+		"selfLink": "/api/v1/namespaces/default/events/aks-agentpool-11593772-vmss000001.165c88776df8b259",
+		"uid": "fbc587f8-ec0b-48c8-80be-47a0bbb431ee",
+		"resourceVersion": "4457562",
+		"creationTimestamp": "2021-01-22T10:53:33Z",
+		"managedFields": [{
+			"manager": "kubelet",
+			"operation": "Update",
+			"apiVersion": "v1",
+			"time": "2021-01-22T10:53:33Z"
+		}]
+	},
+	"reason": "NodeReady",
+	"message": "Node aks-agentpool-11593772-vmss000001 status is now: NodeReady",
+	"source": {
+		"component": "kubelet",
+		"host": "aks-agentpool-11593772-vmss000001"
+	},
+	"firstTimestamp": "2021-01-22T10:53:33Z",
+	"lastTimestamp": "2021-01-22T10:53:33Z",
+	"count": 1,
+	"type": "Normal",
+	"eventTime": null,
+	"reportingComponent": "",
+	"reportingInstance": "",
+	"involvedObject": {}
+}

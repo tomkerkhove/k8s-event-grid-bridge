@@ -1,0 +1,30 @@
+{
+	"metadata": {
+		"name": "aks-agentpool-11593772-vmss000001.165c8875140a134d",
+		"namespace": "default",
+		"selfLink": "/api/v1/namespaces/default/events/aks-agentpool-11593772-vmss000001.165c8875140a134d",
+		"uid": "026ea61e-be83-4e79-ba02-b6160040ccd7",
+		"resourceVersion": "4457518",
+		"creationTimestamp": "2021-01-22T10:53:23Z",
+		"managedFields": [{
+			"manager": "kubelet",
+			"operation": "Update",
+			"apiVersion": "v1",
+			"time": "2021-01-22T10:53:23Z"
+		}]
+	},
+	"reason": "NodeHasSufficientMemory",
+	"message": "Node aks-agentpool-11593772-vmss000001 status is now: NodeHasSufficientMemory",
+	"source": {
+		"component": "kubelet",
+		"host": "aks-agentpool-11593772-vmss000001"
+	},
+	"firstTimestamp": "2021-01-22T10:53:23Z",
+	"lastTimestamp": "2021-01-22T10:53:23Z",
+	"count": 2,
+	"type": "Normal",
+	"eventTime": null,
+	"reportingComponent": "",
+	"reportingInstance": "",
+	"involvedObject": {}
+}

@@ -1,0 +1,30 @@
+{
+	"metadata": {
+		"name": "aks-agentpool-11593772-vmss000001.165c887517dda665",
+		"namespace": "default",
+		"selfLink": "/api/v1/namespaces/default/events/aks-agentpool-11593772-vmss000001.165c887517dda665",
+		"uid": "f09c9ad8-1a60-40ad-a088-0396d0c4f11a",
+		"resourceVersion": "4457525",
+		"creationTimestamp": "2021-01-22T10:53:23Z",
+		"managedFields": [{
+			"manager": "kubelet",
+			"operation": "Update",
+			"apiVersion": "v1",
+			"time": "2021-01-22T10:53:23Z"
+		}]
+	},
+	"reason": "NodeAllocatableEnforced",
+	"message": "Updated Node Allocatable limit across pods",
+	"source": {
+		"component": "kubelet",
+		"host": "aks-agentpool-11593772-vmss000001"
+	},
+	"firstTimestamp": "2021-01-22T10:53:23Z",
+	"lastTimestamp": "2021-01-22T10:53:23Z",
+	"count": 1,
+	"type": "Normal",
+	"eventTime": null,
+	"reportingComponent": "",
+	"reportingInstance": "",
+	"involvedObject": {}
+}

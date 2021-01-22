@@ -1,0 +1,30 @@
+{
+	"metadata": {
+		"name": "aks-agentpool-11593772-vmss000001.165c88750cdf8085",
+		"namespace": "default",
+		"selfLink": "/api/v1/namespaces/default/events/aks-agentpool-11593772-vmss000001.165c88750cdf8085",
+		"uid": "74fb7c94-e315-462e-8922-ef2b225244f5",
+		"resourceVersion": "4457508",
+		"creationTimestamp": "2021-01-22T10:53:23Z",
+		"managedFields": [{
+			"manager": "kubelet",
+			"operation": "Update",
+			"apiVersion": "v1",
+			"time": "2021-01-22T10:53:23Z"
+		}]
+	},
+	"reason": "InvalidDiskCapacity",
+	"message": "invalid capacity 0 on image filesystem",
+	"source": {
+		"component": "kubelet",
+		"host": "aks-agentpool-11593772-vmss000001"
+	},
+	"firstTimestamp": "2021-01-22T10:53:23Z",
+	"lastTimestamp": "2021-01-22T10:53:23Z",
+	"count": 1,
+	"type": "Warning",
+	"eventTime": null,
+	"reportingComponent": "",
+	"reportingInstance": "",
+	"involvedObject": {}
+}

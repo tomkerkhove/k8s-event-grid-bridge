@@ -20,10 +20,28 @@
     <Content Include="..\..\events\ImagePulled.json" Link="Events\Samples\ImagePulled.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\events\InvalidDiskCapacity.json" Link="Events\Samples\InvalidDiskCapacity.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\events\KillingContainer.json" Link="Events\Samples\KillingContainer.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\events\KillingPod.json" Link="Events\Samples\KillingPod.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\NodeAllocatableEnforced.json" Link="Events\Samples\NodeAllocatableEnforced.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\NodeHasNoDiskPressure.json" Link="Events\Samples\NodeHasNoDiskPressure.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\NodeHasSufficientMemory.json" Link="Events\Samples\NodeHasSufficientMemory.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\NodeHasSufficientPID.json" Link="Events\Samples\NodeHasSufficientPID.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\NodeReady.json" Link="Events\Samples\NodeReady.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\events\PodScheduled.json" Link="Events\Samples\PodScheduled.json">
@@ -32,13 +50,25 @@
     <Content Include="..\..\events\PullingImage.json" Link="Events\Samples\PullingImage.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\events\RegisteredNode.json" Link="Events\Samples\RegisteredNode.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\RemovingNode.json" Link="Events\Samples\RemovingNode.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\events\ScalingReplicaSet.json" Link="Events\Samples\ScalingReplicaSet.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\StartingKubelet.json" Link="Events\Samples\StartingKubelet.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\events\SuccesfulCreate.json" Link="Events\Samples\SuccesfulCreate.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\events\SuccessfulDelete.json" Link="Events\Samples\SuccessfulDelete.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\UpdatedLoadBalancer.json" Link="Events\Samples\UpdatedLoadBalancer.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
