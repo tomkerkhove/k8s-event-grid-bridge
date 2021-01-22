@@ -11,7 +11,8 @@ namespace Kubernetes.EventGrid.Tests.Unit.Events
 
         private static string ReadEventFromDisk(string fileName)
         {
-            return File.ReadAllText($"Events\\Samples\\{fileName}");
+            var filePath = Path.Combine("Events", "Samples", fileName);
+            return File.ReadAllText(filePath);
         }
     }
 }
