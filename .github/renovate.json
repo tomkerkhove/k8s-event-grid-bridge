@@ -10,10 +10,10 @@
 	"ignoreDeps": [],
 	"prHourlyLimit": 0,
 	"prConcurrentLimit": 0,
-  	"prBodyTemplate": "{{{header}}}{{{table}}}{{{notes}}}{{{changelogs}}}{{{configDescription}}}{{{footer}}}",
 	"extends": [
 		"config:base",
-		"default:pinDigestsDisabled"
+		"default:pinDigestsDisabled",
+		"default:disablePrControls"
 	],
 	"nuget": {
 		"enabled": true
