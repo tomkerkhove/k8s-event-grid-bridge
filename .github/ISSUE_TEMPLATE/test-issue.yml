@@ -1,0 +1,49 @@
+name: Bug Report
+about: File a bug report
+title: "[Bug]: "
+labels: "bug, triage"
+assignees: monalisa
+issue_body: true
+inputs:
+- type: description
+  attributes:
+    preview_only: true
+    value: |
+      Thanks for taking the time to fill out this bug report!
+- type: input
+  attributes:
+    label: Contact Details
+    description: How can we get in touch with you if we need more info?
+    required: false
+    placeholder: ex. email@example.com
+- type: textarea
+  attributes:
+    label: What happened?
+    description: Also tell us, what did you expect to happen?
+    required: true
+    placeholder: Tell us what you see!
+    value: "A bug happened!"
+- type: dropdown
+  attributes:
+    label: Version
+    description: What version of our software are you running?
+    required: true
+    choices:
+    - 1.0.2 (Default)
+    - 1.0.3 (Edge)
+- type: multi_select
+  attributes:
+    label: What browsers are you seeing the problem on?
+    choices:
+    - Firefox
+    - Chrome
+    - Safari
+    - Microsoft Edge    
+- type: checkboxes
+  attributes:
+    label: Code of Conduct
+    description:
+    all-required: true
+    choices:
+    - label: I agree to follow this project's Code of Conduct
+      required: true
