@@ -7,7 +7,6 @@ issue_body: true
 inputs:
 - type: description
   attributes:
-    preview_only: true
     value: |
       Thanks for taking the time to fill out this bug report!
 - type: input
@@ -43,7 +42,6 @@ inputs:
   attributes:
     label: Code of Conduct
     description:
-    all-required: true
     choices:
     - label: I agree to follow this project's Code of Conduct
       required: true
