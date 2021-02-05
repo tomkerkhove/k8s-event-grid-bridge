@@ -4,7 +4,7 @@ labels: "bug"
 assignees: tomkerkhove
 issue_body: true
 inputs:
-- type: input
+- type: textarea
   attributes:
     label: Report
     description: "What bug have you encountered?"
