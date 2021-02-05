@@ -4,10 +4,11 @@ labels: "bug"
 assignees: tomkerkhove
 issue_body: true
 inputs:
-- type: description
+- type: input
   attributes:
-    value: |
-      Thanks for taking the time to fill out this bug report!
+    label: Report
+    description: "What bug have you encountered?"
+    placeholder: "A clear and concise description of what the bug is."
 - type: input
   attributes:
     label: Contact Details
@@ -26,6 +27,16 @@ inputs:
     description: Also tell us, what did you see is happen?
     required: true
     placeholder: Tell us what you see that is happening
+- type: textarea
+  attributes:
+    label: Steps to Reproduce the Problem
+    description: "How can we reproduce this bug? Please walk us through it step by step."
+    value: |
+      1.
+      2.
+      3.
+      ...
+    required: true
 - type: dropdown
   attributes:
     label: Version
@@ -34,3 +45,14 @@ inputs:
     choices:
     - 0.1.0
     - experimental
+- type: dropdown
+  attributes:
+    label: Platform
+    description: Where is your cluster running?
+    required: false
+    choices:
+    - Microsoft Azure
+    - Amazon Web Services
+    - Google Cloud
+    - Alibaba Cloud
+    - Other
