@@ -1,0 +1,49 @@
+{
+    "specversion": "1.0",
+    "type": "Kubernetes.Events.Generic",
+    "source": "http://kubernetes",
+    "id": "43294fbf-5cf3-47b6-be6b-b3ea764cd868",
+    "time": "2021-02-15T07:52:10.1559659Z",
+    "datacontenttype": "application/json",
+    "data": {
+        "metadata": {
+            "name": "nginx-6799fc88d8-4vrz4.1663dc76b9431e4a",
+            "namespace": "default",
+            "selfLink": "/api/v1/namespaces/default/events/nginx-6799fc88d8-4vrz4.1663dc76b9431e4a",
+            "uid": "263589b2-eb17-4cdf-84b0-632e2431440f",
+            "resourceVersion": "10119624",
+            "creationTimestamp": "2021-02-15T07:52:10Z",
+            "managedFields": [{
+                    "manager": "cluster-autoscaler",
+                    "operation": "Update",
+                    "apiVersion": "v1",
+                    "time": "2021-02-15T07:52:10Z"
+                }
+            ]
+        },
+        "reason": "NotTriggerScaleUp",
+        "message": "pod didn't trigger scale-up (it wouldn't fit if a new node is added): 1 max node group size reached",
+        "source": {
+            "component": "cluster-autoscaler"
+        },
+        "firstTimestamp": "2021-02-15T07:51:34Z",
+        "lastTimestamp": "2021-02-15T07:51:34Z",
+        "count": 1,
+        "type": "Normal",
+        "eventTime": null,
+        "reportingComponent": "",
+        "reportingInstance": "",
+        "involvedObject": {
+            "kind": "Pod",
+            "namespace": "default",
+            "name": "nginx-6799fc88d8-4vrz4",
+            "uid": "836e5705-f54c-4303-97b4-6af3cf3e6230",
+            "apiVersion": "v1",
+            "resourceVersion": "10118810",
+            "labels": {
+                "app": "nginx",
+                "pod-template-hash": "6799fc88d8"
+            }
+        }
+    }
+}
