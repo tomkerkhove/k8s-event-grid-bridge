@@ -1,0 +1,49 @@
+{
+    "specversion": "1.0",
+    "type": "Kubernetes.Events.Generic",
+    "source": "http://kubernetes",
+    "id": "69eb6dde-8697-44bc-9a5f-b2129efde84d",
+    "time": "2021-02-15T06:33:53.0339894Z",
+    "datacontenttype": "application/json",
+    "data": {
+        "metadata": {
+            "name": "nginx-6799fc88d8-8vp5l.1663d839287f874d",
+            "namespace": "default",
+            "selfLink": "/api/v1/namespaces/default/events/nginx-6799fc88d8-8vp5l.1663d839287f874d",
+            "uid": "71b2ee14-4845-4514-9b86-08ab74ebc294",
+            "resourceVersion": "10102671",
+            "creationTimestamp": "2021-02-15T06:33:51Z",
+            "managedFields": [{
+                    "manager": "cluster-autoscaler",
+                    "operation": "Update",
+                    "apiVersion": "v1",
+                    "time": "2021-02-15T06:33:51Z"
+                }
+            ]
+        },
+        "reason": "TriggeredScaleUp",
+        "message": "pod triggered scale-up: [{aks-agentpool-11593772-vmss 1->2 (max: 2)}]",
+        "source": {
+            "component": "cluster-autoscaler"
+        },
+        "firstTimestamp": "2021-02-15T06:33:51Z",
+        "lastTimestamp": "2021-02-15T06:33:51Z",
+        "count": 1,
+        "type": "Normal",
+        "eventTime": null,
+        "reportingComponent": "",
+        "reportingInstance": "",
+        "involvedObject": {
+            "kind": "Pod",
+            "namespace": "default",
+            "name": "nginx-6799fc88d8-8vp5l",
+            "uid": "b9ec3ac9-5055-4880-aaec-ddce65b26774",
+            "apiVersion": "v1",
+            "resourceVersion": "10102618",
+            "labels": {
+                "app": "nginx",
+                "pod-template-hash": "6799fc88d8"
+            }
+        }
+    }
+}

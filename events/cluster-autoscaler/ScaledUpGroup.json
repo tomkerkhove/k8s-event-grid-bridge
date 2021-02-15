@@ -1,0 +1,45 @@
+{
+    "specversion": "1.0",
+    "type": "Kubernetes.Events.Generic",
+    "source": "http://kubernetes",
+    "id": "355d557f-a26e-4322-9f85-1bba8ad46153",
+    "time": "2021-02-15T06:33:52.5749408Z",
+    "datacontenttype": "application/json",
+    "data": {
+        "metadata": {
+            "name": "cluster-autoscaler-status.1663d838f8750ee2",
+            "namespace": "kube-system",
+            "selfLink": "/api/v1/namespaces/kube-system/events/cluster-autoscaler-status.1663d838f8750ee2",
+            "uid": "9f64fc58-a3b5-4dbf-bd9e-d493b70aae42",
+            "resourceVersion": "10102658",
+            "creationTimestamp": "2021-02-15T06:33:50Z",
+            "managedFields": [{
+                    "manager": "cluster-autoscaler",
+                    "operation": "Update",
+                    "apiVersion": "v1",
+                    "time": "2021-02-15T06:33:50Z"
+                }
+            ]
+        },
+        "reason": "ScaledUpGroup",
+        "message": "Scale-up: setting group aks-agentpool-11593772-vmss size to 2",
+        "source": {
+            "component": "cluster-autoscaler"
+        },
+        "firstTimestamp": "2021-02-15T06:33:50Z",
+        "lastTimestamp": "2021-02-15T06:33:50Z",
+        "count": 1,
+        "type": "Normal",
+        "eventTime": null,
+        "reportingComponent": "",
+        "reportingInstance": "",
+        "involvedObject": {
+            "kind": "ConfigMap",
+            "namespace": "kube-system",
+            "name": "cluster-autoscaler-status",
+            "uid": "4bef47ef-d436-4ed8-8f42-9a5a9f6175da",
+            "apiVersion": "v1",
+            "resourceVersion": "10102264"
+        }
+    }
+}

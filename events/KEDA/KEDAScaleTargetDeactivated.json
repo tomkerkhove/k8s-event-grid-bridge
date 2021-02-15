@@ -1,0 +1,41 @@
+{
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2021-02-12T20:37:38Z",
+    "involvedObject": {
+        "apiVersion": "keda.sh/v1alpha1",
+        "kind": "ScaledObject",
+        "name": "demo-worker",
+        "namespace": "foo",
+        "resourceVersion": "2016293",
+        "uid": "1dac27a7-7d0f-48a9-8688-12b9fb47ff82"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2021-02-12T20:37:38Z",
+    "message": "Deactivated  foo/demo-worker from 1 to 0",
+    "metadata": {
+        "creationTimestamp": "2021-02-12T20:37:38Z",
+        "managedFields": [
+            {
+                "apiVersion": "v1",
+                "fieldsType": "FieldsV1",
+                "manager": "keda",
+                "operation": "Update",
+                "time": "2021-02-12T20:37:38Z"
+            }
+        ],
+        "name": "demo-worker.16631a86f8a0646d",
+        "namespace": "foo",
+        "resourceVersion": "2016372",
+        "selfLink": "/api/v1/namespaces/foo/events/demo-worker.16631a86f8a0646d",
+        "uid": "424c5689-21ec-45e9-8105-0ae5cb4bf874"
+    },
+    "reason": "KEDAScaleTargetDeactivated",
+    "reportingComponent": "",
+    "reportingInstance": "",
+    "source": {
+        "component": "keda-operator"
+    },
+    "type": "Normal"
+}

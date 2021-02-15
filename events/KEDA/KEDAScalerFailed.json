@@ -1,0 +1,41 @@
+{
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2021-02-12T20:42:20Z",
+    "involvedObject": {
+        "apiVersion": "keda.sh/v1alpha1",
+        "kind": "ScaledObject",
+        "name": "demo-worker",
+        "namespace": "foo",
+        "resourceVersion": "2016373",
+        "uid": "1dac27a7-7d0f-48a9-8688-12b9fb47ff82"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2021-02-12T20:42:20Z",
+    "message": "-\u003e github.com/Azure/azure-storage-queue-go/azqueue.newStorageError, /go/pkg/mod/github.com/!azure/azure-storage-queue-go@v0.0.0-20191125232315-636801874cdd/azqueue/zc_storage_error.go:42\n===== RESPONSE ERROR (ServiceCode=AuthenticationFailed) =====\nDescription=Server failed to authenticate the request. Make sure the value of Authorization header is formed correctly including the signature.\nRequestId:a765bfd5-5003-0074-1a7f-01ef55000000\nTime:2021-02-12T20:42:20.3372554Z, Details: \n   AuthenticationErrorDetail: The MAC signature found in the HTTP request 'PxtGA2B+o/LIu5Lz5k9Hj6X9EKqp9gQmlnEBE9j+Fws=' is not the same as any computed signature. Server used following string to sign: 'GET\n\n\n\n\n\n\n\n\n\n\n\nx-ms-client-request-id:d98a0219-7b32-458a-629c-f43808e3128f\nx-ms-date:Fri, 12 Feb 2021 20:42:20 GMT\nx-ms-version:2018-03-28\n/ahmelsbugbashstorage/js-queue-items\ncomp:metadata\ntimeout:61'.\n   Code: AuthenticationFailed\n   GET https://ahmelsbugbashstorage.queue.core.windows.net/js-queue-items?comp=metadata\u0026timeout=61\n   Authorization: REDACTED\n   User-Agent: [Azure-Storage/0.3 (go1.15.6; linux)]\n   X-Ms-Client-Request-Id: [d98a0219-7b32-458a-629c-f43808e3128f]\n   X-Ms-Date: [Fri, 12 Feb 2021 20:42:20 GMT]\n   X-Ms-Version: [2018-03-28]\n   --------------------------------------------------------------------------------\n   RESPONSE Status: 403 Server failed to authenticate the request. Make sure the value of Authorization header is formed correctly including the signature.\n   Content-Length: [750]\n   Content-Type: [application/xml]\n   Date: [Fri, 12 Feb 2021 20:42:20 GMT]\n   Server: [Microsoft-HTTPAPI/2.0]\n   X-Ms-Error-Code: [AuthenticationFailed]\n   X-Ms-Request-Id: [a765bfd5-5003-0074-1a7f-01ef55000000]\n\n\n",
+    "metadata": {
+        "creationTimestamp": "2021-02-12T20:42:20Z",
+        "managedFields": [
+            {
+                "apiVersion": "v1",
+                "fieldsType": "FieldsV1",
+                "manager": "keda",
+                "operation": "Update",
+                "time": "2021-02-12T20:42:20Z"
+            }
+        ],
+        "name": "demo-worker.16631ac897e95e20",
+        "namespace": "foo",
+        "resourceVersion": "2017169",
+        "selfLink": "/api/v1/namespaces/foo/events/demo-worker.16631ac897e95e20",
+        "uid": "a260a113-c1a7-4acb-9764-3c50dfaf3ec4"
+    },
+    "reason": "KEDAScalerFailed",
+    "reportingComponent": "",
+    "reportingInstance": "",
+    "source": {
+        "component": "keda-operator"
+    },
+    "type": "Warning"
+}

@@ -1,0 +1,41 @@
+{
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2021-02-12T20:37:18Z",
+    "involvedObject": {
+        "apiVersion": "keda.sh/v1alpha1",
+        "kind": "ScaledObject",
+        "name": "demo-worker",
+        "namespace": "foo",
+        "resourceVersion": "2016120",
+        "uid": "1dac27a7-7d0f-48a9-8688-12b9fb47ff82"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2021-02-12T20:37:18Z",
+    "message": "Scaled  foo/demo-worker from 0 to 1",
+    "metadata": {
+        "creationTimestamp": "2021-02-12T20:37:18Z",
+        "managedFields": [
+            {
+                "apiVersion": "v1",
+                "fieldsType": "FieldsV1",
+                "manager": "keda",
+                "operation": "Update",
+                "time": "2021-02-12T20:37:18Z"
+            }
+        ],
+        "name": "demo-worker.16631a82460cb2b7",
+        "namespace": "foo",
+        "resourceVersion": "2016292",
+        "selfLink": "/api/v1/namespaces/foo/events/demo-worker.16631a82460cb2b7",
+        "uid": "040abcd3-3355-4715-ae6f-26bace8b9d47"
+    },
+    "reason": "KEDAScaleTargetActivated",
+    "reportingComponent": "",
+    "reportingInstance": "",
+    "source": {
+        "component": "keda-operator"
+    },
+    "type": "Normal"
+}
