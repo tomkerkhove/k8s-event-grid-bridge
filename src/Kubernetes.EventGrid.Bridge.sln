@@ -11,13 +11,51 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kubernetes.EventGrid.Bridge.Host", "Kubernetes.EventGrid.Bridge.Host\Kubernetes.EventGrid.Bridge.Host.csproj", "{A9EDC108-4D16-4360-B563-6CBA88C36A5B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Events", "Events", "{487C0A64-1543-40B1-A6C7-6025B0CFD6B8}"
-	ProjectSection(SolutionItems) = preProject
-		..\events\ScalingReplicaSet.json = ..\events\ScalingReplicaSet.json
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kubernetes.EventGrid.Core", "Kubernetes.EventGrid.Core\Kubernetes.EventGrid.Core.csproj", "{10DD3A89-C475-495B-913B-04A1DF4DC297}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kubernetes.EventGrid.Tests.Unit", "Kubernetes.EventGrid.Tests.Unit\Kubernetes.EventGrid.Tests.Unit.csproj", "{BD4B9825-A792-46B8-A2DD-AF6BA949B527}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KEDA", "KEDA", "{3C176301-E2A4-49C0-8DF2-C2E5B5ABF453}"
+	ProjectSection(SolutionItems) = preProject
+		..\events\KEDA\KEDAScalerFailed.json = ..\events\KEDA\KEDAScalerFailed.json
+		..\events\KEDA\KEDAScalersStarted.json = ..\events\KEDA\KEDAScalersStarted.json
+		..\events\KEDA\KEDAScaleTargetActivated.json = ..\events\KEDA\KEDAScaleTargetActivated.json
+		..\events\KEDA\KEDAScaleTargetDeactivated.json = ..\events\KEDA\KEDAScaleTargetDeactivated.json
+		..\events\KEDA\ScaledObjectReady.json = ..\events\KEDA\ScaledObjectReady.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{AB7921A0-4BF3-44DC-B443-7A272EAAC25C}"
+	ProjectSection(SolutionItems) = preProject
+		..\events\core\ContainerStarted.json = ..\events\core\ContainerStarted.json
+		..\events\core\ImagePulled.json = ..\events\core\ImagePulled.json
+		..\events\core\InvalidDiskCapacity.json = ..\events\core\InvalidDiskCapacity.json
+		..\events\core\KillingContainer.json = ..\events\core\KillingContainer.json
+		..\events\core\KillingPod.json = ..\events\core\KillingPod.json
+		..\events\core\NodeAllocatableEnforced.json = ..\events\core\NodeAllocatableEnforced.json
+		..\events\core\NodeHasNoDiskPressure.json = ..\events\core\NodeHasNoDiskPressure.json
+		..\events\core\NodeHasSufficientMemory.json = ..\events\core\NodeHasSufficientMemory.json
+		..\events\core\NodeHasSufficientPID.json = ..\events\core\NodeHasSufficientPID.json
+		..\events\core\NodeReady.json = ..\events\core\NodeReady.json
+		..\events\core\PodScheduled.json = ..\events\core\PodScheduled.json
+		..\events\core\PullingImage.json = ..\events\core\PullingImage.json
+		..\events\core\RegisteredNode.json = ..\events\core\RegisteredNode.json
+		..\events\core\RemovingNode.json = ..\events\core\RemovingNode.json
+		..\events\core\ScalingReplicaSet.json = ..\events\core\ScalingReplicaSet.json
+		..\events\core\StartingKubelet.json = ..\events\core\StartingKubelet.json
+		..\events\core\SuccesfulCreate.json = ..\events\core\SuccesfulCreate.json
+		..\events\core\SuccessfulDelete.json = ..\events\core\SuccessfulDelete.json
+		..\events\core\UpdatedLoadBalancer.json = ..\events\core\UpdatedLoadBalancer.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cluster-Autoscaler", "Cluster-Autoscaler", "{71B586CB-8BC9-44EB-A2E0-A07F468BBDD2}"
+	ProjectSection(SolutionItems) = preProject
+		..\events\cluster-autoscaler\NotTriggerScaleUp.json = ..\events\cluster-autoscaler\NotTriggerScaleUp.json
+		..\events\cluster-autoscaler\ScaleDown.json = ..\events\cluster-autoscaler\ScaleDown.json
+		..\events\cluster-autoscaler\ScaleDownEmpty.json = ..\events\cluster-autoscaler\ScaleDownEmpty.json
+		..\events\cluster-autoscaler\ScaledUpGroup.json = ..\events\cluster-autoscaler\ScaledUpGroup.json
+		..\events\cluster-autoscaler\TriggeredScaleUp.json = ..\events\cluster-autoscaler\TriggeredScaleUp.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +78,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3C176301-E2A4-49C0-8DF2-C2E5B5ABF453} = {487C0A64-1543-40B1-A6C7-6025B0CFD6B8}
+		{AB7921A0-4BF3-44DC-B443-7A272EAAC25C} = {487C0A64-1543-40B1-A6C7-6025B0CFD6B8}
+		{71B586CB-8BC9-44EB-A2E0-A07F468BBDD2} = {487C0A64-1543-40B1-A6C7-6025B0CFD6B8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D5F6D13-33B8-4464-887A-2361225667A4}

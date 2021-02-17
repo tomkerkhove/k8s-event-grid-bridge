@@ -6,12 +6,12 @@ namespace Kubernetes.EventGrid.Tests.Unit.Events
     {
         public static string GetRawContainerStartedEvent()
         {
-            return ReadEventFromDisk("ContainerStarted.json");
+            return ReadEventFromDisk("Core", "ContainerStarted.json");
         }
 
-        private static string ReadEventFromDisk(string fileName)
+        private static string ReadEventFromDisk(string folderName, string fileName)
         {
-            var filePath = Path.Combine("Events", "Samples", fileName);
+            var filePath = Path.Combine("Events", "Samples", folderName, fileName);
             return File.ReadAllText(filePath);
         }
     }
