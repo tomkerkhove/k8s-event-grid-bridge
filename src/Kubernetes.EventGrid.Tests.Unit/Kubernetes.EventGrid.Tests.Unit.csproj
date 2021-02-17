@@ -14,61 +14,91 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\..\events\ContainerStarted.json" Link="Events\Samples\ContainerStarted.json">
+    <Content Include="..\..\events\cluster-autoscaler\NotTriggerScaleUp.json" Link="Events\Samples\Cluster-Autoscaler\NotTriggerScaleUp.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\ImagePulled.json" Link="Events\Samples\ImagePulled.json">
+    <Content Include="..\..\events\cluster-autoscaler\ScaleDown.json" Link="Events\Samples\Cluster-Autoscaler\ScaleDown.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\InvalidDiskCapacity.json" Link="Events\Samples\InvalidDiskCapacity.json">
+    <Content Include="..\..\events\cluster-autoscaler\ScaleDownEmpty.json" Link="Events\Samples\Cluster-Autoscaler\ScaleDownEmpty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\KillingContainer.json" Link="Events\Samples\KillingContainer.json">
+    <Content Include="..\..\events\cluster-autoscaler\ScaledUpGroup.json" Link="Events\Samples\Cluster-Autoscaler\ScaledUpGroup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\KillingPod.json" Link="Events\Samples\KillingPod.json">
+    <Content Include="..\..\events\cluster-autoscaler\TriggeredScaleUp.json" Link="Events\Samples\Cluster-Autoscaler\TriggeredScaleUp.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\NodeAllocatableEnforced.json" Link="Events\Samples\NodeAllocatableEnforced.json">
+    <Content Include="..\..\events\core\ContainerStarted.json" Link="Events\Samples\Core\ContainerStarted.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\NodeHasNoDiskPressure.json" Link="Events\Samples\NodeHasNoDiskPressure.json">
+    <Content Include="..\..\events\core\ImagePulled.json" Link="Events\Samples\Core\ImagePulled.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\NodeHasSufficientMemory.json" Link="Events\Samples\NodeHasSufficientMemory.json">
+    <Content Include="..\..\events\core\InvalidDiskCapacity.json" Link="Events\Samples\Core\InvalidDiskCapacity.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\NodeHasSufficientPID.json" Link="Events\Samples\NodeHasSufficientPID.json">
+    <Content Include="..\..\events\core\KillingContainer.json" Link="Events\Samples\Core\KillingContainer.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\NodeReady.json" Link="Events\Samples\NodeReady.json">
+    <Content Include="..\..\events\core\KillingPod.json" Link="Events\Samples\Core\KillingPod.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\PodScheduled.json" Link="Events\Samples\PodScheduled.json">
+    <Content Include="..\..\events\core\NodeAllocatableEnforced.json" Link="Events\Samples\Core\NodeAllocatableEnforced.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\PullingImage.json" Link="Events\Samples\PullingImage.json">
+    <Content Include="..\..\events\core\NodeHasNoDiskPressure.json" Link="Events\Samples\Core\NodeHasNoDiskPressure.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\RegisteredNode.json" Link="Events\Samples\RegisteredNode.json">
+    <Content Include="..\..\events\core\NodeHasSufficientMemory.json" Link="Events\Samples\Core\NodeHasSufficientMemory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\RemovingNode.json" Link="Events\Samples\RemovingNode.json">
+    <Content Include="..\..\events\core\NodeHasSufficientPID.json" Link="Events\Samples\Core\NodeHasSufficientPID.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\ScalingReplicaSet.json" Link="Events\Samples\ScalingReplicaSet.json">
+    <Content Include="..\..\events\core\NodeReady.json" Link="Events\Samples\Core\NodeReady.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\StartingKubelet.json" Link="Events\Samples\StartingKubelet.json">
+    <Content Include="..\..\events\core\PodScheduled.json" Link="Events\Samples\Core\PodScheduled.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\SuccesfulCreate.json" Link="Events\Samples\SuccesfulCreate.json">
+    <Content Include="..\..\events\core\PullingImage.json" Link="Events\Samples\Core\PullingImage.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\SuccessfulDelete.json" Link="Events\Samples\SuccessfulDelete.json">
+    <Content Include="..\..\events\core\RegisteredNode.json" Link="Events\Samples\Core\RegisteredNode.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\UpdatedLoadBalancer.json" Link="Events\Samples\UpdatedLoadBalancer.json">
+    <Content Include="..\..\events\core\RemovingNode.json" Link="Events\Samples\Core\RemovingNode.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\core\ScalingReplicaSet.json" Link="Events\Samples\Core\ScalingReplicaSet.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\core\StartingKubelet.json" Link="Events\Samples\Core\StartingKubelet.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\core\SuccesfulCreate.json" Link="Events\Samples\Core\SuccesfulCreate.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\core\SuccessfulDelete.json" Link="Events\Samples\Core\SuccessfulDelete.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\core\UpdatedLoadBalancer.json" Link="Events\Samples\Core\UpdatedLoadBalancer.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\KEDA\KEDAScalerFailed.json" Link="Events\Samples\KEDA\KEDAScalerFailed.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\KEDA\KEDAScalersStarted.json" Link="Events\Samples\KEDA\KEDAScalersStarted.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\KEDA\KEDAScaleTargetActivated.json" Link="Events\Samples\KEDA\KEDAScaleTargetActivated.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\KEDA\KEDAScaleTargetDeactivated.json" Link="Events\Samples\KEDA\KEDAScaleTargetDeactivated.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\KEDA\ScaledObjectReady.json" Link="Events\Samples\KEDA\ScaledObjectReady.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -87,6 +117,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Events\Samples\" />
+    <Folder Include="Events\Samples\Core\" />
+    <Folder Include="Events\Samples\KEDA\" />
+    <Folder Include="Events\Samples\Cluster-Autoscaler\" />
   </ItemGroup>
 </Project>
