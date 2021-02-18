@@ -1,45 +1,38 @@
 {
-    "specversion": "1.0",
-    "type": "Kubernetes.Events.Generic",
-    "source": "http://kubernetes",
-    "id": "43158422-a76a-4111-920d-59cad66c2b0c",
-    "time": "2021-02-15T06:46:03.30369Z",
-    "datacontenttype": "application/json",
-    "data": {
-        "metadata": {
-            "name": "cluster-autoscaler-status.1663d8e388c6e362",
-            "namespace": "kube-system",
-            "selfLink": "/api/v1/namespaces/kube-system/events/cluster-autoscaler-status.1663d8e388c6e362",
-            "uid": "d07ae469-5d73-494f-8085-edd2c1916c25",
-            "resourceVersion": "10105701",
-            "creationTimestamp": "2021-02-15T06:46:03Z",
-            "managedFields": [{
-                    "manager": "cluster-autoscaler",
-                    "operation": "Update",
-                    "apiVersion": "v1",
-                    "time": "2021-02-15T06:46:03Z"
-                }
-            ]
-        },
-        "reason": "ScaleDownEmpty",
-        "message": "Scale-down: removing empty node aks-agentpool-11593772-vmss000004",
-        "source": {
-            "component": "cluster-autoscaler"
-        },
-        "firstTimestamp": "2021-02-15T06:46:03Z",
-        "lastTimestamp": "2021-02-15T06:46:03Z",
-        "count": 1,
-        "type": "Normal",
-        "eventTime": null,
-        "reportingComponent": "",
-        "reportingInstance": "",
-        "involvedObject": {
-            "kind": "ConfigMap",
-            "namespace": "kube-system",
-            "name": "cluster-autoscaler-status",
-            "uid": "4bef47ef-d436-4ed8-8f42-9a5a9f6175da",
-            "apiVersion": "v1",
-            "resourceVersion": "10105672"
-        }
+    "metadata": {
+        "name": "cluster-autoscaler-status.1663d8e388c6e362",
+        "namespace": "kube-system",
+        "selfLink": "/api/v1/namespaces/kube-system/events/cluster-autoscaler-status.1663d8e388c6e362",
+        "uid": "d07ae469-5d73-494f-8085-edd2c1916c25",
+        "resourceVersion": "10105701",
+        "creationTimestamp": "2021-02-15T06:46:03Z",
+        "managedFields": [
+            {
+                "manager": "cluster-autoscaler",
+                "operation": "Update",
+                "apiVersion": "v1",
+                "time": "2021-02-15T06:46:03Z"
+            }
+        ]
+    },
+    "reason": "ScaleDownEmpty",
+    "message": "Scale-down: removing empty node aks-agentpool-11593772-vmss000004",
+    "source": {
+        "component": "cluster-autoscaler"
+    },
+    "firstTimestamp": "2021-02-15T06:46:03Z",
+    "lastTimestamp": "2021-02-15T06:46:03Z",
+    "count": 1,
+    "type": "Normal",
+    "eventTime": null,
+    "reportingComponent": "",
+    "reportingInstance": "",
+    "involvedObject": {
+        "kind": "ConfigMap",
+        "namespace": "kube-system",
+        "name": "cluster-autoscaler-status",
+        "uid": "4bef47ef-d436-4ed8-8f42-9a5a9f6175da",
+        "apiVersion": "v1",
+        "resourceVersion": "10105672"
     }
 }

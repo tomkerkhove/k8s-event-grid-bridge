@@ -1,38 +1,31 @@
 {
-    "specversion": "1.0",
-    "type": "Kubernetes.Events.Generic",
-    "source": "http://kubernetes",
-    "id": "c895f146-f480-41a3-a11c-af4a7b5ef766",
-    "time": "2021-02-15T06:46:03.5138244Z",
-    "datacontenttype": "application/json",
-    "data": {
-        "metadata": {
-            "name": "aks-agentpool-11593772-vmss000004.1663d8e3919db247",
-            "namespace": "default",
-            "selfLink": "/api/v1/namespaces/default/events/aks-agentpool-11593772-vmss000004.1663d8e3919db247",
-            "uid": "0e1e1f9c-5920-4c82-b702-f8abf249ca45",
-            "resourceVersion": "10105703",
-            "creationTimestamp": "2021-02-15T06:46:03Z",
-            "managedFields": [{
-                    "manager": "cluster-autoscaler",
-                    "operation": "Update",
-                    "apiVersion": "v1",
-                    "time": "2021-02-15T06:46:03Z"
-                }
-            ]
-        },
-        "reason": "ScaleDown",
-        "message": "node removed by cluster autoscaler",
-        "source": {
-            "component": "cluster-autoscaler"
-        },
-        "firstTimestamp": "2021-02-15T06:46:03Z",
-        "lastTimestamp": "2021-02-15T06:46:03Z",
-        "count": 1,
-        "type": "Normal",
-        "eventTime": null,
-        "reportingComponent": "",
-        "reportingInstance": "",
-        "involvedObject": {}
-    }
+    "metadata": {
+        "name": "aks-agentpool-11593772-vmss000004.1663d8e3919db247",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/events/aks-agentpool-11593772-vmss000004.1663d8e3919db247",
+        "uid": "0e1e1f9c-5920-4c82-b702-f8abf249ca45",
+        "resourceVersion": "10105703",
+        "creationTimestamp": "2021-02-15T06:46:03Z",
+        "managedFields": [
+            {
+                "manager": "cluster-autoscaler",
+                "operation": "Update",
+                "apiVersion": "v1",
+                "time": "2021-02-15T06:46:03Z"
+            }
+        ]
+    },
+    "reason": "ScaleDown",
+    "message": "node removed by cluster autoscaler",
+    "source": {
+        "component": "cluster-autoscaler"
+    },
+    "firstTimestamp": "2021-02-15T06:46:03Z",
+    "lastTimestamp": "2021-02-15T06:46:03Z",
+    "count": 1,
+    "type": "Normal",
+    "eventTime": null,
+    "reportingComponent": "",
+    "reportingInstance": "",
+    "involvedObject": {}
 }
