@@ -3,13 +3,14 @@ about: Suggest a new event type that would be an added value
 labels: "bug"
 assignees: tomkerkhove
 issue_body: true
-inputs:
+body:
 - type: input
   attributes:
     label: Contact Details
     description: How can we get in touch with you if we need more info?
-    required: false
     placeholder: ex. email@example.com
+  validations:
+    required: false
 - type: textarea
   attributes:
     label: Scenario
@@ -20,36 +21,40 @@ inputs:
     label: Proposed Event Type
     description: "What event type would you propose?"
     placeholder: "A proposal for the event type, for example `Kubernetes.ClusterAutoscaler.Scale.Out`."
+  validations:
     required: false
 - type: textarea
   attributes:
     label: Proposed Event Payload
     description: What event payload would you propose?
     placeholder: "A proposal for the event payload that you would like to have."
-    required: false
     value: |
       ```json
       {
         "key": "value"
       }
       ```
+  validations:
+    required: false
 - type: textarea
   attributes:
     label: Raw Kubernetes Event
     description: What is the raw Kubernetes event that we should convert for this event?
     placeholder: "A raw Kubernetes event payload that is the source."
-    required: false
     value: |
       ```json
       {
         "key": "value"
       }
       ```
+  validations:
+    required: false
 - type: dropdown
   attributes:
     label: Source Component
     description: What component is emitting the original raw event?
-    required: false
-    choices:
+    options:
     - Kubernetes Control Plane
     - Other
+  validations:
+    required: false

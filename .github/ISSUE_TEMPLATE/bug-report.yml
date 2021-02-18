@@ -3,7 +3,7 @@ about: Create a report to help us improve
 labels: "bug"
 assignees: tomkerkhove
 issue_body: true
-inputs:
+body:
 - type: textarea
   attributes:
     label: Report
@@ -13,20 +13,23 @@ inputs:
   attributes:
     label: Contact Details
     description: How can we get in touch with you if we need more info?
-    required: false
     placeholder: ex. email@example.com
+  validations:
+    required: false
 - type: textarea
   attributes:
     label: Expected Behavior
     description: What did you expect to happen?
-    required: true
     placeholder: What did you expect to happen?
+  validations:
+    required: true
 - type: textarea
   attributes:
     label: Actual Behavior
     description: Also tell us, what did you see is happen?
-    required: true
     placeholder: Tell us what you see that is happening
+  validations:
+    required: true
 - type: textarea
   attributes:
     label: Steps to Reproduce the Problem
@@ -36,23 +39,26 @@ inputs:
       2.
       3.
       ...
+  validations:
     required: true
 - type: dropdown
   attributes:
     label: Version
     description: What version of our software are you running?
-    required: false
-    choices:
+    options:
     - 0.1.0
     - experimental
+  validations:
+    required: false
 - type: dropdown
   attributes:
     label: Platform
     description: Where is your cluster running?
-    required: false
-    choices:
+    options:
     - Microsoft Azure
     - Amazon Web Services
     - Google Cloud
     - Alibaba Cloud
     - Other
+  validations:
+    required: false
