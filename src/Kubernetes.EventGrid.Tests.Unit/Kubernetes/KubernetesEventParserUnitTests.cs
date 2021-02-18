@@ -23,5 +23,21 @@ namespace Kubernetes.EventGrid.Tests.Unit.Kubernetes
             Assert.Equal(KubernetesEventType.Raw, kubernetesEvent.Type);
             Assert.NotNull(kubernetesEvent.Payload);
         }
+
+        [Fact]
+        public void ParseFromRawNativeEvent_ParseRawClusterAutoscalerScaleInEvent_ReturnsClusterAutoscalerScaleInEvent()
+        {
+            // Arrange
+            var kubernetesEventParser = new KubernetesEventParser();
+            var rawClusterAutoscalerScaleDownEvent = KubernetesEventSamples.GetRawClusterAutoscalerScaleDownEvent();
+
+            // Act
+            var kubernetesEvent = kubernetesEventParser.ParseFromRawNativeEvent(rawClusterAutoscalerScaleDownEvent);
+
+            // Assert
+            Assert.NotNull(kubernetesEvent);
+            Assert.Equal(KubernetesEventType.ClusterAutoscalerScaleIn, kubernetesEvent.Type);
+            Assert.Null(kubernetesEvent.Payload);
+        }
     }
 }

@@ -6,5 +6,9 @@ namespace Kubernetes.EventGrid.Core.Kubernetes.Enums
     {
         [Description("Kubernetes.Events.Raw")]
         Raw,
+        [Description("Kubernetes.Autoscaling.ClusterAutoscaler.ScaleIn")]
+        ClusterAutoscalerScaleIn,
+        [Description("Kubernetes.Autoscaling.ClusterAutoscaler.ScaleOut")]
+        ClusterAutoscalerScaleOut,
     }
 }
