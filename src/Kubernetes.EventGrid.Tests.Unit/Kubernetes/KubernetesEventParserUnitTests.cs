@@ -1,5 +1,5 @@
-﻿using Kubernetes.EventGrid.Core.Kubernetes;
-using Kubernetes.EventGrid.Core.Kubernetes.Enums;
+﻿using Kubernetes.EventGrid.Bridge.Contracts.Enums;
+using Kubernetes.EventGrid.Core.Kubernetes;
 using Kubernetes.EventGrid.Tests.Unit.Events;
 using Xunit;
 
@@ -37,7 +37,7 @@ namespace Kubernetes.EventGrid.Tests.Unit.Kubernetes
             // Assert
             Assert.NotNull(kubernetesEvent);
             Assert.Equal(KubernetesEventType.ClusterAutoscalerScaleIn, kubernetesEvent.Type);
-            Assert.Null(kubernetesEvent.Payload);
+            Assert.NotNull(kubernetesEvent.Payload);
         }
     }
 }

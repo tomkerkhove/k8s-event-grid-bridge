@@ -1,6 +1,6 @@
-﻿using Kubernetes.EventGrid.Core.Kubernetes.Events;
-using Kubernetes.EventGrid.Core.Kubernetes.Events.ClusterAutoscaler;
-using Kubernetes.EventGrid.Core.Kubernetes.Events.ClusterAutoscaler.Contracts;
+﻿using Kubernetes.EventGrid.Bridge.Contracts.Enums;
+using Kubernetes.EventGrid.Core.Kubernetes.Converters;
+using Kubernetes.EventGrid.Core.Kubernetes.Events;
 using Kubernetes.EventGrid.Core.Kubernetes.Events.Interfaces;
 using Kubernetes.EventGrid.Core.Kubernetes.Interfaces;
 using Newtonsoft.Json.Linq;
@@ -31,48 +31,7 @@ namespace Kubernetes.EventGrid.Core.Kubernetes
 
         private IKubernetesEvent ComposeRawKubernetesEvent(JToken parsedPayload)
         {
-            return new RawKubernetesEvent
-            {
-                Payload = parsedPayload.ToObject<object>()
-            };
-        }
-    }
-
-    public class ClusterAutoscalerEventConverter : EventConverter
-    {
-        public IKubernetesEvent ConvertFromNativeEvent(JToken parsedPayload)
-        {
-            var eventReason = parsedPayload["reason"]?.ToString()?.ToLower();
-            switch (eventReason)
-            {
-                case "scaledown":
-                    return new ClusterAutoscalerScaleInEvent();
-                case "triggeredscaleup":
-                    return new ClusterAutoscalerScaleOutEvent
-                    {
-                        Payload = new ClusterAutoscalerScaleOutEventPayload
-                        {
-                            Replicas = new ReplicaInfo
-                            {
-                                Old = 1,
-                                New = 2
-                            }
-                        }
-                    };
-                default:
-                    return ComposeRawKubernetesEvent(parsedPayload);
-            }
-        }
-    }
-
-    public class EventConverter
-    {
-        protected IKubernetesEvent ComposeRawKubernetesEvent(JToken parsedPayload)
-        {
-            return new RawKubernetesEvent
-            {
-                Payload = parsedPayload.ToObject<object>()
-            };
+            return new KubernetesEvent(KubernetesEventType.Raw, parsedPayload.ToObject<object>());
         }
     }
 }

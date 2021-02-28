@@ -6,7 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="CloudNative.CloudEvents.AspNetCore" Version="1.3.80" />
+    <PackageReference Include="Guard.Net" Version="1.2.0" />
     <PackageReference Include="KubernetesClient" Version="4.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kubernetes.EventGrid.Bridge.Contracts\Kubernetes.EventGrid.Bridge.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

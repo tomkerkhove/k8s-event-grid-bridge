@@ -1,4 +1,4 @@
-﻿using Kubernetes.EventGrid.Core.Kubernetes.Enums;
+﻿using Kubernetes.EventGrid.Bridge.Contracts.Enums;
 
 namespace Kubernetes.EventGrid.Core.Kubernetes.Events.Interfaces
 {
