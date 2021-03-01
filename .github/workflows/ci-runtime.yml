@@ -5,12 +5,13 @@ on:
       - main
   pull_request:
     paths:
+    - '.github/workflows/ci-runtime.yml'
     - 'src/**'
 
 env:
   IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-grid-bridge
   IMAGE_TAG: experimental
-  NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.${{ GITHUB_RUN_ID }}.nupkg
+  NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.$VERSION_SUFFIX.nupkg
   
 jobs:
   solution:
@@ -22,14 +23,14 @@ jobs:
       uses: allenevans/set-env@v2.0.0
       if: ${{ github.event_name == 'push' }}
       with:
-        VERSION_SUFFIX: ${{ GITHUB_RUN_ID }}
+        VERSION_SUFFIX: ${{ github.sha }}
     - name: Set version suffix for PRs
       uses: allenevans/set-env@v2.0.0
       if: ${{ github.event_name == 'pull_request' }}
       with:
-        VERSION_SUFFIX: ${{ GITHUB_RUN_ID }}
+        VERSION_SUFFIX: ${{ github.event.number }}
     - name: Build Solution
-      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln /p:VersionSuffix=${{ GITHUB_RUN_ID }}
+      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln /p:VersionSuffix=$VERSION_SUFFIX
     - name: Run Unit Tests
       run: dotnet test ./src/Kubernetes.EventGrid.Tests.Unit/Kubernetes.EventGrid.Tests.Unit.csproj --filter Category=Unit
     - name: Push NuGet package
