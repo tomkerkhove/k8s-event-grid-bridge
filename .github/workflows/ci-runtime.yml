@@ -12,7 +12,7 @@ env:
   IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-grid-bridge
   IMAGE_TAG: experimental
   NUGET_PACKAGE_VERSION: 0.1.0-PR$VERSION_SUFFIX
-  NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.${{ env.NUGET_PACKAGE_VERSION}}.nupkg
+  NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.$NUGET_PACKAGE_VERSION.nupkg
   
 jobs:
   solution:
