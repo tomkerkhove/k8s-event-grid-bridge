@@ -9,6 +9,11 @@ namespace Kubernetes.EventGrid.Tests.Unit.Events
             return ReadEventFromDisk("Core", "ContainerStarted.json");
         }
 
+        public static string GetRawClusterAutoscalerScaleDownEvent()
+        {
+            return ReadEventFromDisk("Cluster-Autoscaler", "ScaleDown.json");
+        }
+
         private static string ReadEventFromDisk(string folderName, string fileName)
         {
             var filePath = Path.Combine("Events", "Samples", folderName, fileName);

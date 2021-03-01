@@ -57,6 +57,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cluster-Autoscaler", "Clust
 		..\events\cluster-autoscaler\TriggeredScaleUp.json = ..\events\cluster-autoscaler\TriggeredScaleUp.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kubernetes.EventGrid.Bridge.Contracts", "Kubernetes.EventGrid.Bridge.Contracts\Kubernetes.EventGrid.Bridge.Contracts.csproj", "{C85F9E3A-DC65-4242-B734-BA9DDBEBC6CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{BD4B9825-A792-46B8-A2DD-AF6BA949B527}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD4B9825-A792-46B8-A2DD-AF6BA949B527}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD4B9825-A792-46B8-A2DD-AF6BA949B527}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C85F9E3A-DC65-4242-B734-BA9DDBEBC6CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C85F9E3A-DC65-4242-B734-BA9DDBEBC6CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C85F9E3A-DC65-4242-B734-BA9DDBEBC6CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C85F9E3A-DC65-4242-B734-BA9DDBEBC6CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

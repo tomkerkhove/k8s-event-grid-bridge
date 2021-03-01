@@ -1,5 +1,6 @@
 ﻿using System.Net.Mime;
 using CloudNative.CloudEvents;
+using Kubernetes.EventGrid.Bridge.Contracts.Enums;
 using Kubernetes.EventGrid.Core.CloudEvents;
 using Kubernetes.EventGrid.Core.Extensions;
 using Kubernetes.EventGrid.Core.Kubernetes;
@@ -20,8 +21,8 @@ namespace Kubernetes.EventGrid.Tests.Unit.CloudEvents
             // Arrange
             var expectedContentType = new ContentType("application/json");
             var expectedSource = "http://kubernetes/";
-            var kubernetesEvent = new RawKubernetesEvent();
             var rawKubernetesEvent = KubernetesEventSamples.GetRawContainerStartedEvent();
+            var kubernetesEvent = new KubernetesEvent(KubernetesEventType.Raw ,rawKubernetesEvent);
             var mockedKubernetesEventParser = CreateMockedKubernetesEventParser(kubernetesEvent);
             var cloudEventFactory = new CloudEventFactory(mockedKubernetesEventParser.Object);
 

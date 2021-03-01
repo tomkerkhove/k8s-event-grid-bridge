@@ -1,4 +1,6 @@
-﻿using Kubernetes.EventGrid.Core.Kubernetes.Events;
+﻿using Kubernetes.EventGrid.Bridge.Contracts.Enums;
+using Kubernetes.EventGrid.Core.Kubernetes.Converters;
+using Kubernetes.EventGrid.Core.Kubernetes.Events;
 using Kubernetes.EventGrid.Core.Kubernetes.Events.Interfaces;
 using Kubernetes.EventGrid.Core.Kubernetes.Interfaces;
 using Newtonsoft.Json.Linq;
@@ -16,9 +18,12 @@ namespace Kubernetes.EventGrid.Core.Kubernetes
         {
             var parsedPayload = JToken.Parse(rawPayload);
 
-            var eventReason = parsedPayload["reason"]?.ToString();
-            switch (eventReason)
+            var sourceComponent = parsedPayload["source"]?["component"]?.ToString()?.ToLower();
+            switch (sourceComponent)
             {
+                case "cluster-autoscaler":
+                    var clusterAutoscalerEventConverter = new ClusterAutoscalerEventConverter();
+                    return clusterAutoscalerEventConverter.ConvertFromNativeEvent(parsedPayload);
                 default:
                     return ComposeRawKubernetesEvent(parsedPayload);
             }
@@ -26,10 +31,7 @@ namespace Kubernetes.EventGrid.Core.Kubernetes
 
         private IKubernetesEvent ComposeRawKubernetesEvent(JToken parsedPayload)
         {
-            return new RawKubernetesEvent
-            {
-                Payload = parsedPayload.ToObject<object>()
-            };
+            return new KubernetesEvent(KubernetesEventType.Raw, parsedPayload.ToObject<object>());
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using Kubernetes.EventGrid.Core.Extensions;
-using Kubernetes.EventGrid.Core.Kubernetes.Enums;
+﻿using Kubernetes.EventGrid.Bridge.Contracts.Enums;
+using Kubernetes.EventGrid.Core.Extensions;
 using Kubernetes.EventGrid.Tests.Unit.Extensions.Enums;
 using Xunit;
 
