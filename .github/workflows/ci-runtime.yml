@@ -11,8 +11,8 @@ on:
 env:
   IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-grid-bridge
   IMAGE_TAG: experimental
-  NUGET_PACKAGE_VERSION: 0.1.0-PR$VERSION_SUFFIX
-  NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.$NUGET_PACKAGE_VERSION.nupkg
+  NUGET_PACKAGE_VERSION: 0.1.0
+  NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.$NUGET_PACKAGE_VERSION-PR$VERSION_SUFFIX.nupkg
   
 jobs:
   solution:
@@ -31,7 +31,7 @@ jobs:
       with:
         VERSION_SUFFIX: ${{ github.event.number }}
     - name: Build Solution
-      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln --configuration Release -p:Version=${{ env.NUGET_PACKAGE_VERSION}}
+      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln --configuration Release -p:Version=${{ env.NUGET_PACKAGE_VERSION}}-PR$VERSION_SUFFIX
     - name: Run Unit Tests
       run: dotnet test ./src/Kubernetes.EventGrid.Tests.Unit/Kubernetes.EventGrid.Tests.Unit.csproj --filter Category=Unit
     - name: Push NuGet package
