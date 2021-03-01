@@ -11,7 +11,8 @@ on:
 env:
   IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-grid-bridge
   IMAGE_TAG: experimental
-  NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.$VERSION_SUFFIX.nupkg
+  NUGET_PACKAGE_VERSION: ${{ env.NUGET_VERSION }}-PR$VERSION_SUFFIX
+  NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.${{ env.NUGET_PACKAGE_VERSION}}.nupkg
   
 jobs:
   solution:
@@ -30,16 +31,16 @@ jobs:
       with:
         VERSION_SUFFIX: ${{ github.event.number }}
     - name: Build Solution
-      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln --configuration Release /p:VersionSuffix=PR$VERSION_SUFFIX
+      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln --configuration Release -p:Version=${{ env.NUGET_PACKAGE_VERSION}}
     - name: Run Unit Tests
       run: dotnet test ./src/Kubernetes.EventGrid.Tests.Unit/Kubernetes.EventGrid.Tests.Unit.csproj --filter Category=Unit
     - name: Push NuGet package
-      run: dotnet nuget push "./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.PR$VERSION_SUFFIX.nupkg"  --api-key ${{ secrets.NUGET_REGISTRY_PAT }} --source "https://nuget.pkg.github.com/tomkerkhove/index.json"
+      run: dotnet nuget push "${{ env.NUGET_PACKAGE_PATH }}"  --api-key ${{ secrets.NUGET_REGISTRY_PAT }} --source "https://nuget.pkg.github.com/tomkerkhove/index.json"
     - name: Upload NuGet Package
       uses: actions/upload-artifact@v2
       with:
         name: NuGet
-        path: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.PR$VERSION_SUFFIX.nupkg
+        path: ${{ env.NUGET_PACKAGE_PATH }}
   runtime:
     name: Runtime (Docker)
     runs-on: ubuntu-latest
