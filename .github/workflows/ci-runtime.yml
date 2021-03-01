@@ -34,12 +34,12 @@ jobs:
     - name: Run Unit Tests
       run: dotnet test ./src/Kubernetes.EventGrid.Tests.Unit/Kubernetes.EventGrid.Tests.Unit.csproj --filter Category=Unit
     - name: Push NuGet package
-      run: dotnet nuget push "./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.$VERSION_SUFFIX.nupkg"  --api-key ${{ secrets.NUGET_REGISTRY_PAT }} --source "https://nuget.pkg.github.com/tomkerkhove/index.json"
-    - name: Upload math result for job 2
+      run: dotnet nuget push "./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.PR$VERSION_SUFFIX.nupkg"  --api-key ${{ secrets.NUGET_REGISTRY_PAT }} --source "https://nuget.pkg.github.com/tomkerkhove/index.json"
+    - name: Upload NuGet Package
       uses: actions/upload-artifact@v2
       with:
         name: NuGet
-        path: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.$VERSION_SUFFIX.nupkg
+        path: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.PR$VERSION_SUFFIX.nupkg
   runtime:
     name: Runtime (Docker)
     runs-on: ubuntu-latest
