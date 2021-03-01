@@ -1,5 +1,8 @@
 name: CI (Runtime)
 on:
+  push:
+    branches:
+      - main
   pull_request:
     paths:
     - 'src/**'
@@ -7,6 +10,7 @@ on:
 env:
   IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-grid-bridge
   IMAGE_TAG: experimental
+  NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.${{ GITHUB_RUN_ID }}.nupkg
   
 jobs:
   solution:
@@ -14,10 +18,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Set version suffix for main branch
+      uses: allenevans/set-env@v2.0.0
+      if: ${{ github.event_name == 'push' }}
+      with:
+        VERSION_SUFFIX: ${{ GITHUB_RUN_ID }}
+    - name: Set version suffix for PRs
+      uses: allenevans/set-env@v2.0.0
+      if: ${{ github.event_name == 'pull_request' }}
+      with:
+        VERSION_SUFFIX: ${{ GITHUB_RUN_ID }}
     - name: Build Solution
-      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln
+      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln /p:VersionSuffix=${{ GITHUB_RUN_ID }}
     - name: Run Unit Tests
       run: dotnet test ./src/Kubernetes.EventGrid.Tests.Unit/Kubernetes.EventGrid.Tests.Unit.csproj --filter Category=Unit
+    - name: Push NuGet package
+      run: dotnet nuget push "${{ env.NUGET_PACKAGE_PATH }}"  --api-key ${{ secrets.NUGET_REGISTRY_PAT }} --source "GitHub Action"
+    - name: Upload math result for job 2
+      uses: actions/upload-artifact@v2
+      with:
+        name: NuGet
+        path: ${{ env.NUGET_PACKAGE_PATH }}
   runtime:
     name: Runtime (Docker)
     runs-on: ubuntu-latest
