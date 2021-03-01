@@ -17,12 +17,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Resource Include="LICENSE">
+    <Content Include="LICENSE">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="logo.png">
+    </Content>
+    <Content Include="logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\docs\media\logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
