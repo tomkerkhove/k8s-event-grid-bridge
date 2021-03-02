@@ -41,7 +41,7 @@ jobs:
     - name: Run Unit Tests
       run: dotnet test ./src/Kubernetes.EventGrid.Tests.Unit/Kubernetes.EventGrid.Tests.Unit.csproj --filter Category=Unit
     - name: Push NuGet package
-      run: dotnet nuget push "${{ env.NUGET_PACKAGE_PATH }}"  --api-key ${{ secrets.NUGET_REGISTRY_PAT }} --source "https://nuget.pkg.github.com/tomkerkhove/index.json"
+      run: dotnet nuget push "${{ env.NUGET_PACKAGE_PATH }}"  --api-key ${{ secrets.NUGET_REGISTRY_GHPR_PAT }} --source "https://nuget.pkg.github.com/tomkerkhove/index.json"
     - name: Upload NuGet Package
       uses: actions/upload-artifact@v2
       with:
