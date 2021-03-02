@@ -6,11 +6,9 @@ on:
 env:
   IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-grid-bridge
   IMAGE_TAG: "${{ github.event.release.tag_name }}"
-  NUGET_VERSION: "${{ github.event.release.tag_name }}"
-  NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.$NUGET_VERSION.nupkg
 jobs:
   verify:
-    name: Push Docker image to GitHub Container Registry
+    name: Verify App
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -38,12 +36,32 @@ jobs:
     needs: [verify]
     steps:
     - uses: actions/checkout@v2
+    - name: Set version for release trigger
+      uses: allenevans/set-env@v2.0.0
+      if: ${{ github.event_name == 'release' }}
+      with:
+        NUGET_VERSION: ${{ github.event.release.tag_name }}
+    - name: Set version for workflow dispatch
+      uses: allenevans/set-env@v2.0.0
+      if: ${{ github.event_name == 'workflow_dispatch' }}
+      with:
+        NUGET_VERSION: ${{ github.event.inputs.version }}
+      # Set NuGet package name since env.NUGET_PACKAGE_NAME doesn't resolve the variables
+    - name: Set NuGet package name
+      uses: allenevans/set-env@v2.0.0
+      with:
+        NUGET_PACKAGE_NAME: Kubernetes.EventGrid.Bridge.Contracts.${{ env.NUGET_VERSION }}.nupkg
+      # Set NuGet package name since env.NUGET_PACKAGE_PATH doesn't resolve the variables
+    - name: Set NuGet package path
+      uses: allenevans/set-env@v2.0.0
+      with:
+        NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/${{ env.NUGET_PACKAGE_NAME }}
     - name: Build Solution
-      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln --configuration Release -p:Version=${{ env.NUGET_VERSION}}
+      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln --configuration Release -p:Version=${{ env.NUGET_VERSION }}
     - name: Push NuGet package
       run: dotnet nuget push "${{ env.NUGET_PACKAGE_PATH }}"  --api-key ${{ secrets.NUGET_REGISTRY_NUGETORG_APIKEY }} --source https://api.nuget.org/v3/index.json
     - name: Upload NuGet Package
       uses: actions/upload-artifact@v2
       with:
-        name: NuGet
+        name: ${{ env.NUGET_PACKAGE_NAME }}
         path: ${{ env.NUGET_PACKAGE_PATH }}
