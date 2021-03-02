@@ -1,6 +1,11 @@
 name: Push Stable Docker Image
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version'
+        required: true
+        default: '0.2.0-rc.1'
   release:
     types: [published]
 env:

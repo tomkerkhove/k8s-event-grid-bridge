@@ -1,5 +1,6 @@
 name: Push Experimental Docker Image
 on:
+  workflow_dispatch:
   push:
     paths:
     - 'src/**'
@@ -9,7 +10,6 @@ env:
   IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-grid-bridge
   IMAGE_TAG: experimental
   NUGET_PACKAGE_VERSION: 0.1.0
-  NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.$NUGET_PACKAGE_VERSION-PR$VERSION_SUFFIX.nupkg
 
 jobs:
   push_docker_to_ghcr:
@@ -36,6 +36,16 @@ jobs:
       uses: allenevans/set-env@v2.0.1
       with:
         VERSION_SUFFIX: ${{ github.sha }}
+      # Set NuGet package name since env.NUGET_PACKAGE_NAME doesn't resolve the variables
+    - name: Set NuGet package name
+      uses: allenevans/set-env@v2.0.1
+      with:
+        NUGET_PACKAGE_NAME: Kubernetes.EventGrid.Bridge.Contracts.$NUGET_PACKAGE_VERSION-PR$VERSION_SUFFIX.nupkg
+      # Set NuGet package name since env.NUGET_PACKAGE_PATH doesn't resolve the variables
+    - name: Set NuGet package path
+      uses: allenevans/set-env@v2.0.1
+      with:
+        NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/${{ env.NUGET_PACKAGE_NAME }}
     - name: Build Solution
       run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln --configuration Release -p:Version=${{ env.NUGET_PACKAGE_VERSION}}-PR$VERSION_SUFFIX
     - name: Run Unit Tests
@@ -45,5 +55,5 @@ jobs:
     - name: Upload NuGet Package
       uses: actions/upload-artifact@v2
       with:
-        name: NuGet
+        name: ${{ env.NUGET_PACKAGE_NAME }}
         path: ${{ env.NUGET_PACKAGE_PATH }}
