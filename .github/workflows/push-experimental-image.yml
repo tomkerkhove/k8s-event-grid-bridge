@@ -33,7 +33,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set version suffix for main branch
-      uses: allenevans/set-env@v2.0.0
+      uses: allenevans/set-env@v2.0.1
       with:
         VERSION_SUFFIX: ${{ github.sha }}
     - name: Build Solution
