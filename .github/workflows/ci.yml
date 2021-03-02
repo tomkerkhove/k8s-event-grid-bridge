@@ -1,15 +1,35 @@
-name: Helm Chart CI
-
+name: CI
 on:
   pull_request:
     paths:
-    - '.github/workflows/ci-helm.yml'
+    - '.github/workflows/ci.yml'
     - 'charts/**'
+    - 'src/**'
 
 env:
   CHART_NAME: k8s-event-grid-bridge
+  IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-grid-bridge
+  IMAGE_TAG: experimental
   
 jobs:
+  solution:
+    name: Runtime (Solution)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build Solution
+      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln --configuration Release
+    - name: Run Unit Tests
+      run: dotnet test ./src/Kubernetes.EventGrid.Tests.Unit/Kubernetes.EventGrid.Tests.Unit.csproj --filter Category=Unit
+  
+  runtime:
+    name: Runtime (Docker)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build ./src/ --file ./src/Kubernetes.EventGrid.Bridge.Host/Dockerfile --tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+  
   lint-helm-3-x:
     name: Lint Helm Chart
     runs-on: ubuntu-latest

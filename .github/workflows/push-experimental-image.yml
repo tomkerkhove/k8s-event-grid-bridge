@@ -8,6 +8,9 @@ on:
 env:
   IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-grid-bridge
   IMAGE_TAG: experimental
+  NUGET_PACKAGE_VERSION: 0.1.0
+  NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.$NUGET_PACKAGE_VERSION-PR$VERSION_SUFFIX.nupkg
+
 jobs:
   push_docker_to_ghcr:
     name: Push Docker image to GitHub Container Registry
@@ -24,3 +27,23 @@ jobs:
       run: docker build ./src/ --file ./src/Kubernetes.EventGrid.Bridge.Host/Dockerfile --tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
     - name: Push the Docker image
       run: docker push ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+  push_nuget_to_ghpr:
+    name: Push NuGet package to GitHub Package Registry
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set version suffix for main branch
+      uses: allenevans/set-env@v2.0.0
+      with:
+        VERSION_SUFFIX: ${{ github.sha }}
+    - name: Build Solution
+      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln --configuration Release -p:Version=${{ env.NUGET_PACKAGE_VERSION}}-PR$VERSION_SUFFIX
+    - name: Run Unit Tests
+      run: dotnet test ./src/Kubernetes.EventGrid.Tests.Unit/Kubernetes.EventGrid.Tests.Unit.csproj --filter Category=Unit
+    - name: Push NuGet package
+      run: dotnet nuget push "${{ env.NUGET_PACKAGE_PATH }}"  --api-key ${{ secrets.NUGET_REGISTRY_GHPR_PAT }} --source "https://nuget.pkg.github.com/tomkerkhove/index.json"
+    - name: Upload NuGet Package
+      uses: actions/upload-artifact@v2
+      with:
+        name: NuGet
+        path: ${{ env.NUGET_PACKAGE_PATH }}
