@@ -7,7 +7,7 @@
     <PackageProjectUrl>http://docs.k8s-event-grid-bridge.io/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tomkerkhove/k8s-event-grid-bridge</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>Kubernetes,Azure,Azure Event Grid,CloudEvents</PackageTags>
+    <PackageTags>Kubernetes;Azure;Azure Event Grid;CloudEvents</PackageTags>
     <PackageIcon>logo.png</PackageIcon>
     <Copyright>Tom Kerkhove</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
