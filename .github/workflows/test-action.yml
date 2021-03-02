@@ -1,8 +1,8 @@
-name: Push Stable Docker Image
+name: Test Action
 on:
   workflow_dispatch:
     inputs:
-      name:
+      version:
         description: 'Version'
         required: true
         default: '0.2.0-rc.1'
@@ -11,11 +11,10 @@ on:
 env:
   IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-grid-bridge
   IMAGE_TAG: "${{ github.event.release.tag_name }}"
-  NUGET_VERSION: "${{ github.event.release.tag_name }}"
   NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/Kubernetes.EventGrid.Bridge.Contracts.$NUGET_VERSION.nupkg
 jobs:
   verify:
-    name: Push Docker image to GitHub Container Registry
+    name: Verify App
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -27,8 +26,16 @@ jobs:
     needs: [verify]
     steps:
     - uses: actions/checkout@v2
+    - name: Set version suffix for release trigger
+      uses: allenevans/set-env@v2.0.0
+      with:
+        NUGET_VERSION: ${{ github.event.release.tag_name }}
+    - name: Set version suffix for workflow dispatch
+      uses: allenevans/set-env@v2.0.0
+      with:
+        NUGET_VERSION: ${{ github.event.inputs.version }}
     - name: Build Solution
-      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln --configuration Release -p:Version=${{ env.NUGET_VERSION}}
+      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln --configuration Release -p:Version=${{ env.NUGET_VERSION }}
     - name: Push NuGet package
       run: dotnet nuget push "${{ env.NUGET_PACKAGE_PATH }}"  --api-key ${{ secrets.NUGET_REGISTRY_NUGETORG_APIKEY }} --source https://api.nuget.org/v3/index.json
     - name: Upload NuGet Package
