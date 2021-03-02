@@ -16,15 +16,6 @@
     <Product>Kubernetes Event Grid Bridge</Product>
   </PropertyGroup>
 
-  <!-- <ItemGroup>
-    <Content Include="LICENSE">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="logo.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup> -->
-
   <ItemGroup>
     <None Include="logo.png">
       <Pack>True</Pack>
