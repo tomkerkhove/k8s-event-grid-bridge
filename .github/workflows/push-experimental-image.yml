@@ -40,14 +40,14 @@ jobs:
     - name: Set NuGet package name
       uses: allenevans/set-env@v2.0.1
       with:
-        NUGET_PACKAGE_NAME: Kubernetes.EventGrid.Bridge.Contracts.${{ env.NUGET_PACKAGE_VERSION }}-${{ env.NUGET_VERSION }}.nupkg
+        NUGET_PACKAGE_NAME: Kubernetes.EventGrid.Bridge.Contracts.${{ env.NUGET_PACKAGE_VERSION }}-$NUGET_VERSION.nupkg
       # Set NuGet package name since env.NUGET_PACKAGE_PATH doesn't resolve the variables
     - name: Set NuGet package path
       uses: allenevans/set-env@v2.0.1
       with:
         NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/${{ env.NUGET_PACKAGE_NAME }}
     - name: Build Solution
-      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln --configuration Release -p:Version=${{ env.NUGET_PACKAGE_VERSION }}-${{ env.NUGET_VERSION }}
+      run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln --configuration Release -p:Version=${{ env.NUGET_PACKAGE_VERSION }}-$NUGET_VERSION
     - name: Run Unit Tests
       run: dotnet test ./src/Kubernetes.EventGrid.Tests.Unit/Kubernetes.EventGrid.Tests.Unit.csproj --filter Category=Unit
     - name: Push NuGet package
