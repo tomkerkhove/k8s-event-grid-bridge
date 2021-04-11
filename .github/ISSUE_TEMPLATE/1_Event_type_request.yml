@@ -55,6 +55,7 @@ body:
     description: What component is emitting the original raw event?
     options:
     - Kubernetes Control Plane
+    - Cluster Autoscaler
     - Other
   validations:
     required: false
