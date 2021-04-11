@@ -9,6 +9,8 @@ namespace Kubernetes.EventGrid.Core.Kubernetes.Events
     {
         public KubernetesEventType Type { get; }
         public object Payload { get; set; }
+        public Uri? Source { get; set; }
+        public string Subject { get; set; }
 
         public KubernetesEvent(KubernetesEventType eventType, object payload)
         {

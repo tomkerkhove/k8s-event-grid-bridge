@@ -4,15 +4,17 @@ title: Raw
 parent: Supported Events
 ---
 
-# Raw
+## Raw
+
+![Availability Badge](https://img.shields.io/badge/Available%20Starting-v0.1.0-green.svg)
 
 This event represents a raw Kubernetes event without translation.
 
-## Event Type
+### Event Type
 
 `Kubernetes.Events.Raw`
 
-## Example
+### Example
 
 ```json
 {

@@ -12,8 +12,7 @@ using Xunit;
 
 namespace Kubernetes.EventGrid.Tests.Unit.CloudEvents
 {
-    [Trait("Category", "Unit")]
-    public class CloudEventFactoryUnitTests
+    public class CloudEventFactoryUnitTests : UnitTest
     {
         [Fact]
         public void ParseFromRawNativeEvent_ParseRawEvent_ReturnsRawEvent()

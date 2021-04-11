@@ -5,8 +5,7 @@ using Xunit;
 
 namespace Kubernetes.EventGrid.Tests.Unit.Extensions
 {
-    [Trait("Category", "Unit")]
-    public class EnumExtensionsUnitTests
+    public class EnumExtensionsUnitTests : UnitTest
     {
         [Fact]
         public void GetDescription_ValueHasDescription_DescriptionIsReturned()
