@@ -37,6 +37,7 @@ namespace Kubernetes.EventGrid.Bridge.Host
         {
             builder.Services.AddTransient<IKubernetesEventParser, KubernetesEventParser>();
             builder.Services.AddTransient<ICloudEventFactory, CloudEventFactory>();
+            
             AddEventGridPublisher(builder, configuration);
         }
 
@@ -61,7 +62,7 @@ namespace Kubernetes.EventGrid.Bridge.Host
                 .MinimumLevel.Debug()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
-                .Enrich.WithComponentName("Kubernetes Event Bridge")
+                .Enrich.WithComponentName("Kubernetes Event Grid    Bridge")
                 .Enrich.WithVersion()
                 .WriteTo.Console();
 

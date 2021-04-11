@@ -2,5 +2,6 @@
 {
     public class ClusterAutoscalerScaleEventPayload
     {
+        public NodeGroupResizeInformation NodeGroup { get; set; }
     }
 }

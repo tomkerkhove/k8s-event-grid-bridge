@@ -7,9 +7,7 @@ namespace Kubernetes.EventGrid.Bridge.Contracts.Enums
         Unspecified,
         [Description("Kubernetes.Events.Raw")]
         Raw,
-        [Description("Kubernetes.Autoscaling.ClusterAutoscaler.ScaleIn")]
-        ClusterAutoscalerScaleIn,
-        [Description("Kubernetes.Autoscaling.ClusterAutoscaler.ScaleOut")]
+        [Description("Kubernetes.Autoscaling.ClusterAutoscaler.NodeGroup.ScaleOut")]
         ClusterAutoscalerScaleOut,
     }
 }

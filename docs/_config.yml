@@ -25,7 +25,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   
   The bridge is not in charge of acquiring the events from Kubernetes, but you can use tools such as Opsgenie's Kubernetes Event Exporter and forward them to the bridge.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://k8s-event-grid-bridge.tomkerkhove.be" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://docs.k8s-event-grid-bridge.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: tomkerkhove
 github_username:  tomkerkhove
 
@@ -45,7 +45,7 @@ last_edit_timestamp: true
 # Footer "Edit this page on GitHub" link text
 gh_edit_link: true # show or hide edit this page link
 gh_edit_link_text: "Edit this page on GitHub."
-gh_edit_repository: "https://github.com/tomkerkhove/k8s-event-bridge" # the github URL for your repo
+gh_edit_repository: "https://github.com/tomkerkhove/k8s-event-grid-bridge" # the github URL for your repo
 gh_edit_branch: "main" # the branch that your docs is served from
 gh_edit_source: docs # the source that your files originate from
 gh_edit_view_mode: "tree"

@@ -27,8 +27,12 @@ namespace Kubernetes.EventGrid.Core.CloudEvents
         public virtual CloudEvent CreateFromRawKubernetesEvent(string payload)
         {
             var kubernetesEvent = _kubernetesEventParser.ParseFromRawNativeEvent(payload);
+            
             var eventType = kubernetesEvent.Type.GetDescription();
-            var cloudEvent = new CloudEvent(CloudEventsSpecVersion.V1_0, eventType, new Uri("http://kubernetes"))
+            var source = kubernetesEvent.Source ?? new Uri("http://kubernetes");
+            var subject = kubernetesEvent.Subject ?? string.Empty;
+            
+            var cloudEvent = new CloudEvent(CloudEventsSpecVersion.V1_0, eventType, source, subject: subject)
             {
                 DataContentType = new ContentType("application/json"),
                 Data = kubernetesEvent.Payload
