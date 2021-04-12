@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Scale Out Node Group2
+title: Scale Out Node Group
 parent: Cluster Autoscaler
 grand_parent: Supported Events
 ---
