@@ -68,7 +68,7 @@ namespace Kubernetes.EventGrid.Bridge.Host
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .Enrich.WithComponentName("Kubernetes Event Grid Bridge")
-                .Enrich.WithProperty("ClusterName", clusterName)
+                .Enrich.WithProperty("Kubernetes-Cluster-Name", clusterName)
                 .Enrich.WithKubernetesInfo()
                 .Enrich.WithVersion()
                 .WriteTo.Console();
