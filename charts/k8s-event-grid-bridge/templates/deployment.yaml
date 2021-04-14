@@ -48,9 +48,11 @@ spec:
               secretKeyRef:
                 name: {{ include "k8s-event-grid-bridge.fullname" . }}
                 key: AzureWebJobsStorage
-          - name: EventBridge_EventGrid_Topic_Uri
+          - name: EventGridBridge_Kubernetes_Cluster_Name
+            value: {{ .Values.kubernetes.cluster.name | quote }}
+          - name: EventGridBridge_EventGrid_Topic_Uri
             value: {{ .Values.azure.eventGrid.topicUri }}
-          - name: EventBridge_EventGrid_Topic_Key
+          - name: EventGridBridge_EventGrid_Topic_Key
             valueFrom:
               secretKeyRef:
                 name: {{ include "k8s-event-grid-bridge.fullname" . }}

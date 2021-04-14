@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Net.Mime;
 using CloudNative.CloudEvents;
+using GuardNet;
 using Kubernetes.EventGrid.Core.CloudEvents.Interfaces;
 using Kubernetes.EventGrid.Core.Extensions;
+using Kubernetes.EventGrid.Core.Kubernetes.Events.Interfaces;
 using Kubernetes.EventGrid.Core.Kubernetes.Interfaces;
 
 namespace Kubernetes.EventGrid.Core.CloudEvents
@@ -10,14 +12,20 @@ namespace Kubernetes.EventGrid.Core.CloudEvents
     public class CloudEventFactory : ICloudEventFactory
     {
         private readonly IKubernetesEventParser _kubernetesEventParser;
+        private readonly IKubernetesClusterInfoProvider _kubernetesClusterInfoProvider;
 
         /// <summary>
         ///     Constructor
         /// </summary>
         /// <param name="kubernetesEventParser">Converter to convert raw Kubernetes events into user-friendly events</param>
-        public CloudEventFactory(IKubernetesEventParser kubernetesEventParser)
+        /// <param name="kubernetesClusterInfoProvider">Provider for getting Kubernetes cluster information</param>
+        public CloudEventFactory(IKubernetesEventParser kubernetesEventParser, IKubernetesClusterInfoProvider kubernetesClusterInfoProvider)
         {
+            Guard.NotNull(kubernetesClusterInfoProvider, nameof(kubernetesClusterInfoProvider));
+            Guard.NotNull(kubernetesClusterInfoProvider, nameof(kubernetesClusterInfoProvider));
+
             _kubernetesEventParser = kubernetesEventParser;
+            _kubernetesClusterInfoProvider = kubernetesClusterInfoProvider;
         }
 
         /// <summary>
@@ -30,8 +38,7 @@ namespace Kubernetes.EventGrid.Core.CloudEvents
             
             var eventType = kubernetesEvent.Type.GetDescription();
             var source = kubernetesEvent.Source ?? new Uri("http://kubernetes");
-            var subject = kubernetesEvent.Subject ?? string.Empty;
-            
+            var subject = ComposeEventSubject(kubernetesEvent);
             var cloudEvent = new CloudEvent(CloudEventsSpecVersion.V1_0, eventType, source, subject: subject)
             {
                 DataContentType = new ContentType("application/json"),
@@ -39,6 +46,15 @@ namespace Kubernetes.EventGrid.Core.CloudEvents
             };
 
             return cloudEvent;
+        }
+
+        private string ComposeEventSubject(IKubernetesEvent kubernetesEvent)
+        {
+            var clusterName = _kubernetesClusterInfoProvider.GetClusterName();
+            var subject = kubernetesEvent.Subject ?? string.Empty;
+            
+            // Always suffix with cluster name
+            return $"/{clusterName}/{subject}";
         }
     }
 }
