@@ -15,7 +15,7 @@ Learn more about it in the [official `cluster-autoscaler` FAQ](https://github.co
 
 ### Event Type
 
-`Kubernetes.Autoscaling.ClusterAutoscaler.NodeGroup.ScaleOut`
+`Kubernetes.Autoscaling.ClusterAutoscaler.V1.NodeGroup.ScaleOut`
 
 ### Example
 
