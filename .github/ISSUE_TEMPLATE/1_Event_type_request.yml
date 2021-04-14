@@ -1,8 +1,7 @@
 name: Event type request ⚡
-about: Suggest a new event type that would be an added value
-labels: "bug"
+description: Suggest a new event type that would be an added value
+labels: "event-type,feature-request"
 assignees: tomkerkhove
-issue_body: true
 body:
 - type: input
   attributes:
@@ -55,6 +54,7 @@ body:
     description: What component is emitting the original raw event?
     options:
     - Kubernetes Control Plane
+    - Cluster Autoscaler
     - Other
   validations:
     required: false
