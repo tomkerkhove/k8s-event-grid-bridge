@@ -6,6 +6,7 @@ using Kubernetes.EventGrid.Core.Extensions;
 using Kubernetes.EventGrid.Core.Kubernetes;
 using Kubernetes.EventGrid.Core.Kubernetes.Events;
 using Kubernetes.EventGrid.Core.Kubernetes.Events.Interfaces;
+using Kubernetes.EventGrid.Core.Kubernetes.Interfaces;
 using Kubernetes.EventGrid.Tests.Unit.Events;
 using Moq;
 using Xunit;
@@ -23,7 +24,8 @@ namespace Kubernetes.EventGrid.Tests.Unit.CloudEvents
             var rawKubernetesEvent = KubernetesEventSamples.GetRawContainerStartedEvent();
             var kubernetesEvent = new KubernetesEvent(KubernetesEventType.Raw ,rawKubernetesEvent);
             var mockedKubernetesEventParser = CreateMockedKubernetesEventParser(kubernetesEvent);
-            var cloudEventFactory = new CloudEventFactory(mockedKubernetesEventParser.Object);
+            var mockedKubernetesClusterInfoProvider = new Mock<IKubernetesClusterInfoProvider>();
+            var cloudEventFactory = new CloudEventFactory(mockedKubernetesEventParser.Object, mockedKubernetesClusterInfoProvider.Object);
 
             // Act
             var cloudEvent = cloudEventFactory.CreateFromRawKubernetesEvent(rawKubernetesEvent);

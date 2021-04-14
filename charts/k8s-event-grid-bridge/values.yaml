@@ -21,6 +21,10 @@ azure:
     topicUri: 
     key:
 
+kubernetes:
+  cluster:
+    name: "unknown-cluster"
+
 service:
   type: ClusterIP
   port: 8888

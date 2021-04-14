@@ -21,13 +21,13 @@ namespace Kubernetes.EventGrid.Bridge.Host
         {
             base.ConfigureAppConfiguration(builder);
 
-            builder.ConfigurationBuilder.AddEnvironmentVariables("EventBridge_");
+            builder.ConfigurationBuilder.AddEnvironmentVariables("EventGridBridge_");
         }
 
         public override void Configure(IFunctionsHostBuilder builder)
         {
             var configuration = GetConfiguration(builder);
-
+            
             AddDependencies(builder, configuration);
 
             ConfigureLogging(builder, configuration);
@@ -35,9 +35,10 @@ namespace Kubernetes.EventGrid.Bridge.Host
 
         private void AddDependencies(IFunctionsHostBuilder builder, IConfiguration configuration)
         {
+            builder.Services.AddTransient<IKubernetesClusterInfoProvider, KubernetesClusterInfoProvider>();
             builder.Services.AddTransient<IKubernetesEventParser, KubernetesEventParser>();
             builder.Services.AddTransient<ICloudEventFactory, CloudEventFactory>();
-            
+
             AddEventGridPublisher(builder, configuration);
         }
 
@@ -56,13 +57,19 @@ namespace Kubernetes.EventGrid.Bridge.Host
 
         private static void ConfigureLogging(IFunctionsHostBuilder builder, IConfiguration configuration)
         {
-            var instrumentationKey = configuration.GetValue<string>("APPINSIGHTS_INSTRUMENTATIONKEY");
+            var dependencyContainer = builder.Services.BuildServiceProvider();
+            var kubernetesInfoProvider = dependencyContainer.GetRequiredService<IKubernetesClusterInfoProvider>();
+            var clusterName = kubernetesInfoProvider.GetClusterName();
 
+            var instrumentationKey = configuration.GetValue<string>("APPINSIGHTS_INSTRUMENTATIONKEY");
+            
             var loggerConfiguration = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .Enrich.WithComponentName("Kubernetes Event Grid Bridge")
+                .Enrich.WithProperty("Kubernetes-Cluster-Name", clusterName)
+                .Enrich.WithKubernetesInfo()
                 .Enrich.WithVersion()
                 .WriteTo.Console();
 
