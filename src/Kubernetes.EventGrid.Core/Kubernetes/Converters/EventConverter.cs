@@ -7,9 +7,15 @@ namespace Kubernetes.EventGrid.Core.Kubernetes.Converters
 {
     public class EventConverter
     {
+        protected string GetKubernetesNamespaceThatEmittedEvent(JToken parsedPayload)
+        {
+            return parsedPayload["metadata"]?["namespace"]?.ToString();
+        }
+
         protected IKubernetesEvent ComposeRawKubernetesEvent(JToken parsedPayload)
         {
-            return new KubernetesEvent(KubernetesEventType.Raw, parsedPayload.ToObject<object>());
+            var @namespace = GetKubernetesNamespaceThatEmittedEvent(parsedPayload);
+            return new KubernetesEvent(KubernetesEventType.Raw, parsedPayload.ToObject<object>(), @namespace);
         }
     }
 }

@@ -4,6 +4,8 @@ using Arcus.EventGrid.Publishing.Interfaces;
 using CloudNative.CloudEvents;
 using GuardNet;
 using Kubernetes.EventGrid.Core.CloudEvents.Interfaces;
+using Kubernetes.EventGrid.Core.Kubernetes;
+using Kubernetes.EventGrid.Core.Kubernetes.Events.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -32,23 +34,23 @@ namespace Kubernetes.EventGrid.Bridge.Host
         [FunctionName("kubernetes-event-exporter")]
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, Route = "kubernetes/events/forward")] HttpRequest request)
         {
-            var cloudEvent = await ConvertRequestToCloudEvent(request);
+            var conversionResult = await ConvertRequestToCloudEvent(request);
             
-            await PublishEventAsync(cloudEvent);
+            await PublishEventAsync(conversionResult.Event);
             
-            MeasureEventPublished(cloudEvent);
+            MeasureEventPublished(conversionResult.Event, conversionResult.KubernetesEvent);
             
-            request.HttpContext.Response.Headers.TryAdd("X-Event-Id", cloudEvent.Id);
+            request.HttpContext.Response.Headers.TryAdd("X-Event-Id", conversionResult.Event.Id);
             return new OkResult();
         }
 
-        private async Task<CloudEvent> ConvertRequestToCloudEvent(HttpRequest request)
+        private async Task<(CloudEvent Event, KubernetesEventContext KubernetesEvent)> ConvertRequestToCloudEvent(HttpRequest request)
         {
             var payload = await request.ReadAsStringAsync();
             _logger.LogInformation($"Kubernetes event received: {payload}");
 
-            var cloudEvent = _cloudEventFactory.CreateFromRawKubernetesEvent(payload);
-            return cloudEvent;
+            var result = _cloudEventFactory.CreateFromRawKubernetesEvent(payload);
+            return result;
         }
 
         private async Task PublishEventAsync(CloudEvent cloudEvent)
@@ -56,8 +58,9 @@ namespace Kubernetes.EventGrid.Bridge.Host
             await _eventGridPublisher.PublishAsync(cloudEvent);
         }
 
-        private void MeasureEventPublished(CloudEvent @event)
+        private void MeasureEventPublished(CloudEvent @event, KubernetesEventContext kubernetesEvent)
         {
+            using (LogContext.PushProperty("Event-Kubernetes-Namespace", kubernetesEvent.Namespace))
             using (LogContext.PushProperty("Event-Type", @event.Type))
             {
                 ILoggerExtensions.LogMetric(_logger, "Kubernetes Event Published", 1);

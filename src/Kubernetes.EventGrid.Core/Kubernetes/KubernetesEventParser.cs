@@ -1,13 +1,11 @@
-﻿using Kubernetes.EventGrid.Bridge.Contracts.Enums;
-using Kubernetes.EventGrid.Core.Kubernetes.Converters;
-using Kubernetes.EventGrid.Core.Kubernetes.Events;
+﻿using Kubernetes.EventGrid.Core.Kubernetes.Converters;
 using Kubernetes.EventGrid.Core.Kubernetes.Events.Interfaces;
 using Kubernetes.EventGrid.Core.Kubernetes.Interfaces;
 using Newtonsoft.Json.Linq;
 
 namespace Kubernetes.EventGrid.Core.Kubernetes
 {
-    public class KubernetesEventParser : IKubernetesEventParser
+    public class KubernetesEventParser : EventConverter, IKubernetesEventParser
     {
         /// <summary>
         ///     Parses a raw Kubernetes native event into user-friendly events
@@ -27,11 +25,6 @@ namespace Kubernetes.EventGrid.Core.Kubernetes
                 default:
                     return ComposeRawKubernetesEvent(parsedPayload);
             }
-        }
-
-        private IKubernetesEvent ComposeRawKubernetesEvent(JToken parsedPayload)
-        {
-            return new KubernetesEvent(KubernetesEventType.Raw, parsedPayload.ToObject<object>());
         }
     }
 }
