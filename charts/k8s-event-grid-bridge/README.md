@@ -7,12 +7,6 @@ The bridge is not in charge of acquiring the events from Kubernetes, but you can
 [![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/k8s-event-grid-bridge)](https://artifacthub.io/packages/search?repo=k8s-event-grid-bridge)
 
 ## Configuration
-azure:
-  storage:
-    connectionString:
-  eventGrid:
-    topicUri: 
-    key:
 
 The following table lists the configurable parameters of the Helm chart and
 their default values.
