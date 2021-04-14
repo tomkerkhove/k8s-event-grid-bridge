@@ -4,6 +4,7 @@ using CloudNative.CloudEvents;
 using GuardNet;
 using Kubernetes.EventGrid.Core.CloudEvents.Interfaces;
 using Kubernetes.EventGrid.Core.Extensions;
+using Kubernetes.EventGrid.Core.Kubernetes;
 using Kubernetes.EventGrid.Core.Kubernetes.Events.Interfaces;
 using Kubernetes.EventGrid.Core.Kubernetes.Interfaces;
 
@@ -32,7 +33,7 @@ namespace Kubernetes.EventGrid.Core.CloudEvents
         ///     Creates a CloudEvent for a raw Kubernetes event
         /// </summary>
         /// <param name="payload">Raw Kubernetes event</param>
-        public virtual CloudEvent CreateFromRawKubernetesEvent(string payload)
+        public virtual (CloudEvent Event, KubernetesEventContext KubernetesEventContext) CreateFromRawKubernetesEvent(string payload)
         {
             var kubernetesEvent = _kubernetesEventParser.ParseFromRawNativeEvent(payload);
             
@@ -45,7 +46,7 @@ namespace Kubernetes.EventGrid.Core.CloudEvents
                 Data = kubernetesEvent.Payload
             };
 
-            return cloudEvent;
+            return (cloudEvent, new KubernetesEventContext(kubernetesEvent.Namespace));
         }
 
         private string ComposeEventSubject(IKubernetesEvent kubernetesEvent)

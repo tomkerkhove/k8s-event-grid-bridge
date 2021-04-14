@@ -12,19 +12,20 @@ namespace Kubernetes.EventGrid.Core.Kubernetes.Converters
     {
         public IKubernetesEvent ConvertFromNativeEvent(JToken parsedPayload)
         {
+            var @namespace = GetKubernetesNamespaceThatEmittedEvent(parsedPayload);
             var eventReason = parsedPayload["reason"]?.ToString()?.ToLower();
             switch (eventReason)
             {
                 // TODO: Cluster node group is at max capacity
                 // case "nottriggerscaleup":
                 case "triggeredscaleup":
-                    return ConvertClusterScalingOut(parsedPayload);
+                    return ConvertClusterScalingOut(parsedPayload, @namespace);
                 default:
                     return ComposeRawKubernetesEvent(parsedPayload);
             }
         }
 
-        private static IKubernetesEvent ConvertClusterScalingOut(JToken parsedPayload)
+        private static IKubernetesEvent ConvertClusterScalingOut(JToken parsedPayload, string @namespace)
         {
             var nodeGroupResizeInformation = ClusterAutoscalerEventParser.ParseForClusterScalingOut(parsedPayload["message"]?.ToString());
             var scaleOutPayload = new ClusterAutoscalerScaleEventPayload
@@ -32,7 +33,7 @@ namespace Kubernetes.EventGrid.Core.Kubernetes.Converters
                 NodeGroup = nodeGroupResizeInformation
             };
 
-            return new KubernetesEvent(KubernetesEventType.ClusterAutoscalerScaleOut, scaleOutPayload)
+            return new KubernetesEvent(KubernetesEventType.ClusterAutoscalerScaleOut, scaleOutPayload, @namespace)
             {
                 Source = new Uri("http://kubernetes/autoscaling/cluster-autoscaler"),
                 Subject = $"/node-groups/{nodeGroupResizeInformation.Name}"

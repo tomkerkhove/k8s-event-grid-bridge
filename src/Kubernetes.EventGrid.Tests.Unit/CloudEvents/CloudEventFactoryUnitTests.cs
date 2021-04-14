@@ -22,15 +22,16 @@ namespace Kubernetes.EventGrid.Tests.Unit.CloudEvents
             var expectedContentType = new ContentType("application/json");
             var expectedSource = "http://kubernetes/";
             var rawKubernetesEvent = KubernetesEventSamples.GetRawContainerStartedEvent();
-            var kubernetesEvent = new KubernetesEvent(KubernetesEventType.Raw ,rawKubernetesEvent);
+            var kubernetesEvent = new KubernetesEvent(KubernetesEventType.Raw, rawKubernetesEvent, "default");
             var mockedKubernetesEventParser = CreateMockedKubernetesEventParser(kubernetesEvent);
             var mockedKubernetesClusterInfoProvider = new Mock<IKubernetesClusterInfoProvider>();
             var cloudEventFactory = new CloudEventFactory(mockedKubernetesEventParser.Object, mockedKubernetesClusterInfoProvider.Object);
 
             // Act
-            var cloudEvent = cloudEventFactory.CreateFromRawKubernetesEvent(rawKubernetesEvent);
+            var conversionResult = cloudEventFactory.CreateFromRawKubernetesEvent(rawKubernetesEvent);
 
             // Assert
+            var cloudEvent = conversionResult.Event;
             Assert.NotNull(cloudEvent);
             Assert.Equal(kubernetesEvent.Type.GetDescription(), cloudEvent.Type);
             Assert.Equal(kubernetesEvent.Payload, cloudEvent.Data);

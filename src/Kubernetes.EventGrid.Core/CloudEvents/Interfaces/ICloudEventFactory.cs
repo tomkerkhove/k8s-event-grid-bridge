@@ -1,4 +1,5 @@
 ﻿using CloudNative.CloudEvents;
+using Kubernetes.EventGrid.Core.Kubernetes;
 
 namespace Kubernetes.EventGrid.Core.CloudEvents.Interfaces
 {
@@ -8,6 +9,6 @@ namespace Kubernetes.EventGrid.Core.CloudEvents.Interfaces
         ///     Creates a CloudEvent for a raw Kubernetes event
         /// </summary>
         /// <param name="payload">Raw Kubernetes event</param>
-        CloudEvent CreateFromRawKubernetesEvent(string payload);
+        (CloudEvent Event, KubernetesEventContext KubernetesEventContext) CreateFromRawKubernetesEvent(string payload);
     }
 }
