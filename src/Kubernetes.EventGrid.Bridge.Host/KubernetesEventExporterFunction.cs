@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
+using Serilog.Context;
 
 namespace Kubernetes.EventGrid.Bridge.Host
 {
@@ -35,7 +36,7 @@ namespace Kubernetes.EventGrid.Bridge.Host
             
             await PublishEventAsync(cloudEvent);
             
-            MeasureEventPublished();
+            MeasureEventPublished(cloudEvent);
             
             request.HttpContext.Response.Headers.TryAdd("X-Event-Id", cloudEvent.Id);
             return new OkResult();
@@ -55,9 +56,12 @@ namespace Kubernetes.EventGrid.Bridge.Host
             await _eventGridPublisher.PublishAsync(cloudEvent);
         }
 
-        private void MeasureEventPublished()
+        private void MeasureEventPublished(CloudEvent @event)
         {
-            ILoggerExtensions.LogMetric(_logger, "Kubernetes Event Published", 1);
+            using (LogContext.PushProperty("Event-Type", @event.Type))
+            {
+                ILoggerExtensions.LogMetric(_logger, "Kubernetes Event Published", 1);
+            }
         }
     }
 }
