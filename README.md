@@ -8,7 +8,7 @@ The bridge is not in charge of acquiring the events from Kubernetes, but you can
 
 # Documentation
 
-Learn more about Kubernetes Event Grid Bridge on [k8s-event-grid-bridge.tomkerkhove.be](http://k8s-event-grid-bridge.tomkerkhove.be/) such as :
+Learn more about Kubernetes Event Grid Bridge on [docs.k8s-event-grid-bridge.io](https://docs.k8s-event-grid-bridge.io/) such as :
 
 - Supported events
 - Deployment
