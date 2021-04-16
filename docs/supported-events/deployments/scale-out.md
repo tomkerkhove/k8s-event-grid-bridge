@@ -27,18 +27,18 @@ This event represents a Deployment that is scaling out.
    "subject": "/local-cluster/namespaces/monitoring/deployments/k8s-event-grid-bridge-workload",
    "datacontenttype": "application/json",
    "data": {
-      "Deployment": {
-         "Name": "k8s-event-grid-bridge-workload",
-         "Namespace": "monitoring",
-         "Labels": {
+      "deployment": {
+         "name": "k8s-event-grid-bridge-workload",
+         "namespace": "monitoring",
+         "labels": {
             "app": "k8s-event-grid-bridge"
          }
       },
-      "ReplicaSet": {
-         "Name": "k8s-event-grid-bridge-workload-76888d9cc9"
+      "replicaSet": {
+         "name": "k8s-event-grid-bridge-workload-76888d9cc9"
       },
-      "Replicas": {
-         "New": 1
+      "replicas": {
+         "new": 10
       }
    }
 }
