@@ -1,0 +1,41 @@
+{
+	"metadata": {
+		"name": "frontend-zshp9.1675f3e79ed67fa5",
+		"namespace": "default",
+		"selfLink": "/api/v1/namespaces/default/events/frontend-zshp9.1675f3e79ed67fa5",
+		"uid": "56f2cb2e-4812-48b0-ad3e-556bed8cc191",
+		"resourceVersion": "24231542",
+		"creationTimestamp": "2021-04-15T06:23:37Z",
+		"managedFields": [{
+			"manager": "kubelet",
+			"operation": "Update",
+			"apiVersion": "v1",
+			"time": "2021-04-15T06:23:37Z"
+		}]
+	},
+	"reason": "Failed",
+	"message": "Error: cannot find volume \"default-token-wjk8j\" to mount into container \"php-redis\"",
+	"source": {
+		"component": "kubelet",
+		"host": "aks-agentpool-11593772-vmss000000"
+	},
+	"firstTimestamp": "2021-04-15T06:23:37Z",
+	"lastTimestamp": "2021-04-15T06:23:37Z",
+	"count": 1,
+	"type": "Warning",
+	"eventTime": null,
+	"reportingComponent": "",
+	"reportingInstance": "",
+	"involvedObject": {
+		"kind": "Pod",
+		"namespace": "default",
+		"name": "frontend-zshp9",
+		"uid": "cd72f718-d40f-47f0-b15e-6dd360e69f34",
+		"apiVersion": "v1",
+		"resourceVersion": "24231332",
+		"fieldPath": "spec.containers{php-redis}",
+		"labels": {
+			"tier": "frontend"
+		}
+	}
+}

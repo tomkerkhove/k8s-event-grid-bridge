@@ -8,6 +8,8 @@ using Kubernetes.EventGrid.Core.CloudEvents;
 using Kubernetes.EventGrid.Core.CloudEvents.Interfaces;
 using Kubernetes.EventGrid.Core.Kubernetes;
 using Kubernetes.EventGrid.Core.Kubernetes.Interfaces;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Serilog;
 using Serilog.Configuration;
 using Serilog.Events;
@@ -30,7 +32,16 @@ namespace Kubernetes.EventGrid.Bridge.Host
             
             AddDependencies(builder, configuration);
 
+            ConfigureSerialization();
             ConfigureLogging(builder, configuration);
+        }
+
+        private void ConfigureSerialization()
+        {
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
         }
 
         private void AddDependencies(IFunctionsHostBuilder builder, IConfiguration configuration)
