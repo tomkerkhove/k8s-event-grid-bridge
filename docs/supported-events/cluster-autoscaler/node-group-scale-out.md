@@ -29,12 +29,12 @@ Learn more about it in the [official `cluster-autoscaler` FAQ](https://github.co
 	"subject": "/node-groups/aks-agentpool-11593772-vmss",
 	"datacontenttype": "application/json",
 	"data": {
-		"NodeGroup": {
-			"Name": "aks-agentpool-11593772-vmss",
-			"SizeInfo": {
-				"New": 16,
-				"Old": 15,
-				"Maximum": 20
+		"nodeGroup": {
+			"name": "aks-agentpool-11593772-vmss",
+			"sizeInfo": {
+				"new": 16,
+				"old": 15,
+				"maximum": 20
 			}
 		}
 	}
