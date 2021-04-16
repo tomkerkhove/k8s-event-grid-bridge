@@ -1,0 +1,42 @@
+{
+	"metadata": {
+		"name": "coredns-autoscaler-5b6cbd75d7-rf47t.1675f3df24a918d1",
+		"namespace": "kube-system",
+		"selfLink": "/api/v1/namespaces/kube-system/events/coredns-autoscaler-5b6cbd75d7-rf47t.1675f3df24a918d1",
+		"uid": "fb4abf18-3e36-49eb-8a22-9dbe04c8a7d3",
+		"resourceVersion": "24231436",
+		"creationTimestamp": "2021-04-15T06:23:00Z",
+		"managedFields": [{
+			"manager": "kubelet",
+			"operation": "Update",
+			"apiVersion": "v1",
+			"time": "2021-04-15T06:23:00Z"
+		}]
+	},
+	"reason": "Unhealthy",
+	"message": "Liveness probe failed: Get \"http://10.244.0.7:8080/last-poll\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)",
+	"source": {
+		"component": "kubelet",
+		"host": "aks-agentpool-11593772-vmss000000"
+	},
+	"firstTimestamp": "2021-04-15T06:23:00Z",
+	"lastTimestamp": "2021-04-15T06:23:00Z",
+	"count": 1,
+	"type": "Warning",
+	"eventTime": null,
+	"reportingComponent": "",
+	"reportingInstance": "",
+	"involvedObject": {
+		"kind": "Pod",
+		"namespace": "kube-system",
+		"name": "coredns-autoscaler-5b6cbd75d7-rf47t",
+		"uid": "21db1050-abb4-47e3-bb0c-c333bc80c225",
+		"apiVersion": "v1",
+		"resourceVersion": "840",
+		"fieldPath": "spec.containers{autoscaler}",
+		"labels": {
+			"k8s-app": "coredns-autoscaler",
+			"pod-template-hash": "5b6cbd75d7"
+		}
+	}
+}

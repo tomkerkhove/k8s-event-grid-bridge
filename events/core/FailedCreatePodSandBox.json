@@ -1,0 +1,40 @@
+{
+	"metadata": {
+		"name": "frontend-dtjf5.1675f3de40d4037d",
+		"namespace": "default",
+		"selfLink": "/api/v1/namespaces/default/events/frontend-dtjf5.1675f3de40d4037d",
+		"uid": "ac5314ce-6f92-4f5a-a2d7-f51316105126",
+		"resourceVersion": "24231421",
+		"creationTimestamp": "2021-04-15T06:22:57Z",
+		"managedFields": [{
+			"manager": "kubelet",
+			"operation": "Update",
+			"apiVersion": "v1",
+			"time": "2021-04-15T06:22:57Z"
+		}]
+	},
+	"reason": "FailedCreatePodSandBox",
+	"message": "Failed to create pod sandbox: rpc error: code = Unknown desc = failed to start sandbox container task \"0a82fde7c4390a9050b0381a1be0e71671b38e46c25f9f7e0837f283f3bac9ad\": OCI runtime start failed: cannot start a container that has stopped: unknown",
+	"source": {
+		"component": "kubelet",
+		"host": "aks-agentpool-11593772-vmss000000"
+	},
+	"firstTimestamp": "2021-04-15T06:22:57Z",
+	"lastTimestamp": "2021-04-15T06:22:57Z",
+	"count": 1,
+	"type": "Warning",
+	"eventTime": null,
+	"reportingComponent": "",
+	"reportingInstance": "",
+	"involvedObject": {
+		"kind": "Pod",
+		"namespace": "default",
+		"name": "frontend-dtjf5",
+		"uid": "94c9fbb6-e0ae-4543-86e1-18f139ae2db1",
+		"apiVersion": "v1",
+		"resourceVersion": "24231333",
+		"labels": {
+			"tier": "frontend"
+		}
+	}
+}
