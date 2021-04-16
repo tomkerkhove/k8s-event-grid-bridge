@@ -1,0 +1,42 @@
+{
+	"metadata": {
+		"name": "metrics-server-77c8679d7d-tsdpq.165910f5e7077e3c",
+		"namespace": "kube-system",
+		"selfLink": "/api/v1/namespaces/kube-system/events/metrics-server-77c8679d7d-tsdpq.165910f5e7077e3c",
+		"uid": "f43d0bd2-2b95-48d3-a505-6f800c96cea6",
+		"resourceVersion": "24231435",
+		"creationTimestamp": "2021-04-15T06:23:00Z",
+		"managedFields": [{
+			"manager": "kubelet",
+			"operation": "Update",
+			"apiVersion": "v1",
+			"time": "2021-04-15T06:23:00Z"
+		}]
+	},
+	"reason": "Unhealthy",
+	"message": "Readiness probe failed: Get \"https://10.244.0.3:443/healthz\": net/http: request canceled (Client.Timeout exceeded while awaiting headers)",
+	"source": {
+		"component": "kubelet",
+		"host": "aks-agentpool-11593772-vmss000000"
+	},
+	"firstTimestamp": "2021-01-11T03:49:50Z",
+	"lastTimestamp": "2021-04-15T06:23:00Z",
+	"count": 19,
+	"type": "Warning",
+	"eventTime": null,
+	"reportingComponent": "",
+	"reportingInstance": "",
+	"involvedObject": {
+		"kind": "Pod",
+		"namespace": "kube-system",
+		"name": "metrics-server-77c8679d7d-tsdpq",
+		"uid": "3e7da7be-4c5a-47cf-8613-719c0afde77b",
+		"apiVersion": "v1",
+		"resourceVersion": "836",
+		"fieldPath": "spec.containers{metrics-server}",
+		"labels": {
+			"k8s-app": "metrics-server",
+			"pod-template-hash": "77c8679d7d"
+		}
+	}
+}
