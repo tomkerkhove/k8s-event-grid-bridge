@@ -21,22 +21,22 @@ Learn more about it in the [official `cluster-autoscaler` FAQ](https://github.co
 
 ```json
 {
-	"specversion": "1.0",
-	"type": "Kubernetes.Autoscaling.ClusterAutoscaler.NodeGroup.ScaleOut",
-	"source": "http://kubernetes/autoscaling/cluster-autoscaler",
-	"id": "6833c9ff-567b-4b80-9cc5-ea34963097d4",
-	"time": "2021-04-11T13:00:40.539442Z",
-	"subject": "/node-groups/aks-agentpool-11593772-vmss",
-	"datacontenttype": "application/json",
-	"data": {
-		"nodeGroup": {
-			"name": "aks-agentpool-11593772-vmss",
-			"sizeInfo": {
-				"new": 16,
-				"old": 15,
-				"maximum": 20
-			}
-		}
-	}
+   "specversion": "1.0",
+   "type": "Kubernetes.Autoscaling.ClusterAutoscaler.NodeGroup.ScaleOut",
+   "source": "http://kubernetes/autoscaling/cluster-autoscaler",
+   "id": "6833c9ff-567b-4b80-9cc5-ea34963097d4",
+   "time": "2021-04-11T13:00:40.539442Z",
+   "subject": "/local-cluster/node-groups/aks-agentpool-11593772-vmss",
+   "datacontenttype": "application/json",
+   "data": {
+      "nodeGroup": {
+         "name": "aks-agentpool-11593772-vmss",
+         "sizeInfo": {
+            "new": 16,
+            "old": 15,
+            "maximum": 20
+         }
+      }
+   }
 }
 ```

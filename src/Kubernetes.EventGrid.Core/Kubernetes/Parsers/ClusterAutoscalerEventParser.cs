@@ -12,7 +12,7 @@ namespace Kubernetes.EventGrid.Core.Kubernetes.Parsers
         /// <example>pod triggered scale-up: [{aks-agentpool-11593772-vmss 1->2 (max: 2)}]</example>
         private const string ClusterResizeRegex = @"\[\{([^\s]+) ([0-9]*)->([0-9]*) \(max: ([0-9]*)";
 
-        public static NodeGroupResizeInformation ParseForClusterScalingOut(string eventMessage)
+        public static NodeGroupResizeInfo ParseForClusterScalingOut(string eventMessage)
         {
             if (Regex.IsMatch(eventMessage, ClusterResizeRegex) == false)
             {
@@ -29,7 +29,7 @@ namespace Kubernetes.EventGrid.Core.Kubernetes.Parsers
                 Maximum = int.Parse(matchingEntries.Groups[4].Value)
             };
 
-            var nodeGroupResizeInfo = new NodeGroupResizeInformation
+            var nodeGroupResizeInfo = new NodeGroupResizeInfo
             {
                 Name = nodeGroupName,
                 SizeInfo = newSizeInfo

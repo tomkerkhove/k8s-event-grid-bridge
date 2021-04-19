@@ -19,6 +19,9 @@ namespace Kubernetes.EventGrid.Core.Kubernetes
             var sourceComponent = parsedPayload["source"]?["component"]?.ToString()?.ToLower();
             switch (sourceComponent)
             {
+                case "deployment-controller":
+                    var deploymentController = new DeploymentControllerEventConverter();
+                    return deploymentController.ConvertFromNativeEvent(parsedPayload);
                 case "cluster-autoscaler":
                     var clusterAutoscalerEventConverter = new ClusterAutoscalerEventConverter();
                     return clusterAutoscalerEventConverter.ConvertFromNativeEvent(parsedPayload);

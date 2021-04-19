@@ -53,7 +53,13 @@ namespace Kubernetes.EventGrid.Core.CloudEvents
         {
             var clusterName = _kubernetesClusterInfoProvider.GetClusterName();
             var subject = kubernetesEvent.Subject ?? string.Empty;
-            
+
+            // Remove leading /, if present
+            if (subject.StartsWith("/"))
+            {
+                subject = subject.Remove(0, 1);
+            }
+
             // Always suffix with cluster name
             return $"/{clusterName}/{subject}";
         }

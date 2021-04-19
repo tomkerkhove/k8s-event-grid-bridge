@@ -14,6 +14,16 @@ namespace Kubernetes.EventGrid.Tests.Unit.Events
             return ReadEventFromDisk("Cluster-Autoscaler", "TriggeredScaleUp.json");
         }
 
+        public static string GetRawReplicaSetScaleInEvent()
+        {
+            return ReadEventFromDisk("Core", "ScalingReplicaSetDown.json");
+        }
+
+        public static string GetRawReplicaSetScaleOutEvent()
+        {
+            return ReadEventFromDisk("Core", "ScalingReplicaSetUp.json");
+        }
+
         private static string ReadEventFromDisk(string folderName, string fileName)
         {
             var filePath = Path.Combine("Events", "Samples", folderName, fileName);
