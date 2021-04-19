@@ -3,6 +3,41 @@ entries:
   k8s-event-grid-bridge:
   - annotations:
       artifacthub.io/changes: |
+        - https://github.com/tomkerkhove/k8s-event-grid-bridge/releases/tag/0.2.0
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/images: |-
+        - name: k8s-event-grid-bridge
+          image: ghcr.io/tomkerkhove/k8s-event-grid-bridge:experimental
+    apiVersion: v2
+    appVersion: 0.2.0
+    created: "2021-04-19T10:34:15.5081668+02:00"
+    description: A simple event bridge for Kubernetes native events to Azure Event
+      Grid.
+    digest: 3b1fb88a4c82049566a0730a7e1f5d62b13433a7fde7ddd565f445012c79b36d
+    home: http://k8s-event-grid-bridge.tomkerkhove.be/
+    icon: https://raw.githubusercontent.com/tomkerkhove/k8s-event-grid-bridge/main/docs/media/logo.png
+    keywords:
+    - kubernetes
+    - kubernetes events
+    - azure
+    - azure event grid
+    - event
+    - events
+    - event exporting
+    - event driven
+    - cloudevents
+    maintainers:
+    - name: Tom Kerkhove
+      url: https://github.com/tomkerkhove
+    name: k8s-event-grid-bridge
+    sources:
+    - https://github.com/tomkerkhove/k8s-event-grid-bridge
+    type: application
+    urls:
+    - https://k8s-event-grid-bridge.tomkerkhove.be/chart-registry/k8s-event-grid-bridge-0.2.0.tgz
+    version: 0.2.0
+  - annotations:
+      artifacthub.io/changes: |
         - Initial version
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/images: |-
@@ -10,7 +45,7 @@ entries:
           image: ghcr.io/tomkerkhove/k8s-event-grid-bridge:experimental
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-01-18T06:58:53.0311438+01:00"
+    created: "2021-04-19T10:34:15.5041659+02:00"
     description: A simple event bridge for Kubernetes native events to Azure Event
       Grid.
     digest: 877275eed46b6fa576bc4137b001864abe48cd5834b78667c41fed8f34586bdc
@@ -35,4 +70,4 @@ entries:
     urls:
     - https://k8s-event-grid-bridge.tomkerkhove.be/chart-registry/k8s-event-grid-bridge-0.1.0.tgz
     version: 0.1.0
-generated: "2021-01-18T06:58:53.0280895+01:00"
+generated: "2021-04-19T10:34:15.4991661+02:00"

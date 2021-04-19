@@ -15,12 +15,12 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.1.0
+version: 0.2.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
-appVersion: 0.1.0
+appVersion: 0.2.0
 home: http://k8s-event-grid-bridge.tomkerkhove.be/
 icon: https://raw.githubusercontent.com/tomkerkhove/k8s-event-grid-bridge/main/docs/media/logo.png
 keywords:
@@ -32,6 +32,7 @@ keywords:
   - events
   - event exporting
   - event driven
+  - cloudevents
 sources:
   - https://github.com/tomkerkhove/k8s-event-grid-bridge
 maintainers:
@@ -39,7 +40,7 @@ maintainers:
     url: https://github.com/tomkerkhove
 annotations:
   artifacthub.io/changes: |
-    - Initial version
+    - https://github.com/tomkerkhove/k8s-event-grid-bridge/releases/tag/0.2.0
   artifacthub.io/containsSecurityUpdates: "false"
   artifacthub.io/images: |
     - name: k8s-event-grid-bridge
