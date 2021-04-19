@@ -15,7 +15,7 @@
         ]
     },
     "reason": "ScalingReplicaSet",
-    "message": "Scaled up replica set k8s-event-grid-bridge-workload-76888d9cc9 to 1",
+    "message": "Scaled up replica set k8s-event-grid-bridge-workload-76888d9cc9 to 20",
     "source": {
         "component": "deployment-controller"
     },

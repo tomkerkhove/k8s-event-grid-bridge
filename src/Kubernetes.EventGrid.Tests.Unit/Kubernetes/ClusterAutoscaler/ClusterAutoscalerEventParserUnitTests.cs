@@ -1,6 +1,4 @@
-﻿using Bogus;
-using Kubernetes.EventGrid.Core.Kubernetes.Converters;
-using Kubernetes.EventGrid.Core.Kubernetes.Parsers;
+﻿using Kubernetes.EventGrid.Core.Kubernetes.Parsers;
 using Xunit;
 
 namespace Kubernetes.EventGrid.Tests.Unit.Kubernetes.ClusterAutoscaler

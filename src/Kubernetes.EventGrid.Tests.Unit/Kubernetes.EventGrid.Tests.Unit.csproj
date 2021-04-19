@@ -71,7 +71,10 @@
     <Content Include="..\..\events\core\RemovingNode.json" Link="Events\Samples\Core\RemovingNode.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\events\core\ScalingReplicaSet.json" Link="Events\Samples\Core\ScalingReplicaSet.json">
+    <Content Include="..\..\events\core\ScalingReplicaSetDown.json" Link="Events\Samples\Core\ScalingReplicaSetDown.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\events\core\ScalingReplicaSetUp.json" Link="Events\Samples\Core\ScalingReplicaSetUp.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\events\core\StartingKubelet.json" Link="Events\Samples\Core\StartingKubelet.json">
