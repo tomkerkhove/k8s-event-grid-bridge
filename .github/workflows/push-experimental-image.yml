@@ -9,7 +9,7 @@ on:
 env:
   IMAGE_NAME: ghcr.io/tomkerkhove/k8s-event-grid-bridge
   IMAGE_TAG: experimental
-  NUGET_PACKAGE_VERSION: 0.1.0
+  NUGET_PACKAGE_VERSION: 0.3.0
 
 jobs:
   push_docker_to_ghcr:
