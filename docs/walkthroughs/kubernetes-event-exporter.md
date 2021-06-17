@@ -296,8 +296,8 @@ Update Complete. ⎈ Happy Helming!⎈
 ```yaml
 image:
   registry: docker.io
-  repository: opsgenie/kubernetes-event-exporter
-  tag: latest
+  repository: ghcr.io/opsgenie/kubernetes-event-exporter
+  tag: v0.10
 config:
   route:
     routes:
