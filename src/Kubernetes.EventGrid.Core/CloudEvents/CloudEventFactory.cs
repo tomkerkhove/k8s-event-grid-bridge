@@ -2,8 +2,8 @@
 using System.Net.Mime;
 using CloudNative.CloudEvents;
 using GuardNet;
+using Kubernetes.EventGrid.Bridge.Contracts.Extensions;
 using Kubernetes.EventGrid.Core.CloudEvents.Interfaces;
-using Kubernetes.EventGrid.Core.Extensions;
 using Kubernetes.EventGrid.Core.Kubernetes;
 using Kubernetes.EventGrid.Core.Kubernetes.Events.Interfaces;
 using Kubernetes.EventGrid.Core.Kubernetes.Interfaces;
