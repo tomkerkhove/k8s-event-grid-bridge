@@ -1,8 +1,8 @@
 ﻿using System.Net.Mime;
 using CloudNative.CloudEvents;
 using Kubernetes.EventGrid.Bridge.Contracts.Enums;
+using Kubernetes.EventGrid.Bridge.Contracts.Extensions;
 using Kubernetes.EventGrid.Core.CloudEvents;
-using Kubernetes.EventGrid.Core.Extensions;
 using Kubernetes.EventGrid.Core.Kubernetes;
 using Kubernetes.EventGrid.Core.Kubernetes.Events;
 using Kubernetes.EventGrid.Core.Kubernetes.Events.Interfaces;

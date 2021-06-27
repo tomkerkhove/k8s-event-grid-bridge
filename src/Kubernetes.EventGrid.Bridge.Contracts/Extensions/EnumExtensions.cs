@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Kubernetes.EventGrid.Core.Extensions
+namespace Kubernetes.EventGrid.Bridge.Contracts.Extensions
 {
     public static class EnumExtensions
     {
