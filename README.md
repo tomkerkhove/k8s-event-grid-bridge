@@ -1,4 +1,5 @@
 <img src="https://static.scarf.sh/a.png?x-pxid=1bb8f39e-0ef8-4dd5-9a36-c192d08e227f" />
+
 ![Logo](./docs/media/logo-with-name.png)
 [![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/k8s-event-grid-bridge)](https://artifacthub.io/packages/search?repo=k8s-event-grid-bridge) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftomkerkhove%2Fk8s-event-grid-bridge.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftomkerkhove%2Fk8s-event-grid-bridge?ref=badge_shield)
 
