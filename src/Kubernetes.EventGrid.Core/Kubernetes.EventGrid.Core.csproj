@@ -7,7 +7,7 @@
   <ItemGroup>
     <PackageReference Include="CloudNative.CloudEvents.AspNetCore" Version="1.3.80" />
     <PackageReference Include="Guard.Net" Version="1.2.0" />
-    <PackageReference Include="KubernetesClient" Version="6.0.11" />
+    <PackageReference Include="KubernetesClient" Version="6.0.13" />
   </ItemGroup>
 
   <ItemGroup>
