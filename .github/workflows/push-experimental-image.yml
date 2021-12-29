@@ -33,17 +33,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set version suffix for main branch
-      uses: allenevans/set-env@v2.1.0
+      uses: allenevans/set-env@v2.2.0
       with:
         VERSION_SUFFIX: ${{ github.sha }}
       # Set NuGet package name since env.NUGET_PACKAGE_NAME doesn't resolve the variables
     - name: Set NuGet package name
-      uses: allenevans/set-env@v2.1.0
+      uses: allenevans/set-env@v2.2.0
       with:
         NUGET_PACKAGE_NAME: Kubernetes.EventGrid.Bridge.Contracts.${{ env.NUGET_PACKAGE_VERSION }}-$VERSION_SUFFIX.nupkg
       # Set NuGet package name since env.NUGET_PACKAGE_PATH doesn't resolve the variables
     - name: Set NuGet package path
-      uses: allenevans/set-env@v2.1.0
+      uses: allenevans/set-env@v2.2.0
       with:
         NUGET_PACKAGE_PATH: ./src/Kubernetes.EventGrid.Bridge.Contracts/bin/Release/${{ env.NUGET_PACKAGE_NAME }}
     - name: Build Solution
