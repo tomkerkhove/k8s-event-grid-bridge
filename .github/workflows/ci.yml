@@ -16,7 +16,7 @@ jobs:
     name: Runtime (Solution)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build Solution
       run: dotnet build ./src/Kubernetes.EventGrid.Bridge.sln --configuration Release
     - name: Run Unit Tests
@@ -26,7 +26,7 @@ jobs:
     name: Runtime (Docker)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build ./src/ --file ./src/Kubernetes.EventGrid.Bridge.Host/Dockerfile --tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
   
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Helm install
       uses: Azure/setup-helm@v1
@@ -51,7 +51,7 @@ jobs:
       KUBERNETES_NAMESPACE: k8s-event-grid-bridge
     steps:
     - name: Check out code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Helm install
       uses: Azure/setup-helm@v1
