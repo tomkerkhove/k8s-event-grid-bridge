@@ -66,7 +66,7 @@ jobs:
     - name: Push NuGet package
       run: dotnet nuget push "${{ env.NUGET_PACKAGE_PATH }}"  --api-key ${{ secrets.NUGET_REGISTRY_NUGETORG_APIKEY }} --source https://api.nuget.org/v3/index.json
     - name: Upload NuGet Package
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ${{ env.NUGET_PACKAGE_NAME }}
         path: ${{ env.NUGET_PACKAGE_PATH }}
