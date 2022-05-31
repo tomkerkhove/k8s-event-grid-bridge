@@ -7,6 +7,12 @@ A simple event bridge for Kubernetes native events forwarding [CloudEvents v1.0]
 
 The bridge is not in charge of acquiring the events from Kubernetes, but you can use tools such as [Opsgenie's Kubernetes Event Exporter](https://github.com/opsgenie/kubernetes-event-exporter) and forward them to the bridge.
 
+---
+
+:loudspeaker: **Tom is looking for co-maintainers to help evolve Kubernetes Event Grid Bridge.**
+
+---
+
 # Documentation
 
 Learn more about Kubernetes Event Grid Bridge on [docs.k8s-event-grid-bridge.io](https://docs.k8s-event-grid-bridge.io/) such as :
