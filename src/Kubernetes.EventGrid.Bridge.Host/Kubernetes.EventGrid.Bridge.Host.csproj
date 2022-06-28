@@ -6,7 +6,7 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Arcus.EventGrid.Publishing" Version="3.1.0" />
+    <PackageReference Include="Arcus.EventGrid.Publishing" Version="3.2.0" />
     <PackageReference Include="Arcus.Observability.Telemetry.AzureFunctions" Version="2.3.0" />
     <PackageReference Include="Arcus.Observability.Telemetry.Serilog.Enrichers" Version="2.3.0" />
     <PackageReference Include="Arcus.Observability.Telemetry.Serilog.Sinks.ApplicationInsights" Version="2.3.0" />
