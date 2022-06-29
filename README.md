@@ -3,15 +3,16 @@
 ![Logo](./docs/media/logo-with-name.png)
 [![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/k8s-event-grid-bridge)](https://artifacthub.io/packages/search?repo=k8s-event-grid-bridge) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftomkerkhove%2Fk8s-event-grid-bridge.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftomkerkhove%2Fk8s-event-grid-bridge?ref=badge_shield)
 
+
+---
+
+:loudspeaker: **Tom is not actively maintaining Kubernetes Event Grid Bridge but happy to have somebody help.**
+
+---
+
 A simple event bridge for Kubernetes native events forwarding [CloudEvents v1.0](https://cloudevents.io/) compliant events to Azure Event Grid into Microsoft Azure.
 
 The bridge is not in charge of acquiring the events from Kubernetes, but you can use tools such as [Opsgenie's Kubernetes Event Exporter](https://github.com/opsgenie/kubernetes-event-exporter) and forward them to the bridge.
-
----
-
-:loudspeaker: **Tom is looking for co-maintainers to help evolve Kubernetes Event Grid Bridge.**
-
----
 
 # Documentation
 
