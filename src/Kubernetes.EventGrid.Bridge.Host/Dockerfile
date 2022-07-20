@@ -10,7 +10,7 @@ RUN dotnet build "Kubernetes.EventGrid.Bridge.Host.csproj" -c Release -o /app/bu
 FROM build AS publish
 RUN dotnet publish "Kubernetes.EventGrid.Bridge.Host.csproj" -c Release -o /app/publish
 
-FROM mcr.microsoft.com/azure-functions/dotnet:3.0 AS runtime
+FROM mcr.microsoft.com/azure-functions/dotnet:4.0 AS runtime
 WORKDIR /home/site/wwwroot
 EXPOSE 80
 COPY --from=publish /app/publish .
